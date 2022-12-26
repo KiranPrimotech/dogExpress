@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../model/response/news_response_model.dart';
 import '../network/api_call.dart';
@@ -16,7 +18,8 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   int index = 0;
   late NewsModal newsModal;
-  late List<Articles> newsList ;
+   List<Articles> newsList =[] ;
+  // late final Future myFuture = getNewsList();
 
   @override
   void initState() {
@@ -30,9 +33,12 @@ class HomeScreenState extends State<HomeScreen> {
   fetchData() {
     newsModal = NewsModal.fromJson(newsDummy);
   }
-  Future<void> getNewsList() async {
-    newsList = await CallAPI().getNewsList();
-    print("resposne ---- ${newsList}");
+  Future<void>  getNewsList() async {
+
+     newsList = await CallAPI().getNewsList();
+
+
+    print("resposne ---- ${newsList.length}");
 
   }
 
@@ -52,8 +58,8 @@ class HomeScreenState extends State<HomeScreen> {
 
   void updateContent(direction) {
     if (index <= 0 && direction == DismissDirection.down) {
-      index = newsModal.result!.length - 1;
-    } else if (index == newsModal.result!.length - 1 &&
+      index =newsList!.length - 1;
+    } else if (index == newsList!.length - 1 &&
         direction == DismissDirection.up) {
       index = 0;
     } else if (direction == DismissDirection.up) {
@@ -87,21 +93,27 @@ class HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
     //  backgroundColor: Colors.black,
-      body: Center(
-        child: Dismissible(
-          background: newsCard(prevIndex),
-          child: newsCard(index),
-          onUpdate: (details) {
-            print(details.progress);
-          },
-          secondaryBackground: newsCard(nextIndex),
-          resizeDuration: Duration(milliseconds: 10),
-          key: Key(index.toString()),
-          direction: DismissDirection.vertical,
-          onDismissed: (direction) {
-            updateContent(direction);
-          },
-        ),
+      body:newsList.length == 0? Center(child: "No List Found".text.make()):slidingwidet(prevIndex, nextIndex),
+
+
+
+    );
+  }
+  Widget slidingwidet(int prevIndex, int nextIndex){
+    return Center(
+      child: Dismissible(
+        background: newsCard(prevIndex),
+        child: newsCard(index),
+        onUpdate: (details) {
+          print(details.progress);
+        },
+        secondaryBackground: newsCard(nextIndex),
+        resizeDuration: Duration(milliseconds: 10),
+        key: Key(index.toString()),
+        direction: DismissDirection.vertical,
+        onDismissed: (direction) {
+          updateContent(direction);
+        },
       ),
     );
   }
