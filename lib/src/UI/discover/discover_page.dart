@@ -75,7 +75,7 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
                 Get.toNamed(AppRoutes.pollScreen);
               }).pLTRB(0, 10, 0, 0),
               pollListWidget(),
-             // itemsList(),
+             itemsList(),
             ],
           ),
         ),

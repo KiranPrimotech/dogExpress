@@ -16,9 +16,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
 
   RxString title="My Feeds".obs;
 
+  RxDouble selectedItem = 3.0.obs;
+
   /// Page controller
   late PageController appBarTab;/// App Bar Tab controller
   late PageController homeTab;/// Dashboard tab controller
+  late PageController webTab;/// Dashboard tab controller
+  late PageController itemTab;/// Dashboard tab controller
 
   /// Tab switch duration
   Duration durationLong = const Duration(milliseconds: 500);
@@ -46,6 +50,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
     );
     /// initialize Dashboard Tab Controller
     homeTab = PageController(initialPage: 0);
+    /// initialize webTab Tab Controller
+    webTab = PageController(initialPage: 0);
+    /// initializa ItemTab Controller
+    itemTab = PageController(initialPage: 3 , viewportFraction: .4);
+    itemTab.addListener((){
+      selectedItem.value = itemTab.page ?? 3.0;
+    });
     /// initialize Dashboard Tab Listener
 
     homeTab.addListener(() {
@@ -90,6 +101,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
   void onClose() {
     appBarTab.dispose();
     homeTab.dispose();
+    webTab.dispose();
+    itemTab.dispose();
     super.onClose();
   }
 
