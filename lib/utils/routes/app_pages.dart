@@ -7,6 +7,8 @@ import 'package:dog_news/src/UI/discover/notificaton_detail/notification_detail.
 import 'package:dog_news/src/UI/discover/poll/poll_screen.dart';
 import 'package:dog_news/src/UI/discover/puzzle/puzzle_screen.dart';
 import 'package:dog_news/src/UI/discover/quote/quote_screen.dart';
+import 'package:dog_news/src/UI/discover/topic/card/topic_card_screen.dart';
+import 'package:dog_news/src/UI/discover/topic/topic_screen.dart';
 import 'package:dog_news/src/UI/home/pagerrr.dart';
 import 'package:dog_news/src/UI/home_page.dart';
 import 'package:dog_news/src/UI/setting/notification.dart';
@@ -30,6 +32,8 @@ import '../../src/bindings/relevancy_binding.dart';
 import '../../src/bindings/search_binding.dart';
 import '../../src/bindings/setting_binding.dart';
 import '../../src/bindings/signin_phone_binding.dart';
+import '../../src/bindings/topic_binding.dart';
+import '../../src/bindings/topic_card_binding.dart';
 import '../../src/bindings/verify_otp_binding.dart';
 import 'app_routes.dart';
 
@@ -120,6 +124,16 @@ class AppPages {
       name: AppRoutes.relevancyScreen,
       page: () =>   RelevancyScreen(),
       binding: RelevancyBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.topicScreen,
+      page: () =>   TopicScreen(),
+      binding: TopicBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.topicCardScreen,
+      page: () =>   TopicCardScreen(),
+      binding: TopicCardBinding(),
     ),
   ];
 }

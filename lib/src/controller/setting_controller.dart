@@ -22,7 +22,7 @@ class SettingController extends GetxController{
   }
 
   setValue( ) async{
-    if( await SharePreference.getStringValuesSF(LocalString.langKey) != ""){
+    if( await SharePreference.getStringValuesSF(LocalString.langKey) != "" && await SharePreference.getStringValuesSF(LocalString.langKey) != null){
       print("if --- ${selectedLanguage.value}");
       selectedLanguage.value =  await SharePreference.getStringValuesSF(LocalString.langKey);
   }

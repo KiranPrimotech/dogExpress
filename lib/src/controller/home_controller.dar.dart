@@ -20,6 +20,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
 
   RxDouble selectedItem = 3.0.obs;
   bool modeValue = false;
+  RxInt indexValue=0.obs;
 
 
   /// Page controller
@@ -67,12 +68,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
       homeTab.offset;
       appBarTab.animateTo(homeTab.offset / 3,
           duration: durationShort, curve: Curves.linear);
+
       position.value = homeTab.page ?? 0;
       if(checkVisibility(check: VisibilityEnum.dashboard)!){
         appBarAnimationController.forward();
         if(bottomBarAnimationController.isCompleted){
           bottomBarAnimationController.reverse(from: appBarHeight);}
       }
+
+      print("index value ---- ${indexValue}");
+
     });
 
     // homeTab.addListener(() {

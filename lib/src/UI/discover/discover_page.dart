@@ -70,12 +70,19 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
               }).pLTRB(0, 10, 0, 0),
               insightListWidget(),
 
+              /// Topic
+              notificationHeading(LocalString.topic, LocalString.viewAll, () {
+                Get.toNamed(AppRoutes.topicScreen);
+              }).pLTRB(0, 10, 0, 0),
+              itemsList(),
+              pageTopicNotifications(),
+
               /// Polll
               notificationHeading(LocalString.poll, LocalString.viewAll, () {
                 Get.toNamed(AppRoutes.pollScreen);
               }).pLTRB(0, 10, 0, 0),
               pollListWidget(),
-             itemsList(),
+
             ],
           ),
         ),

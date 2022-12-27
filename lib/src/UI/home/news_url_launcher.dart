@@ -1,49 +1,24 @@
 
 
+import 'package:dog_news/src/controller/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../controller/home_controller.dar.dart';
 
-class NewsUrlLauncher extends StatefulWidget{
+
+class NewsUrlLauncher extends GetView<HomeControllerCard>{
   
 
-  @override
-  State<NewsUrlLauncher> createState() => _NewsUrlLauncherState();
-}
-
-class _NewsUrlLauncherState extends State<NewsUrlLauncher> {
-  late WebViewController controller;
-  void initializeController(){
-    controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000))
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith('https://www.youtube.com/')) {
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse('https://flutter.dev'));
-  }
-
-   @override
-  void initState() {
-    initializeController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return  WebViewWidget(controller: controller);
+    return  GetBuilder<HomeControllerCard>(
+      init: controller,
+      builder: (contr) {
+        return WebViewWidget(key : Key("${controller.index.value}"),controller: contr.webController);
+      }
+    );
   }
 }

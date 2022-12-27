@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_news/src/controller/poll_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,9 +44,12 @@ class PollCard extends StatelessWidget{
              height: MediaQuery.of(context).size.height / 3,
              width: double.infinity,
              color: Colors.grey.withOpacity(0.2),
-             child: Image.network(
-               imgUrl,
+             child: CachedNetworkImage(
+               imageUrl: imgUrl,
                fit: BoxFit.fill,
+               placeholder: (context, url) =>
+               const Center(child: CircularProgressIndicator()),
+               errorWidget: (context, url, error) => const Icon(Icons.error),
              ),
            ),
          ),

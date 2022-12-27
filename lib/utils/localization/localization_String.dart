@@ -17,6 +17,7 @@ class LocalString {
  static String mood = 'Mood';
  static String workout = 'Workout';
  static String chill = 'Chill';
+
  static String instrumental = 'Instrumental';
  static String originalShow = 'Original & exclusive show';
 
@@ -70,6 +71,7 @@ static String doyouWantLog= "Do you want to logout?";
 static String eng= "English";
 static String discover= "Discover";
 static String verifyOtpDec= "By tapping \"Verify Phone Number \", an SMS may be sent.Message & data ratesvmay apply.";
+ static String topic = 'Topic';
 
 /// Shared Preference key
  static String langKey= "langKey";

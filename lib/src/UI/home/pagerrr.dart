@@ -6,6 +6,7 @@ import '../../controller/home_controller.dar.dart';
 import '../discover/discover_page.dart';
 import '../home_page.dart';
 import 'home_tab_widgets.dart';
+import 'news_url_launcher.dart';
 
 class HomeTabView extends GetView<HomeController> with MixinHomeTabWidgets {
   HomeTabView({super.key});
@@ -49,7 +50,8 @@ class HomeTabView extends GetView<HomeController> with MixinHomeTabWidgets {
                animatedAppBar(),
             ],
           ),
-    Container(color: Colors.red,)
+
+            NewsUrlLauncher()
           ],
         ),
       ),

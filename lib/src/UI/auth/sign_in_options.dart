@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_news/src/UI/auth/auth_widget.dart';
 import 'package:dog_news/src/controller/auth_controller.dart';
 import 'package:dog_news/utils/app_colors.dart';
@@ -25,7 +26,18 @@ class SignInScreen extends GetView<SignController> with AuthWidget{
 
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.network(ImagePathNetwork.dog1,height: 200,width: 200,).centered().pLTRB(0, 20, 0, 10),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6.0),
+              child: CachedNetworkImage(
+                height: 200,
+                width: 200,
+                fit: BoxFit.cover,
+                imageUrl: ImagePathNetwork.dog1,
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),
+            ).centered().pLTRB(0, 20, 0, 10),
             SizedBox(
               height: Get.height *.14,
             ),

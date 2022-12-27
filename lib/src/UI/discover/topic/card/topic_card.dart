@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dog_news/src/controller/topic_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controller/home_controller.dar.dart';
-import '../phot_view_screen.dart';
-import 'Utils.dart';
+import '../../../../controller/home_controller.dar.dart';
+import '../../../card/Utils.dart';
+import '../../../phot_view_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class NewsCard extends StatelessWidget {
+class TopicCard extends StatelessWidget {
   final String url,
       imgUrl,
       primaryText,
@@ -15,18 +16,18 @@ class NewsCard extends StatelessWidget {
       author,
       publishedAt;
 
-  NewsCard(
+  TopicCard(
       {required this.url,
-      required this.imgUrl,
-      required this.primaryText,
-      required this.secondaryText,
-      required this.sourceName,
-      required this.author,
-      required this.publishedAt});
+        required this.imgUrl,
+        required this.primaryText,
+        required this.secondaryText,
+        required this.sourceName,
+        required this.author,
+        required this.publishedAt});
 
   @override
   Widget build(BuildContext context) {
-    HomeController controller = Get.find();
+    TopicCardController controller = Get.find();
     return Scaffold(
       // backgroundColor: Colors.black,
       body: Column(
@@ -48,25 +49,24 @@ class NewsCard extends StatelessWidget {
                 const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-
             ),
           ),
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: () {
               if (controller.appBarAnimationController.status ==
-                      AnimationStatus.completed &&
+                  AnimationStatus.completed &&
                   controller.bottomBarAnimationController.status ==
                       AnimationStatus.dismissed) {
                 controller.bottomBarAnimationController.forward();
               } else if (controller.appBarAnimationController.status ==
-                      AnimationStatus.completed &&
+                  AnimationStatus.completed &&
                   controller.bottomBarAnimationController.status ==
                       AnimationStatus.completed) {
                 controller.bottomBarAnimationController.reverse(from: 50);
                 controller.appBarAnimationController.reverse(from: 50);
               } else if (controller.appBarAnimationController.status ==
-                      AnimationStatus.dismissed &&
+                  AnimationStatus.dismissed &&
                   controller.bottomBarAnimationController.status ==
                       AnimationStatus.dismissed) {
                 controller.appBarAnimationController.forward();
@@ -80,7 +80,7 @@ class NewsCard extends StatelessWidget {
                   child: Text(
                     primaryText,
                     style:
-                        const TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
                   ),
                 ),
                 Padding(
@@ -95,9 +95,9 @@ class NewsCard extends StatelessWidget {
                   child: Text(
                     "swipe left for more at $sourceName by $author / ${Utils.timeAgoSinceDate(publishedAt)}",
                     style: const TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 12.0,
-                        ),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12.0,
+                    ),
                   ),
                 )
               ],

@@ -2,6 +2,7 @@ import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:dog_news/utils/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -25,10 +26,17 @@ class PhoneAuthScreen extends StatelessWidget{
           children: [
             IntlPhoneField(
               dropdownIcon:const  Icon(Icons.arrow_drop_down_outlined,color: Colors.black,),
+              style: TextStyle(color: Colors.black),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                FilteringTextInputFormatter.digitsOnly
+
+              ],
+
             
               decoration:  InputDecoration(
                 iconColor: AppColors.black,
-
                 labelText: 'Phone Number',
                 labelStyle: const TextStyle(
                     color: Colors.black,

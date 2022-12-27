@@ -6,12 +6,14 @@ import 'package:get/get.dart';
 
 class DiscoverController extends GetxController{
 
-   double SCALE_FRACTION = 0.7;
-   double FULL_SCALE = 1.0;
-   double  PAGER_HEIGHT = 230.0;
-   double viewPortFraction = 0.5;
-   RxDouble page = 2.0.obs;
-   RxDouble scale = 0.0.obs;
+  double SCALE_FRACTION = 0.7;
+  double FULL_SCALE = 1.0;
+  double  PAGER_HEIGHT = 135.0;
+  double viewPortFraction = 0.3;
+  RxDouble page = 2.0.obs;
+  RxDouble scale = 0.0.obs;
+
+  late PageController topicNotificationPageController;
 
    late PageController pageController;
 
@@ -62,16 +64,32 @@ class DiscoverController extends GetxController{
      {'image':ImagePathNetwork.dog7, 'name': "Barack Obama announces death of former US 'first dog', says lost true friend",'description':"n 2013, Bo was joined at the White House by a second Portuguese water dog, Sunny, after Michelle Obama said that Bo needed more interaction with other dogs, according to NYT."}
    ];
 
+   /// Topic List Items
+  List<Map<String, dynamic>> topicList = [{'image':ImagePathNetwork.dog8, 'name': "Health"},
+    {'image':ImagePathNetwork.dog2,'name': "Food"},
+    {'image': ImagePathNetwork.dog6, 'name': "Dog Behaviour"},
+    {'image': ImagePathNetwork.dog7, 'name': "Animal Cruelty"},
+    {'image':ImagePathNetwork.dog4, 'name': "Barking Problems"},
+    {'image':ImagePathNetwork.dog5, 'name': "Bones for Your Dog"}
+  ];
 
 
 
-   @override
-  void onInit() {
 
-    super.onInit();
-    pageController =
-        PageController(initialPage: currentPage.value, viewportFraction: viewPortFraction);
-  }
+
+  @override
+   void onInit() {
+
+     super.onInit();
+     pageController =
+         PageController(initialPage: currentPage.value, viewportFraction: viewPortFraction);
+     pageController.addListener(() {
+       if(topicNotificationPageController.page!.floor()!=pageController.page!.floor()) {
+         topicNotificationPageController.animateToPage(pageController.page!.floor(), duration: Duration(milliseconds: 300), curve: Curves.easeInCubic);
+       }
+     });
+     topicNotificationPageController =  PageController(initialPage: currentPage.value);
+   }
 
 getScale(int index){
     scale.value= max(SCALE_FRACTION, (FULL_SCALE - (index - page.value).abs()) +  viewPortFraction);

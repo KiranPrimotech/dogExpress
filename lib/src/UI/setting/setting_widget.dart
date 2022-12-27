@@ -19,7 +19,7 @@ class SettingWidget {
 
   Widget safePreferenceWidget() {
     return Container(
-      height: Get.height * .23,
+      height: Get.height * .24,
       color: AppColors.primary,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -11,35 +11,37 @@ class PuzzleWidget {
   Widget imageSliderWidget() {
     return Stack(
       children: [
-
         SizedBox(
-          height: Get.height *.7,
+          height: Get.height * .7,
           child: PageView(
-
             controller: controller.controller,
             children: <Widget>[
               Container(
                 height: 250,
                 decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.fill, image: NetworkImage(ImagePathNetwork.cartoon))),
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(ImagePathNetwork.cartoon),
+                  ),
+                ),
               ),
               Container(
                 height: 250,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
-                        fit: BoxFit.fill, image: NetworkImage(ImagePathNetwork.cartoon))),
+                        fit: BoxFit.fill,
+                        image: NetworkImage(ImagePathNetwork.cartoon))),
               ),
               Container(
                 height: 250,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
-                        fit: BoxFit.fill, image: NetworkImage(ImagePathNetwork.cartoon))),
+                        fit: BoxFit.fill,
+                        image: NetworkImage(ImagePathNetwork.cartoon))),
               )
             ],
           ),
         ),
-
         Positioned(
             bottom: 10,
             left: 0,
@@ -64,16 +66,12 @@ class PuzzleWidget {
           right: 20,
           child: Container(
               decoration: BoxDecoration(
-                  color:Colors.transparent,
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(width: 2,color:Colors.white)
-              ),
-              child: "Share".text.bold.white.make().px(15).py(5)
-
-          ),
+                  border: Border.all(width: 2, color: Colors.white)),
+              child: "Share".text.bold.white.make().px(15).py(5)),
         )
       ],
     );
   }
-
 }

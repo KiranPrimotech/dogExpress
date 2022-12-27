@@ -58,13 +58,14 @@ class VerifyOTPScreen extends GetView<VerifyOTPController>{
               alignment: Alignment.topLeft,
               child: OTPTextField(
                 length: 6,
+
                 width: MediaQuery.of(context).size.width,
                 textFieldAlignment: MainAxisAlignment.spaceAround,
                 fieldWidth: 20,
                   fieldStyle: FieldStyle.underline,
                 outlineBorderRadius: 8,
                 keyboardType: TextInputType.number,
-                style: const TextStyle(fontSize: 17),
+                style:  TextStyle(fontSize: 17,color: AppColors.black),
                 onChanged: (pin)
                 {
                   // if ("1234" == pin) {

@@ -19,5 +19,7 @@ class AppRoutes {
   static String puzzleScreen = "/puzzleScreen";
   static String insightScreen = "/insightScreen";
   static String relevancyScreen = "/relevancyScreen";
+  static String topicScreen = "/topicScreen";
+  static String topicCardScreen = "/topicCardScreen";
 
 }
