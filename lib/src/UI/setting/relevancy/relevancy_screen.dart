@@ -21,8 +21,8 @@ class RelevancyScreen extends GetView<RelevancyController> with RelevancyWidget{
        backgroundColor: Colors.transparent,
        leading: IconButton(onPressed: () {
          Get.back();
-       }, icon: Icon(Icons.arrow_back_ios_new,size: 18,color: AppColors.gray,),),
-       title: AppText(LocalString.changeRelevancy.tr,color: AppColors.gray,fontWeight: FontWeight.w700,),
+       }, icon: Icon(Icons.arrow_back_ios_new,size: 18,),),
+       title: AppText(LocalString.changeRelevancy.tr,fontWeight: FontWeight.w700,),
        centerTitle: true,
      ),
      body: Column(

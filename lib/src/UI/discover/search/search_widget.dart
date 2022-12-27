@@ -34,13 +34,13 @@ class SearchWidget {
             ]),
         SingleChildScrollView(
           child: SizedBox(
-            height: Get.height * .8,
+            height: Get.height * .9,
             child: TabBarView(children: [
               shortWidget(),
               topicWidget(),
             ]),
           ),
-        )
+        ).expand()
       ],
     );
   }
