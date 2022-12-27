@@ -168,15 +168,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
 
 
   getData() async {
-    if( await SharePreference.getStringValuesSF(LocalString.langKey) != ""){
+    if( await SharePreference.getStringValuesSF(LocalString.langKey) != "" && await SharePreference.getStringValuesSF(LocalString.langKey) != null){
       Locale  locale=  await  SharePreference.getStringValuesSF(LocalString.langKey) == LocalString.eng  ? const Locale('en', 'US') : const Locale('hi', 'IND');
-
       if(locale != Get.locale){
         Get.updateLocale(locale);
       }
 
     }
     else{
+
+
       print("home page -------------");
     }
 
