@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../utils/app_colors.dart';
+
 class AuthWidget {
   Widget optionWidget(
       {Color? bckClr,
@@ -12,8 +14,10 @@ class AuthWidget {
     return InkWell(
       onTap:()=> onTap(),
       child: Container(
+
         width: Get.width *.7,
         decoration: BoxDecoration(
+
             color: bckClr,
             borderRadius: BorderRadius.circular(4),
             boxShadow: [BoxShadow(color: Colors.grey.shade400, blurRadius: 3,spreadRadius: 2,offset:  Offset(0.0, 0.75))]),

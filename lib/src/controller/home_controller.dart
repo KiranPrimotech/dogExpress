@@ -2,56 +2,75 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../UI/card/NewsCards.dart';
-import '../UI/card/NewsDummy.dart';
 import '../UI/card/NewsModal.dart';
 import '../UI/card/shared_pref.dart';
+import '../model/response/news_response_model.dart';
+import '../network/api_call.dart';
 
 class HomeControllerCard extends GetxController{
-  int index = 0;
+
+  RxInt index = 0.obs;
   late NewsModal newsModal;
-  fetchData() {
-    newsModal = NewsModal.fromJson(newsDummy);
+  List<Articles> newsList =[] ;
+
+
+  Future<void>  getNewsList() async {
+
+    newsList = await CallAPI().getNewsList();
+
+
+    print("resposne ---- ${newsList.length}");
+
   }
 
   void updateIndex(newIndex) {
-      index = newIndex;
+
+      index.value = newIndex;
+
     SharePreference.setLastIndex(newIndex);
   }
 
   void setupLastIndex() async {
     int? lastIndex = await SharePreference.getLastIndex();
-    if (lastIndex != null && lastIndex < newsModal.result!.length - 1) {
+    if (lastIndex != null && lastIndex < newsList.length - 1) {
       updateIndex(lastIndex);
     }
   }
 
   void updateContent(direction) {
-    if (index <= 0 && direction == DismissDirection.down) {
-      index = newsModal.result!.length - 1;
-    } else if (index == newsModal.result!.length - 1 &&
+    if (index.value <= 0 && direction == DismissDirection.down) {
+      index.value =newsList!.length - 1;
+    } else if (index == newsList!.length - 1 &&
         direction == DismissDirection.up) {
-      index = 0;
+      index.value = 0;
     } else if (direction == DismissDirection.up) {
-      index++;
+      index.value++;
     } else {
-      index--;
+      index.value--;
     }
-    updateIndex(index);
+    updateIndex(index.value);
   }
 
   String getShareText() {
-    return "${newsModal.result![index].title}\n${newsModal.result![index].url}";
+    return "${newsList[index.value].title}\n${newsList[index.value].url}";
   }
 
   Widget newsCard(int index) {
     return NewsCard(
-      imgUrl: newsModal.result![index].urlToImage!,
-      primaryText: newsModal.result![index].title!,
-      secondaryText: newsModal.result![index].description!,
-      sourceName: newsModal.result![index].sourceName!,
-      author: newsModal.result![index].author!,
-      publishedAt: newsModal.result![index].publishedAt!,
-      url: newsModal.result![index].url!,
+      imgUrl: newsList[index].urlToImage!,
+      primaryText: newsList[index].title!,
+      secondaryText: newsList[index].description!,
+      sourceName: newsList[index].source!.name!,
+      author: newsList[index].author!,
+      publishedAt: newsList[index].publishedAt!,
+      url: newsList[index].url!,
     );
+  }
+
+  @override
+  void onInit() {
+    getNewsList();
+    setupLastIndex();
+    super.onInit();
   }
 }

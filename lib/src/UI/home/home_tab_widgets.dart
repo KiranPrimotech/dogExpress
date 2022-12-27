@@ -1,3 +1,4 @@
+import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,53 +9,80 @@ import '../../controller/home_controller.dar.dart';
 
 mixin MixinHomeTabWidgets {
   HomeController controller = Get.find();
-  
-
+  ThemeController themeController = Get.find();
 
   /** Note :  Discover action button is implemented using stack in [appBar] widget **/
-
 
   ///  Animated app bar
   Widget animatedAppBar() {
     return AnimatedBuilder(
         animation: controller.appBarAnimationController,
         builder: (context, child) {
-          return Transform.translate(offset: Offset(0.0,(controller.appBarAnimationController.value-1)*controller.appBarHeight),child: appBar());
+          return Transform.translate(
+              offset: Offset(
+                  0.0,
+                  (controller.appBarAnimationController.value - 1) *
+                      controller.appBarHeight),
+              child: appBar());
         });
   }
+
   ///  Animated bottom bar
   Widget animatedBottomBar() {
     return AnimatedBuilder(
         animation: controller.bottomBarAnimationController,
         builder: (context, child) {
-          return Transform.translate(offset: Offset(0.0,-(controller.bottomBarAnimationController.value-1)*controller.appBarHeight),child: Container(height: controller.appBarHeight,width: Get.width,color: Colors.white,
-          child: bottomBarItems(),));
+          return Transform.translate(
+              offset: Offset(
+                  0.0,
+                  -(controller.bottomBarAnimationController.value - 1) *
+                      controller.appBarHeight),
+              child: Obx(
+                () => Container(
+                  height: controller.appBarHeight,
+                  color: themeController.appBarColor.value,
+                  width: Get.width,
+                  child: bottomBarItems(),
+                ),
+              ));
         });
   }
 
   /// bottom bar items
 
-  Widget bottomBarItems(){
+  Widget bottomBarItems() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.circle,size: 14,color: AppColors.primary,),
-            "Relevancy".text.size(12).color(AppColors.gray).make()
+            const Icon(
+              Icons.circle,
+              size: 14,
+            ),
+            "Relevancy".text.size(12).make()
           ],
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.share,size: 14,color: AppColors.primary,),
-            "Share".text.size(12).color(AppColors.gray).make()
+            const Icon(
+              Icons.share,
+              size: 14,
+            ),
+            "Share".text.size(12).make()
           ],
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.bookmark,size: 14,color: AppColors.primary,),
-            "Bookmark".text.size(12).color(AppColors.gray).make()
+            const Icon(
+              Icons.bookmark,
+              size: 14,
+            ),
+            "Bookmark".text.size(12).make()
           ],
         )
       ],
@@ -63,61 +91,66 @@ mixin MixinHomeTabWidgets {
 
   /// App Bar
   Widget appBar() {
-    return Container(
-      color: Colors.white,
-      height: controller.appBarHeight,
-      child: Obx(()=>
-        Row(
-          children: [
-            /// Left Side Widgets of App Bar
-            leftAppBarActions(),
-            Stack(
-              children: [
-                Container(
-                  alignment: Alignment.centerRight,
-                  width: Get.width * .8,
-                  child: PageView(
-                    allowImplicitScrolling: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    controller: controller.appBarTab,
-                    children: <Widget>[
-                      appBarTile(
-                        caption: LocalString.discover,
-                        onTap: () => controller.homeFunctions(
-                            action: HomeFunctions.discoverBar),
-                      ),
-                      Obx(() =>
-                       appBarTile(
-                          caption: '${controller.title.value}',
+    return Obx(
+      () => Container(
+        color: themeController.appBarColor.value,
+        height: controller.appBarHeight,
+        child: Obx(
+          () => Row(
+            children: [
+              /// Left Side Widgets of App Bar
+              leftAppBarActions(),
+              Stack(
+                children: [
+                  Container(
+                    alignment: Alignment.centerRight,
+                    width: Get.width * .8,
+                    child: PageView(
+                      allowImplicitScrolling: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      controller: controller.appBarTab,
+                      children: <Widget>[
+                        appBarTile(
+                          caption: LocalString.discover,
                           onTap: () => controller.homeFunctions(
-                              action: HomeFunctions.feedBar),
+                              action: HomeFunctions.discoverBar),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                /// Discover Action button
-                AnimatedBuilder(
-                 animation: controller.appBarAnimationController,
-                  builder : (context , child)=> Transform.translate(
-                    offset: Offset(0.0,(controller.appBarAnimationController.value-1)*controller.appBarHeight),
-                    child: appBarActionButtons(
-                      visible: controller.checkVisibility(
-                          check: VisibilityEnum.dashboard)!,
-                      onTap: () =>
-                          controller.homeFunctions(action: HomeFunctions.search),
-                      icon: Icons.search,
+                        Obx(
+                          () => appBarTile(
+                            caption: '${controller.title.value}',
+                            onTap: () => controller.homeFunctions(
+                                action: HomeFunctions.feedBar),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
 
-            /// Right Side Widgets of App Bar
-            rightAppBarActions(),
-          ],
+                  /// Discover Action button
+                  AnimatedBuilder(
+                    animation: controller.appBarAnimationController,
+                    builder: (context, child) => Transform.translate(
+                      offset: Offset(
+                          0.0,
+                          (controller.appBarAnimationController.value - 1) *
+                              controller.appBarHeight),
+                      child: appBarActionButtons(
+                        visible: controller.checkVisibility(
+                            check: VisibilityEnum.dashboard)!,
+                        onTap: () => controller.homeFunctions(
+                            action: HomeFunctions.search),
+                        icon: Icons.search,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              /// Right Side Widgets of App Bar
+              rightAppBarActions(),
+            ],
+          ),
         ),
       ),
     );
@@ -182,7 +215,7 @@ mixin MixinHomeTabWidgets {
         child: Center(
           child: Text(
             caption.tr,
-            style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
           ),
         ),
       ),
@@ -199,7 +232,12 @@ mixin MixinHomeTabWidgets {
         child: SizedBox(
           height: controller.appBarHeight,
           width: Get.width * .1,
-          child: icon != null ? Icon(icon,color: AppColors.primary,) : const SizedBox(),
+          child: icon != null
+              ? Icon(
+                  icon,
+                  color: AppColors.primary,
+                )
+              : const SizedBox(),
         ),
       ),
     );

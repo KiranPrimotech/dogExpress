@@ -9,11 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../utils/app_text.dart';
+import '../../../utils/app_themes/app_theme_controller.dart';
 import '../../../utils/image_path_assets.dart';
 import '../card/shared_pref.dart';
 
 class SettingWidget {
   SettingController controller = Get.find();
+  ThemeController _themeController = Get.find();
 
   Widget safePreferenceWidget() {
     return Container(
@@ -23,11 +25,18 @@ class SettingWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-           AppText.extraLarge(LocalString.savePreference.tr,fontSize: TextSizes.extraLarge,color:AppColors.white,).p(10),
-
+          AppText.extraLarge(
+            LocalString.savePreference.tr,
+            fontSize: TextSizes.extraLarge,
+            color: AppColors.white,
+          ).p(10),
           SizedBox(
             width: Get.width * .37,
-            child:AppText.small(LocalString.signInDesc.tr,maxLines: 2,color:AppColors.white,),
+            child: AppText.small(
+              LocalString.signInDesc.tr,
+              maxLines: 2,
+              color: AppColors.white,
+            ),
 
             // LocalString.signInDesc.tr.text.base.white.maxLines(2).make(),
           ).px(10),
@@ -44,11 +53,17 @@ class SettingWidget {
                     borderRadius: BorderRadius.circular(5),
                     color: AppColors.white,
                   ),
-                  child:Center(child: AppText.small(LocalString.signIn.tr,maxLines: 2,fontWeight: FontWeight.w600,color:AppColors.primary,)).py(10).px(12),
+                  child: Center(
+                      child: AppText.small(
+                    LocalString.signIn.tr,
+                    maxLines: 2,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primary,
+                  )).py(10).px(12),
                 ),
               ),
               SizedBox(
-               // width: Get.width *.6,
+                // width: Get.width *.6,
                 child: Row(
                   children: [
                     signInOptionIcon(ImagePathAssets.googleImg),
@@ -81,22 +96,23 @@ class SettingWidget {
     );
   }
 
-  Widget notificationOptionIconWidget(IconData? iconData, String title,String route) {
+  Widget notificationOptionIconWidget(
+      IconData? iconData, String title, String route) {
     return InkWell(
       onTap: () {
-       Get.toNamed(route);
+        Get.toNamed(route);
       },
       child: Container(
-        color: Colors.white,
         child: Row(
           children: [
             Icon(
               iconData,
               size: 24,
-              color: AppColors.gray,
+              //  color: AppColors.gray,
             ),
-          AppText.small( title.tr,color:AppColors.gray,).px(10)
-
+            AppText.small(
+              title.tr,
+            ).px(10)
           ],
         ),
       ).p(10),
@@ -105,14 +121,14 @@ class SettingWidget {
 
   Widget notificationOptionTitleWidget(String title) {
     return Container(
-      color: Colors.white,
       child: Row(
         children: [
           const SizedBox(
             width: 24,
           ),
-          AppText.small( title.tr,color:AppColors.gray,).px(10)
-
+          AppText.small(
+            title.tr,
+          ).px(10)
         ],
       ),
     ).p(10);
@@ -121,7 +137,6 @@ class SettingWidget {
   Widget notificationOptionDropDownWidget(IconData? iconData, String title,
       RxString dropDownTitle, void Function() onTap) {
     return Container(
-      color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -130,9 +145,11 @@ class SettingWidget {
               Icon(
                 iconData,
                 size: 24,
-                color: AppColors.gray,
+                // color: AppColors.gray,
               ),
-              AppText.small( title.tr,color:AppColors.gray,).px(10)
+              AppText.small(
+                title.tr,
+              ).px(10)
             ],
           ),
           GestureDetector(
@@ -141,7 +158,9 @@ class SettingWidget {
             },
             child: Row(
               children: [
-                Obx(() =>  AppText.small( dropDownTitle.value.tr,color:AppColors.gray,)),
+                Obx(() => AppText.small(
+                      dropDownTitle.value.tr,
+                    )),
                 // dropDownTitle.tr.text.color(AppColors.primary).make(),
                 Icon(
                   Icons.arrow_drop_down_outlined,
@@ -157,9 +176,8 @@ class SettingWidget {
   }
 
   Widget notificationOptionSwitchWidget(
-      IconData? iconData, String title, RxBool value) {
+      IconData? iconData, String title, RxBool value, SwitchAction action) {
     return Container(
-      color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -168,31 +186,38 @@ class SettingWidget {
               Icon(
                 iconData,
                 size: 24,
-                color: AppColors.gray,
+                //color: AppColors.gray,
               ),
-              AppText.small( title.tr,color:AppColors.gray,).px(10)
+              AppText.small(
+                title.tr,
+              ).px(10)
               // title.tr.text.color(AppColors.gray).make().px(10),
             ],
           ),
-          switchButton(value).px(6),
+          switchButton(value, action).px(6),
         ],
       ),
     ).px(10);
   }
 
-  Widget switchButton(RxBool switchBool) {
+  Widget switchButton(RxBool switchBool, SwitchAction action) {
     return Transform.scale(
       scale: 1.5,
-      child: Obx(
-        () => Switch(
-            activeColor: Get.theme.primaryColor
-            ,
-            inactiveTrackColor: AppColors.gray.withOpacity(0.5),
-            value: switchBool.value,
-            onChanged: (value) {
-              switchBool.value = value;
-              //Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
-            }),
+      child: Switch(
+        activeColor: Get.theme.primaryColor,
+        //inactiveTrackColor: AppColors.gray.withOpacity(0.5),
+        value: switchBool.value,
+        onChanged: (value) {
+          switchBool.value = value;
+          if (action == SwitchAction.theme) {
+            Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+            _themeController.upgradeFun(value);
+            _themeController.setThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+
+            SharePreference.addBoolToSF("mode", value);
+            controller.update();
+          } else {}
+        },
       ),
     );
   }
@@ -200,6 +225,7 @@ class SettingWidget {
   /// Log Out function
   void logout() {
     showModalBottomSheet(
+      backgroundColor: AppColors.white,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -231,17 +257,18 @@ class SettingWidget {
                   borderRadius: BorderRadius.circular(40)),
               child: Icon(
                 Icons.person_outline_outlined,
-                color: AppColors.gray,
+                  color: AppColors.gray,
                 size: 40,
               )).p(20),
-          LocalString.doyouWantLog.tr.text.size(18).wide.make().py(20),
+          LocalString.doyouWantLog.tr.text.size(18).color( AppColors.gray).wide.make().py(20),
           GestureDetector(
-            onTap: (){
-              Get.back();
-            },
-              child: logoutOptions(title: "Log Out", txtClr: AppColors.primary)),
+              onTap: () {
+                Get.back();
+              },
+              child:
+                  logoutOptions(title: "Log Out", txtClr: AppColors.primary)),
           GestureDetector(
-              onTap: (){
+              onTap: () {
                 Get.back();
               },
               child: logoutOptions(title: "Cancel", txtClr: AppColors.gray)),
@@ -249,14 +276,16 @@ class SettingWidget {
       ),
     );
   }
+
   Widget logoutOptions({String? title, Color? txtClr}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const Divider(
+         Divider(
           thickness: 1,
+          color: AppColors.grey,
         ),
-        AppText.small( title!.tr,color:txtClr).px(10)
+        AppText.small(title!.tr, color: txtClr).px(10)
         //title!.tr.text.color(txtClr).wide.base.make().p(8)
       ],
     );
@@ -266,6 +295,7 @@ class SettingWidget {
 
   void language() {
     showModalBottomSheet(
+      backgroundColor: AppColors.white,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -282,6 +312,7 @@ class SettingWidget {
           );
         });
   }
+
   Widget languageDialog() {
     return SizedBox(
       height: Get.height * .25,
@@ -290,28 +321,31 @@ class SettingWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           languageOption(title: "English", value: 1),
-          const Divider(thickness: 1,),
-
+           Divider(
+            thickness: 1,
+             color: AppColors.grey,
+          ),
           languageOption(title: "हिंदी", value: 2),
         ],
       ),
     );
   }
+
   Widget languageOption({required String title, required int value}) {
     print("$title     ${controller.selectedLanguage.value}");
-    return GestureDetector (
-      onTap: ()  async {
+    return GestureDetector(
+      onTap: () async {
         Get.updateLocale(
             value == 1 ? const Locale('en', 'US') : const Locale('hi', 'IND'));
 
         controller.selectedLanguage.value = title;
         print("$title     ${controller.selectedLanguage.value}");
         controller.update();
-       await SharePreference.addStringToSF(LocalString.langKey, controller.selectedLanguage.value);
+        await SharePreference.addStringToSF(
+            LocalString.langKey, controller.selectedLanguage.value);
         print(LocalString.langKey);
 
-          Get.back();
-
+        Get.back();
       },
       child: Obx(
         () => Row(
@@ -342,6 +376,7 @@ class SettingWidget {
   /// Text Size Funcion
   void textSizeFun() {
     showModalBottomSheet(
+      backgroundColor: AppColors.white,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -358,6 +393,7 @@ class SettingWidget {
           );
         });
   }
+
   Widget textSizeDialog() {
     return SizedBox(
       height: Get.height * .25,
@@ -366,28 +402,28 @@ class SettingWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           textSizeOption(title: LocalString.defaultTxt, value: 1),
-          const Divider(thickness: 1,),
-
+           Divider(
+            thickness: 1,
+             color:  AppColors.grey,
+          ),
           textSizeOption(title: LocalString.largeTxt, value: 2),
         ],
       ),
     );
   }
+
   Widget textSizeOption({required String title, required int value}) {
     print("$title     ${controller.selectedTextSize.value}");
     return GestureDetector(
       onTap: () {
-
-
         controller.selectedTextSize.value = title;
-       // print("$title     ${controller.selectedLanguage.value}");
+        // print("$title     ${controller.selectedLanguage.value}");
         controller.update();
 
         Get.back();
-
       },
       child: Obx(
-            () => Row(
+        () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Icon(
@@ -398,8 +434,8 @@ class SettingWidget {
             ),
             title.text
                 .color(controller.selectedTextSize.value != title
-                ? Colors.black
-                : AppColors.primary)
+                    ? Colors.black
+                    : AppColors.primary)
                 .make()
                 .centered(),
             const Icon(
@@ -412,10 +448,10 @@ class SettingWidget {
     );
   }
 
-
   /// AutoPlay
   void autoPlayFun() {
     showModalBottomSheet(
+        backgroundColor: AppColors.white,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -432,6 +468,7 @@ class SettingWidget {
           );
         });
   }
+
   Widget autoPlayDialog() {
     return SizedBox(
       height: Get.height * .28,
@@ -440,15 +477,22 @@ class SettingWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           autoPlayOption(title: LocalString.on, value: 1),
-          const Divider(thickness: 1,),
+           Divider(
+            thickness: 1,
+             color: AppColors.grey,
+          ),
           autoPlayOption(title: LocalString.onlyOn, value: 2),
-          const Divider(thickness: 1,),
+           Divider(
+            thickness: 1,
+             color: AppColors.grey,
 
+           ),
           autoPlayOption(title: LocalString.off, value: 2),
         ],
       ),
     );
   }
+
   Widget autoPlayOption({required String title, required int value}) {
     print("$title     ${controller.selectedAutoPlay.value}");
     return GestureDetector(
@@ -456,11 +500,10 @@ class SettingWidget {
         controller.selectedAutoPlay.value = title;
         controller.update();
 
-          Get.back();
-
+        Get.back();
       },
       child: Obx(
-            () => Row(
+        () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Icon(
@@ -471,8 +514,8 @@ class SettingWidget {
             ),
             title.text
                 .color(controller.selectedAutoPlay.value != title
-                ? Colors.black
-                : AppColors.primary)
+                    ? Colors.black
+                    : AppColors.primary)
                 .make()
                 .centered(),
             const Icon(
@@ -484,5 +527,4 @@ class SettingWidget {
       ),
     );
   }
-
 }

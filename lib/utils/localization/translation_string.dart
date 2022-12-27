@@ -11,7 +11,7 @@ class TranslationString extends Translations {
           LocalString.enter_password: 'Enter Password',
           LocalString.password: 'Password',
           LocalString.notification: 'Notifications',
-          LocalString.viewAll: 'viewAll',
+          LocalString.viewAll: 'VIEW ALL',
           LocalString.yes: 'Yes',
           LocalString.no: 'No',
           LocalString.options: "Options",

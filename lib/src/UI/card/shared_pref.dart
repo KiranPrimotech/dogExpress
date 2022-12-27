@@ -29,4 +29,16 @@ class SharePreference {
   }
 
 
+  static addBoolToSF(String key ,bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(key , value);
+  }
+  static getBoolValuesSF(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    bool? boolValue = prefs.getBool(key);
+    return boolValue;
+  }
+
+
 }

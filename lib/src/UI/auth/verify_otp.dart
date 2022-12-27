@@ -15,6 +15,7 @@ class VerifyOTPScreen extends GetView<VerifyOTPController>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.black,

@@ -13,8 +13,6 @@ class SettingController extends GetxController{
   RxString selectedTextSize = LocalString.defaultTxt.obs;
   RxString selectedAutoPlay= LocalString.on.obs;
 
-
-
   onNotificationTap(){
     Get.toNamed(AppRoutes.notification);
   }
@@ -35,6 +33,13 @@ class SettingController extends GetxController{
 
   }
 
+
+  setModeValue( ) async{
+   modeValue.value = await SharePreference.getBoolValuesSF("mode");
+   print("mode value --- ${modeValue}");
+
+  }
+
   getData() async {
     if( await SharePreference.getStringValuesSF(LocalString.langKey) == ""){
       print("No value Stored");
@@ -49,7 +54,14 @@ class SettingController extends GetxController{
   void onInit() {
     super.onInit();
     setValue();
+    setModeValue();
 
   }
 
+
+
+}
+enum SwitchAction{
+  hdImage,
+  theme,
 }

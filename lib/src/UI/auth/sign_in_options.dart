@@ -14,6 +14,7 @@ class SignInScreen extends GetView<SignController> with AuthWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.black,

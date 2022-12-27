@@ -6,11 +6,17 @@ import '../UI/card/NewsDummy.dart';
 import '../UI/card/NewsModal.dart';
 import '../UI/card/shared_pref.dart';
 
-class PollController extends GetxController{
+class PollController extends GetxController with GetTickerProviderStateMixin{
 
   RxInt index = 0.obs;
   late NewsModal newsModal;
 
+  /// AppBar Height
+  double appBarHeight = 50;
+  late AnimationController appBarAnimationController;
+  late AnimationController bottomBarAnimationController;
+
+  Duration animationDuration = const Duration(milliseconds: 300);
 
 
   fetchData() {
@@ -38,11 +44,11 @@ class PollController extends GetxController{
         direction == DismissDirection.up) {
       index.value = 0;
     } else if (direction == DismissDirection.up) {
-      index++;
+      index.value++;
     } else {
-      index--;
+      index.value--;
     }
-    updateIndex(index);
+    updateIndex(index.value);
   }
 
   String getShareText() {
@@ -51,6 +57,14 @@ class PollController extends GetxController{
 
   @override
   void onInit() {
+
+    /// initialize app bar animation controller
+    appBarAnimationController = AnimationController(duration : animationDuration,vsync: this);
+  //  appBarAnimationController.forward();
+
+    /// initialize bottom bar animation controller
+    bottomBarAnimationController = AnimationController(duration : animationDuration,vsync: this);
+
     fetchData();
     setupLastIndex();
     super.onInit();

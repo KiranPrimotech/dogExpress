@@ -12,7 +12,9 @@ import 'setting_widget.dart';
 import 'package:get/get.dart';
 
 class SettingScreen extends StatelessWidget with SettingWidget{
+
   SettingController controller = Get.find();
+
   getData() async {
     if( await SharePreference.getStringValuesSF(LocalString.langKey) == ""){
       print("No value Stored");
@@ -22,21 +24,19 @@ class SettingScreen extends StatelessWidget with SettingWidget{
       print(" uyryutieruituiotui ${await SharePreference.getStringValuesSF(LocalString.langKey) }");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     double? thickness= 1.5;
     getData();
 
    return Scaffold(
-     backgroundColor: AppColors.white,
 
      appBar: AppBar(
-       backgroundColor: AppColors.white,
-       leading:  BackButton(
-         color: AppColors.gray,
 
+       leading:  const BackButton(
        ),
-       title: AppText.small( LocalString.options.tr,color:AppColors.gray,),
+       title: AppText.small( LocalString.options.tr,),
 
        actions: [
          GestureDetector(
@@ -47,10 +47,10 @@ class SettingScreen extends StatelessWidget with SettingWidget{
              height:35,
              width: 35,
              decoration: BoxDecoration(
-               border: Border.all(color: AppColors.gray,width: 1.5),
+               border: Border.all(width: 1.5),
                borderRadius: BorderRadius.circular(40)
              ),
-               child: Icon(Icons.person_outline_outlined,color: AppColors.gray,size: 30,)).p(10),
+               child: const Icon(Icons.person_outline_outlined,size: 30,)).p(10),
          ),
        ],
      ),
@@ -73,11 +73,11 @@ class SettingScreen extends StatelessWidget with SettingWidget{
            Divider(thickness: thickness,).px(12),
 
            /// HD Image
-           notificationOptionSwitchWidget(Icons.play_arrow_outlined,LocalString.hdImage,controller.hdImageValue),
+           Obx(() => notificationOptionSwitchWidget(Icons.play_arrow_outlined,LocalString.hdImage,controller.hdImageValue,SwitchAction.hdImage)),
             Divider(thickness: thickness,).px(12),
 
            ///  Night Mode
-           notificationOptionSwitchWidget(Icons.nightlight_outlined,LocalString.nightMode,controller.modeValue),
+           Obx(() => notificationOptionSwitchWidget(Icons.nightlight_outlined,LocalString.nightMode,controller.modeValue,SwitchAction.theme)),
             Divider(thickness: thickness,).px(12),
 
            /// AutoPlay
@@ -104,11 +104,10 @@ class SettingScreen extends StatelessWidget with SettingWidget{
            /// Privacy
            notificationOptionTitleWidget(LocalString.privacy),
 
-
-
           ],
        ),
      ),
    );
+
   }
 }

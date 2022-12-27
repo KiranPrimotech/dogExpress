@@ -1,3 +1,4 @@
+import 'package:dog_news/src/controller/poll_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -27,7 +28,9 @@ class PollCard extends StatelessWidget{
         required this.publishedAt});
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    PollController controller = Get.find();
+
+    return Scaffold(
      body: Column(
        crossAxisAlignment: CrossAxisAlignment.start,
        mainAxisAlignment: MainAxisAlignment.start,
@@ -46,28 +49,55 @@ class PollCard extends StatelessWidget{
              ),
            ),
          ),
-         Padding(
-           padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-           child: Text(
-             primaryText,
-             style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-           ),
-         ),
-         Padding(
-             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-             child: Text(
-               secondaryText,
-               style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
-             )),
-         Container(
-           padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-           child: Text(
-             "swipe left for more at $sourceName by $author / ${Utils.timeAgoSinceDate(publishedAt)}",
-             style: const TextStyle(
-                 fontWeight: FontWeight.w300,
-                 fontSize: 12.0,
-                 color: Colors.grey),
-           ),
+         GestureDetector(
+             onTap: () {
+               if (controller.appBarAnimationController.status ==
+                   AnimationStatus.completed &&
+                   controller.bottomBarAnimationController.status ==
+                       AnimationStatus.dismissed) {
+                 controller.bottomBarAnimationController.forward();
+               } else if (controller.appBarAnimationController.status ==
+                   AnimationStatus.completed &&
+                   controller.bottomBarAnimationController.status ==
+                       AnimationStatus.completed) {
+                 controller.bottomBarAnimationController.reverse(from: 50);
+                 controller.appBarAnimationController.reverse(from: 50);
+               } else if (controller.appBarAnimationController.status ==
+                   AnimationStatus.dismissed &&
+                   controller.bottomBarAnimationController.status ==
+                       AnimationStatus.dismissed) {
+                 controller.appBarAnimationController.forward();
+                 controller.bottomBarAnimationController.forward();
+               }
+             },
+           child: Column(
+             children: [
+               Padding(
+                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                 child: Text(
+                   primaryText,
+                   style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                 ),
+               ),
+               Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                   child: Text(
+                     secondaryText,
+                     style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
+                   )),
+               Container(
+                 padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+                 child: Text(
+                   "swipe left for more at $sourceName by $author / ${Utils.timeAgoSinceDate(publishedAt)}",
+                   style: const TextStyle(
+                       fontWeight: FontWeight.w300,
+                       fontSize: 12.0,
+                       color: Colors.grey),
+                 ),
+               )
+             ],
+           )
+
          ).expand(),
 
          Container(

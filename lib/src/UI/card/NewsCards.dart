@@ -71,28 +71,28 @@ class NewsCard extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
                   child: Text(
                     primaryText,
                     style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                        const TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       secondaryText,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.w300),
                     )),
                 Container(
-                  padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+                  padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
                   child: Text(
                     "swipe left for more at $sourceName by $author / ${Utils.timeAgoSinceDate(publishedAt)}",
                     style: const TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: 12.0,
-                        color: Colors.grey),
+                        ),
                   ),
                 )
               ],

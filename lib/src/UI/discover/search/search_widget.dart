@@ -13,17 +13,18 @@ class SearchWidget {
   Widget tabWidget() {
     return Column(
       children: [
-        TabBar(
-          indicatorColor: AppColors.primary,
-            labelColor: AppColors.primary,
+        const TabBar(
+         // indicatorSize: TabBarIndicatorSize.tab,
+       //   indicatorColor: AppColors.primary,
+          //  labelColor: AppColors.primary,
             //<-- selected text color
-            unselectedLabelColor: AppColors.black,
+          //  unselectedLabelColor: AppColors.black,
             labelStyle:
-                const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-            indicator: const UnderlineTabIndicator(
+                TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+            indicator: UnderlineTabIndicator(
                 borderSide: BorderSide(width: 3.0),
                 insets: EdgeInsets.symmetric(horizontal: 40.0)),
-            tabs: const [
+            tabs: [
               Tab(
                 text: 'Shorts',
               ),
@@ -122,15 +123,15 @@ class SearchWidget {
     return Chip(
       elevation: 1,
       //padding: EdgeInsets.all(),
-      backgroundColor: Colors.transparent,
+     // backgroundColor: Colors.transparent,
       shape:
-          StadiumBorder(side: BorderSide(width: 1, color: AppColors.primary)),
+          StadiumBorder(side: BorderSide(width: 1,)),
       shadowColor: Colors.black,
 
       label: Text(
         "${topicList[index]['name']}",
         style:
-            TextStyle(fontSize: 14, color: Theme.of(Get.context!).primaryColor),
+            TextStyle(fontSize: 14,),
       ).px(10),
     ).pLTRB(0, 10, 0, 0);
   }
