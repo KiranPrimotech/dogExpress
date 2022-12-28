@@ -14,11 +14,6 @@ class SearchWidget {
     return Column(
       children: [
         const TabBar(
-         // indicatorSize: TabBarIndicatorSize.tab,
-       //   indicatorColor: AppColors.primary,
-          //  labelColor: AppColors.primary,
-            //<-- selected text color
-          //  unselectedLabelColor: AppColors.black,
             labelStyle:
                 TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             indicator: UnderlineTabIndicator(

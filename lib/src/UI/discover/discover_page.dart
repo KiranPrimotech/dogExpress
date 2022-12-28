@@ -24,24 +24,7 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
               searchWidget().pLTRB(0, 10, 0, 0),
 
               /// Puzzle and quote
-              SizedBox(
-                height: 110,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-
-
-                  child: Row(
-                    children: [
-                      puzzleQuoteWidget(ImagePathNetwork.puzzle, () {
-                        Get.toNamed(AppRoutes.puzzleScreen);
-                      }),
-                      puzzleQuoteWidget(ImagePathNetwork.quote, () {
-                        Get.toNamed(AppRoutes.quoteScreen);
-                      }),
-                    ],
-                  ),
-                ),
-              ),
+               puzzleQuoteWidget(),
 
               // SizedBox(
               //   height:110,

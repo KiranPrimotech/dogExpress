@@ -29,7 +29,7 @@ class DiscoverWidget {
         Get.toNamed(AppRoutes.search);
       },
       child: Container(
-        height: 40,
+        height: 40.h,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: Colors.grey.shade300.withOpacity(0.5)),
@@ -47,14 +47,36 @@ class DiscoverWidget {
       ).p(10),
     );
   }
+    Widget puzzleQuoteWidget(){
+    return SizedBox(
+      height: 110,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+
+
+        child: Row(
+          children: [
+            puzzleQuoteWidgetItem(ImagePathNetwork.puzzle, () {
+              Get.toNamed(AppRoutes.puzzleScreen);
+            }),
+            puzzleQuoteWidgetItem(ImagePathNetwork.quote, () {
+              Get.toNamed(AppRoutes.quoteScreen);
+            }),
+          ],
+        ),
+      ),
+    );
+
+    }
+
 
   /// Puzzle Quote Widget
-  Widget puzzleQuoteWidget(String image, Function onTap) {
+  Widget puzzleQuoteWidgetItem(String image, Function onTap) {
     return InkWell(
       onTap: () => onTap(),
       child: Container(
-        width: 180,
-        height: 110,
+        width: 180.w,
+        height: 110.h,
         decoration: BoxDecoration(
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(8),
@@ -121,7 +143,7 @@ class DiscoverWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            heading.tr.text.size(18).bold.make(),
+            AppText.large(heading.tr,fontWeight: FontWeight.w700,),
             Container(
               height: 2,
               width: 30,
@@ -137,7 +159,7 @@ class DiscoverWidget {
   /// Notification List widget
   Widget notificationListWidgte() {
     return SizedBox(
-      height: 300,
+      height:75*4.h,
       child: ListView.builder(
           itemCount: controller.notificationList.length,
           physics: NeverScrollableScrollPhysics(),
@@ -156,35 +178,41 @@ class DiscoverWidget {
         Get.toNamed(AppRoutes.notificationDetail);
       },
       child: SizedBox(
+         height:75 .h,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: Get.width * .7,
-                  child: Text(
-                    "${notificationList[index]['name']}",
-                    maxLines: 2,
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 10).r,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: Get.width * .7,
+                    child: AppText(
+                      "${notificationList[index]['name']}",
+                      maxLines: 2,
+                    ),
                   ),
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(6.0),
-                  child: CachedNetworkImage(
-                    height: 55,
-                    width: 55,
-                    fit: BoxFit.cover,
-                    imageUrl: notificationList[index]['image'],
-                    placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                )
-              ],
-            ).px(10),
-            const Divider(
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(6.0).r,
+                    child: CachedNetworkImage(
+                      height: 57.h,
+                      width: 57.h,
+                      fit: BoxFit.cover,
+                      imageUrl: notificationList[index]['image'],
+                      placeholder: (context, url) =>
+                          Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
+                  )
+                ],
+              ),
+            ),
+             Divider(
               color: Colors.grey,
-              thickness: 1,
+              thickness: 1.h,
             )
           ],
         ),
@@ -235,7 +263,7 @@ class DiscoverWidget {
   /// Poll List View
   Widget pollListWidget() {
     return SizedBox(
-      height: Get.height * .56,
+      height: Get.height * .58,
       child: ListView.builder(
           itemCount: controller.pollList.length,
           scrollDirection: Axis.horizontal,
@@ -254,15 +282,15 @@ class DiscoverWidget {
       },
       child: SizedBox(
         width: Get.width * .8,
-        height: Get.width *.8,
+        height: Get.width * .8 * 6/10 + 210,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(0.0),
               child: CachedNetworkImage(
-                height: Get.width * 6/10,
-                width: Get.width * .8.w,
+                height: Get.width * .8 * 6/10,
+                width: Get.width * .8,
                 fit: BoxFit.cover,
                 imageUrl: pollList[index]['image'],
                 placeholder: (context, url) =>
@@ -271,7 +299,7 @@ class DiscoverWidget {
               ),
             ).p(10),
             SizedBox(
-              // height: Get.height *.3.h,
+              height: 210,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -279,7 +307,8 @@ class DiscoverWidget {
                     "${pollList[index]['description']}",
                     maxLines: 4,
                   ).px(8).py(5),
-                  "Do you personally own a pet?".text.bold.make().px(8).py(8),
+                  const AppText("Do you personally own a pet?",fontWeight: FontWeight.w800,).px(8).py(8),
+
                   Row(
                     children: [
                       Container(
@@ -303,10 +332,10 @@ class DiscoverWidget {
                         ).centered().p(4),
                       ).expand(),
                     ],
-                  ).px(16).py(10)
+                  ).px(8).py(10)
                 ],
               ),
-            ),
+            ).expand(),
           ],
         ),
       ),

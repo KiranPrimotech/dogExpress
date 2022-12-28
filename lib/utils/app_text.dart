@@ -31,7 +31,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
-    this.fontSize,
+    this.fontSize=TextSizes.small,
     this.fontWeight = FontWeight.w400,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -44,7 +44,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
-    this.fontSize,
+    this.fontSize=TextSizes.large,
     this.fontWeight = FontWeight.w600,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -57,7 +57,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
-    this.fontSize,
+    this.fontSize=TextSizes.extraLarge,
     this.fontWeight = FontWeight.w600,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
