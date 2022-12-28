@@ -41,7 +41,7 @@ class SearchScreen extends StatelessWidget with SearchWidget{
                 ],
               ),
 
-              tabWidget(),
+              Expanded(child: tabWidget()),
 
             ],
           ),
