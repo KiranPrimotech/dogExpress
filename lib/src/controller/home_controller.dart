@@ -35,7 +35,7 @@ class HomeControllerCard extends GetxController{
       updateIndex(lastIndex);
     }
   }
-
+    RxInt progressValue = 0.obs;
   Future updateWeb() async{
     webController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -43,7 +43,9 @@ class HomeControllerCard extends GetxController{
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            print("Progress");
+            progressValue.value= progress;
+
+            print("Progress--- ${progressValue}");
             // Update loading bar.
           },
           onPageStarted: (String url) {},

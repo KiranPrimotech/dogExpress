@@ -7,6 +7,7 @@ import 'package:dog_news/utils/image_path_assets.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -136,7 +137,7 @@ class DiscoverWidget {
   /// Notification List widget
   Widget notificationListWidgte() {
     return SizedBox(
-      height:300,
+      height: 300,
       child: ListView.builder(
           itemCount: controller.notificationList.length,
           physics: NeverScrollableScrollPhysics(),
@@ -155,7 +156,6 @@ class DiscoverWidget {
         Get.toNamed(AppRoutes.notificationDetail);
       },
       child: SizedBox(
-
         child: Column(
           children: [
             Row(
@@ -163,7 +163,10 @@ class DiscoverWidget {
               children: [
                 SizedBox(
                   width: Get.width * .7,
-                  child: Text("${notificationList[index]['name']}",maxLines: 2,),
+                  child: Text(
+                    "${notificationList[index]['name']}",
+                    maxLines: 2,
+                  ),
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6.0),
@@ -189,26 +192,12 @@ class DiscoverWidget {
     );
   }
 
-
   /// Insight
   Widget insightListWidget() {
     final ScrollController horizontal =
         ScrollController(initialScrollOffset: 50.0);
 
-    return
-        // RawScrollbar(
-        // controller: horizontal,
-        // thumbColor: Colors.blue,
-        // minThumbLength: 8,
-        // minOverscrollLength: 4,
-        // radius: Radius.circular(10),
-        // scrollbarOrientation: ScrollbarOrientation.top,
-        // thickness: 5,
-        // thumbVisibility: true,
-        // trackVisibility: true,
-        // child:
-
-        SizedBox(
+    return SizedBox(
       height: Get.height * .4,
       child: ListView.builder(
           itemCount: controller.insightList.length,
@@ -231,8 +220,8 @@ class DiscoverWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
         child: CachedNetworkImage(
-          height: 150,
-          width: 150,
+          height: Get.width *.4,
+          width:  Get.width *.4,
           fit: BoxFit.cover,
           imageUrl: insightList[index]['image'],
           placeholder: (context, url) =>
@@ -265,14 +254,15 @@ class DiscoverWidget {
       },
       child: SizedBox(
         width: Get.width * .8,
+        height: Get.width *.8,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(0.0),
               child: CachedNetworkImage(
-                height: 160,
-                width: Get.width * .8,
+                height: Get.width * 6/10,
+                width: Get.width * .8.w,
                 fit: BoxFit.cover,
                 imageUrl: pollList[index]['image'],
                 placeholder: (context, url) =>
@@ -280,37 +270,43 @@ class DiscoverWidget {
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ).p(10),
-            "${pollList[index]['description']}"
-                .text
-                .maxLines(5)
-                .make()
-                .px(8)
-                .py(5),
-            "Do you personally own a pet?".text.bold.make().px(8).py(8),
-            Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.white,
-                      border: Border.all(color: AppColors.grey, width: 1)),
-                  child: LocalString.yes.tr.text
-                      .color(AppColors.primary)
-                      .make()
-                      .centered()
-                      .p(4),
-                ).expand(),
-                Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.white,
-                      border: Border.all(color: AppColors.grey, width: 1)),
-                  child: LocalString.no.tr.text
-                      .color(AppColors.primary)
-                      .make()
-                      .centered()
-                      .p(4),
-                ).expand(),
-              ],
-            ).px(16).py(10)
+            SizedBox(
+              // height: Get.height *.3.h,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(
+                    "${pollList[index]['description']}",
+                    maxLines: 4,
+                  ).px(8).py(5),
+                  "Do you personally own a pet?".text.bold.make().px(8).py(8),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.white,
+                            border:
+                                Border.all(color: AppColors.grey, width: 1)),
+                        child: AppText(
+                          LocalString.yes.tr,
+                          color: AppColors.primary,
+                        ).centered().p(4),
+                      ).expand(),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.white,
+                            border:
+                                Border.all(color: AppColors.grey, width: 1)),
+                        child: AppText(
+                          LocalString.no.tr,
+                          color: AppColors.primary,
+                        ).centered().p(4),
+                      ).expand(),
+                    ],
+                  ).px(16).py(10)
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -356,9 +352,11 @@ class DiscoverWidget {
           ),
           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Obx(() =>
-                AppText.large("${controller.topicList[controller.currentPage.value]['name']!}",fontSize: TextSizes.large,color: AppColors.primary,)
-                    .centered()),
+            child: Obx(() => AppText.large(
+                  "${controller.topicList[controller.currentPage.value]['name']!}",
+                  fontSize: TextSizes.large,
+                  color: AppColors.primary,
+                ).centered()),
           ),
         ],
       ),

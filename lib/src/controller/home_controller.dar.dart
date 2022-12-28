@@ -176,11 +176,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
 
     }
     else{
-
-
       print("home page -------------");
     }
-
 
   }
 

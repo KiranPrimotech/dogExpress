@@ -9,12 +9,13 @@ import '../../controller/home_controller.dar.dart';
 
 
 class NewsUrlLauncher extends GetView<HomeControllerCard>{
-  
+
 
 
   @override
   Widget build(BuildContext context) {
-    return  GetBuilder<HomeControllerCard>(
+    return
+      GetBuilder<HomeControllerCard>(
       init: controller,
       builder: (contr) {
         return WebViewWidget(key : Key("${controller.index.value}"),controller: contr.webController);

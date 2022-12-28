@@ -1,6 +1,7 @@
 import 'package:dog_news/src/model/enumClass.dart';
 import 'package:dog_news/utils/sizes_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppText extends StatelessWidget {
   final String label;
@@ -91,7 +92,7 @@ class AppText extends StatelessWidget {
                 style: TextStyle(
                   color: color,
                   fontWeight: fontWeight,
-                  fontSize: textSize,
+                  fontSize: textSize.sp,
                   decoration: textDecoration,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -103,7 +104,7 @@ class AppText extends StatelessWidget {
                 style: TextStyle(
                   color: color,
                   fontWeight: fontWeight,
-                  fontSize: textSize,
+                  fontSize: textSize.sp,
                   decoration: textDecoration,
                 ),
                 overflow: TextOverflow.ellipsis,
