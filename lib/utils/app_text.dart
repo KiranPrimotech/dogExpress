@@ -9,6 +9,7 @@ class AppText extends StatelessWidget {
   final Color? color;
   final FontWeight? fontWeight;
   final int? maxLines;
+  final int? minLines;
   final TextAlign? textAlign;
   final EdgeInsets? padding;
   final VoidCallback? onTap;
@@ -18,6 +19,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
+        this.minLines=1,
     this.fontWeight = FontWeight.w500,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -31,6 +33,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
+        this.minLines=1,
     this.fontSize=TextSizes.small,
     this.fontWeight = FontWeight.w400,
     this.maxLines = 1,
@@ -44,6 +47,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
+        this.minLines=1,
     this.fontSize=TextSizes.large,
     this.fontWeight = FontWeight.w600,
     this.maxLines = 1,
@@ -57,6 +61,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
+        this.minLines=1,
     this.fontSize=TextSizes.extraLarge,
     this.fontWeight = FontWeight.w600,
     this.maxLines = 1,

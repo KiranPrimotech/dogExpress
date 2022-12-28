@@ -49,7 +49,7 @@ class DiscoverWidget {
   }
     Widget puzzleQuoteWidget(){
     return SizedBox(
-      height: 110,
+      height: 110.h,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
 
@@ -100,7 +100,7 @@ class DiscoverWidget {
   /// Feed Option
   Widget feedOptionWidget() {
     return SizedBox(
-      height: 120,
+      height: 120.h,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: controller.feedList.length,
@@ -126,7 +126,7 @@ class DiscoverWidget {
         children: [
           Icon(
             controller.feedList[index]['image'],
-            size: 50,
+            size: 50.h,
             color: AppColors.primary,
           ),
           "${feedList[index]['name']}".text.make().py(10),
@@ -263,7 +263,7 @@ class DiscoverWidget {
   /// Poll List View
   Widget pollListWidget() {
     return SizedBox(
-      height: Get.height * .58,
+      height: Get.width * .8 * 6/10 + 210.h,
       child: ListView.builder(
           itemCount: controller.pollList.length,
           scrollDirection: Axis.horizontal,
@@ -282,7 +282,7 @@ class DiscoverWidget {
       },
       child: SizedBox(
         width: Get.width * .8,
-        height: Get.width * .8 * 6/10 + 210,
+        height: Get.width * .8 * 6/10 + 210.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -299,14 +299,15 @@ class DiscoverWidget {
               ),
             ).p(10),
             SizedBox(
-              height: 210,
+              height: 210.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppText(
                     "${pollList[index]['description']}",
                     maxLines: 4,
-                  ).px(8).py(5),
+
+                  ).px(8).py(5).expand(),
                   const AppText("Do you personally own a pet?",fontWeight: FontWeight.w800,).px(8).py(8),
 
                   Row(
@@ -437,7 +438,7 @@ class DiscoverWidget {
   ///Topics PAge View
   Widget pageTopicNotifications() {
     return SizedBox(
-        height: 300,
+        height: 300.h,
         child: PageView.builder(
           controller: controller.topicNotificationPageController,
           itemBuilder: (ctx, index) {

@@ -100,7 +100,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
     themeController.getThemeModeFromPreferences();
 
     themeController.upgradeFun( modeValue);
-    getNewsList();
+    // getNewsList();
     super.onInit();
   }
 
@@ -182,7 +182,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
   }
 
   getModeValue() async{
-    modeValue = await SharePreference.getBoolValuesSF("mode");
+    modeValue = await SharePreference.getBoolValuesSF("mode")??false;
   }
 
 }
