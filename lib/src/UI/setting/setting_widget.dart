@@ -206,8 +206,10 @@ class SettingWidget {
     return Transform.scale(
       scale: 1.5,
       child: Switch(
-        activeColor: Get.theme.primaryColor,
-        //inactiveTrackColor: AppColors.gray.withOpacity(0.5),
+        inactiveThumbColor: _themeController.switchColor.value,
+        activeColor: _themeController.switchColor.value,
+        inactiveTrackColor: AppColors.gray.withOpacity(0.5),
+        activeTrackColor:AppColors.primary.withOpacity(0.5) ,
         value: switchBool.value,
         onChanged: (value) {
           switchBool.value = value;

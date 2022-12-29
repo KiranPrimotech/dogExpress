@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -100,13 +101,17 @@ ThemeData _lightTheme = ThemeData.from(
    // foregroundColor: AppColors.textLight,
     //systemOverlayStyle: SystemUiOverlayStyle.dark,
   ),
-  tabBarTheme:  TabBarTheme(
-    labelColor:AppColors.primary,
-      unselectedLabelColor: AppColors.black
+    tabBarTheme :  TabBarTheme(
+      labelColor:AppColors.primary,
+      unselectedLabelColor: AppColors.black,
+      indicator:  UnderlineTabIndicator(
+
+          borderSide: BorderSide(width: 3.0,color: AppColors.primary),
+          insets: EdgeInsets.symmetric(horizontal: 150.0)),
 
 
 
-  ),
+    ),
 
   dialogTheme: DialogTheme(
     //backgroundColor: AppColors.dialogLight,
@@ -183,7 +188,7 @@ ThemeData _darkTheme = ThemeData.from(
     ),
   ),
 ).copyWith(
-  scaffoldBackgroundColor: AppColors.gray,
+  scaffoldBackgroundColor: AppColors.black,
   iconTheme: const IconThemeData(
     color: AppColors.white
 
@@ -194,7 +199,7 @@ ThemeData _darkTheme = ThemeData.from(
     elevation: 0,
     centerTitle: true,
     titleTextStyle: TextStyle(color: AppColors.white),
-      backgroundColor: AppColors.gray,
+      backgroundColor: AppColors.black,
     iconTheme: IconThemeData(color: AppColors.white),
     actionsIconTheme: IconThemeData(color: AppColors.white),
     foregroundColor: AppColors.gray,
@@ -219,9 +224,13 @@ ThemeData _darkTheme = ThemeData.from(
   //   visualDensity: VisualDensity.compact,
   // ),
   errorColor: AppColors.white,
-  tabBarTheme: const TabBarTheme(
+  tabBarTheme:   const TabBarTheme(
       labelColor:AppColors.white,
-      unselectedLabelColor: AppColors.white
+      unselectedLabelColor: AppColors.white,
+      indicator: UnderlineTabIndicator(
+
+          borderSide: BorderSide(width: 3.0,color: AppColors.white),
+          insets: EdgeInsets.symmetric(horizontal: 150.0)),
 
 
 

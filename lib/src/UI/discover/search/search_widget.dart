@@ -16,9 +16,7 @@ class SearchWidget {
         const TabBar(
             labelStyle:
                 TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-            indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(width: 3.0),
-                insets: EdgeInsets.symmetric(horizontal: 40.0)),
+
             tabs: [
               Tab(
                 text: 'Shorts',
