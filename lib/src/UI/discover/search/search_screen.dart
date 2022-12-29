@@ -24,7 +24,6 @@ class SearchScreen extends StatelessWidget with SearchWidget{
                       Get.back();
                     },
                     child: BackButton(
-                      color: Get.context!.theme.primaryColor,
                     ),
                   ),
                   SizedBox(

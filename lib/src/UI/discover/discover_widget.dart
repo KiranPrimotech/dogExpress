@@ -29,30 +29,32 @@ class DiscoverWidget {
       onTap: () {
         Get.toNamed(AppRoutes.search);
       },
-      child: Container(
-        height: 40.h,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.white,
-                blurRadius: 3
-              )
+      child: Obx(()=>
+        Container(
+          height: 40.h,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              boxShadow:  [
+                BoxShadow(
+                  color: Colors.white,
+                  blurRadius: 3
+                )
+              ],
+              color: themeController.searchColor.value),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.search_outlined,
+                color: AppColors.primary,
+                size: 20.h,
+              ),
+              AppText(LocalString.searchNews.tr, color: themeController.searchHintColor.value,).px(4)
+              // LocalString.searchNews.tr.text.make().px(4)
             ],
-            color: Colors.grey.shade300.withOpacity(0.5)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.search_outlined,
-              color: AppColors.primary,
-              size: 20.h,
-            ),
-            AppText(LocalString.searchNews.tr).px(4)
-            // LocalString.searchNews.tr.text.make().px(4)
-          ],
-        ).p(8),
-      ).p(10),
+          ).p(8),
+        ).p(10),
+      ),
     );
   }
 
@@ -220,16 +222,21 @@ class DiscoverWidget {
                       maxLines: 2,
                     ),
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(6.0).r,
-                    child: CachedNetworkImage(
-                      height: 57.h,
-                      width: 57.h,
-                      fit: BoxFit.cover,
-                      imageUrl: notificationList[index]['image'],
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white, borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: [BoxShadow(color: Colors.grey.shade400, blurRadius: 4)]),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6.0).r,
+                      child: CachedNetworkImage(
+                        height: 57.h,
+                        width: 57.h,
+                        fit: BoxFit.cover,
+                        imageUrl: notificationList[index]['image'],
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                     ),
                   )
                 ],

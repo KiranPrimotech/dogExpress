@@ -15,13 +15,20 @@ class ThemeController extends GetxController{
   Rx<Color> appBarColor = AppColors.white.obs;
   Rx<Color> headingColor = AppColors.black.obs;
   Rx<Color> dividerColor = AppColors.black.obs;
+  Rx<Color> switchColor = AppColors.black.obs;
+  Rx<Color> searchColor = AppColors.grey.obs;
+  Rx<Color> searchHintColor = AppColors.grey.obs;
 
   upgradeFun(bool value){
     if(value ){
 
-      appBarColor.value =AppColors.gray;
+      appBarColor.value =AppColors.black;
       headingColor.value =AppColors.white;
       dividerColor.value =AppColors.white;
+      switchColor.value =AppColors.primary;
+      searchColor.value =AppColors.white;
+      searchHintColor.value =AppColors.black;
+
 
       print(  " iff part --- ${appBarColor.value }");
     }
@@ -29,6 +36,10 @@ class ThemeController extends GetxController{
       appBarColor.value =AppColors.white;
       headingColor.value =AppColors.black;
       dividerColor.value =AppColors.black;
+      switchColor.value =AppColors.white;
+      searchColor.value =Colors.grey.shade300.withOpacity(.5);
+      searchHintColor.value =AppColors.white;
+
 
       print(  " else  part --- ${appBarColor.value }");    }
   }
