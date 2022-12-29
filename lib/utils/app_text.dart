@@ -9,6 +9,7 @@ class AppText extends StatelessWidget {
   final Color? color;
   final FontWeight? fontWeight;
   final int? maxLines;
+  final int? minLines;
   final TextAlign? textAlign;
   final EdgeInsets? padding;
   final VoidCallback? onTap;
@@ -18,6 +19,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
+        this.minLines=1,
     this.fontWeight = FontWeight.w500,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -31,7 +33,22 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
+        this.minLines=1,
     this.fontSize=TextSizes.small,
+    this.fontWeight = FontWeight.w400,
+    this.maxLines = 1,
+    this.textAlign = TextAlign.left,
+    this.padding,
+    this.onTap,
+    this.textDecoration,
+  }) : super(key: key);
+
+  const AppText.medium(
+    this.label, {
+    Key? key,
+    this.color,
+        this.minLines=1,
+    this.fontSize=TextSizes.medium,
     this.fontWeight = FontWeight.w400,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -44,6 +61,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
+        this.minLines=1,
     this.fontSize=TextSizes.large,
     this.fontWeight = FontWeight.w600,
     this.maxLines = 1,
@@ -57,6 +75,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
+        this.minLines=1,
     this.fontSize=TextSizes.extraLarge,
     this.fontWeight = FontWeight.w600,
     this.maxLines = 1,
@@ -68,6 +87,7 @@ class AppText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final double textSize;
     if (fontSize == TextSizes.small) {
       textSize = Dimens.fontSmall;
@@ -92,7 +112,7 @@ class AppText extends StatelessWidget {
                 style: TextStyle(
                   color: color,
                   fontWeight: fontWeight,
-                  fontSize: textSize.sp,
+                  fontSize: textSize,
                   decoration: textDecoration,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -104,7 +124,7 @@ class AppText extends StatelessWidget {
                 style: TextStyle(
                   color: color,
                   fontWeight: fontWeight,
-                  fontSize: textSize.sp,
+                  fontSize: textSize,
                   decoration: textDecoration,
                 ),
                 overflow: TextOverflow.ellipsis,

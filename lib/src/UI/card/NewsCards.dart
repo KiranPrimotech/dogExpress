@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dog_news/utils/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../controller/home_controller.dar.dart';
 import '../phot_view_screen.dart';
@@ -38,7 +40,7 @@ class NewsCard extends StatelessWidget {
               Get.to(PhotoViewScreen(), arguments: "${imgUrl}");
             },
             child: Container(
-              height: MediaQuery.of(context).size.height / 3,
+              height: (MediaQuery.of(context).size.height /2).h,
               width: double.infinity,
               color: Colors.grey.withOpacity(0.2),
               child: CachedNetworkImage(
@@ -74,30 +76,30 @@ class NewsCard extends StatelessWidget {
               }
             },
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-                  child: Text(
+                  child: AppText.medium(
                     primaryText,
-                    style:
-                        const TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                    maxLines: 10,
+                    fontWeight: FontWeight.w700,
+
                   ),
                 ),
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
+                    child: AppText.small(
                       secondaryText,
-                      style: const TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.w300),
+                      maxLines: 50,
+                      fontWeight: FontWeight.w500,
+
                     )),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-                  child: Text(
+                  padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 4.0),
+                  child: AppText.medium(
                     "swipe left for more at $sourceName by $author / ${Utils.timeAgoSinceDate(publishedAt)}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 12.0,
-                        ),
+
                   ),
                 )
               ],
@@ -105,7 +107,7 @@ class NewsCard extends StatelessWidget {
           ).expand(),
           Container(
             width: Get.width * 1,
-            height: 50,
+            height: 50.h,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,
@@ -121,14 +123,18 @@ class NewsCard extends StatelessWidget {
               onTap: (){
                 Utils.launchURL(url);
               },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  "Blast Ocuured on jangambadi area".text.white.size(12).make(),
-                  "Tap to read more $sourceName".text.white.size(10).make(),
-                ],
-              ).p(8),
+              child: Padding(
+                padding:  EdgeInsets.only(left: 8.0,bottom: 6,top: 6).r,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    "Blast Ocuured on jangambadi area".text.white.size(12.sp).make(),
+                    "Tap to read more $sourceName".text.white.size(10.sp).make(),
+                  ],
+                ),
+              ),
             ),
           )
         ],

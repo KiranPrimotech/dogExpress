@@ -2,11 +2,13 @@ import 'package:dog_news/src/controller/setting_controller.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_text.dart';
 import '../../../utils/routes/app_routes.dart';
+import '../../../utils/sizes_config.dart';
 import '../card/shared_pref.dart';
 import 'setting_widget.dart';
 import 'package:get/get.dart';
@@ -34,9 +36,10 @@ class SettingScreen extends StatelessWidget with SettingWidget{
 
      appBar: AppBar(
 
-       leading:  const BackButton(
+       leading:   BackButton(
+
        ),
-       title: AppText.small( LocalString.options.tr,),
+       title: AppText.medium( LocalString.options.tr,),
 
        actions: [
          GestureDetector(
@@ -50,7 +53,7 @@ class SettingScreen extends StatelessWidget with SettingWidget{
                border: Border.all(width: 1.5),
                borderRadius: BorderRadius.circular(40)
              ),
-               child: const Icon(Icons.person_outline_outlined,size: 30,)).p(10),
+               child:  Icon(Icons.person_outline_outlined,size:  Dimens.largeIcon,)).p(10),
          ),
        ],
      ),

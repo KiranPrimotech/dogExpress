@@ -4,6 +4,8 @@ import 'utils/app_themes/app_theme.dart';
 import 'utils/localization/translation_string.dart';
 import 'utils/routes/app_pages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'utils/sizes_config.dart';
 void main() {
   runApp(const MyApp());
 }

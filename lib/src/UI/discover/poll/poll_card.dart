@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_news/src/controller/poll_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../utils/app_colors.dart';
+import '../../../../utils/app_text.dart';
 import '../../../../utils/localization/localization_String.dart';
 import '../../card/Utils.dart';
 import '../../phot_view_screen.dart';
@@ -41,7 +43,7 @@ class PollCard extends StatelessWidget{
              Get.to(PhotoViewScreen(), arguments: "${imgUrl}");
            },
            child: Container(
-             height: MediaQuery.of(context).size.height / 3,
+             height: (MediaQuery.of(context).size.height / 2).h,
              width: double.infinity,
              color: Colors.grey.withOpacity(0.2),
              child: CachedNetworkImage(
@@ -75,28 +77,28 @@ class PollCard extends StatelessWidget{
                }
              },
            child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
              children: [
                Padding(
                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-                 child: Text(
+                 child: AppText(
                    primaryText,
-                   style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                   maxLines: 10,
+
                  ),
                ),
                Padding(
                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                   child: Text(
+                   child: AppText.small(
                      secondaryText,
-                     style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300),
+                     maxLines: 50,
+
                    )),
                Container(
-                 padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-                 child: Text(
+                 padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 4.0),
+                 child: AppText.medium(
                    "swipe left for more at $sourceName by $author / ${Utils.timeAgoSinceDate(publishedAt)}",
-                   style: const TextStyle(
-                       fontWeight: FontWeight.w300,
-                       fontSize: 12.0,
-                       color: Colors.grey),
+
                  ),
                )
              ],
@@ -106,7 +108,7 @@ class PollCard extends StatelessWidget{
 
          Container(
            width: Get.width *1,
-           height: Get.height *.14,
+           height: Get.height *.15,
            decoration:   BoxDecoration(
              gradient: LinearGradient(
 

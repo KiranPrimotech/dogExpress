@@ -1,3 +1,4 @@
+import 'package:dog_news/src/controller/home_controller.dart';
 import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +8,10 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../utils/localization/localization_String.dart';
 import '../../../../utils/sizes_config.dart';
-import '../../../controller/poll_controller.dart';
+import '../../../controller/home_controller.dar.dart';
 
-class PollWidget {
-
-  PollController controller = Get.find();
+class NotificationDetailWidget {
+  HomeController controller = Get.find();
   ThemeController themeController = Get.find();
 
   //  Animated app bar
@@ -37,8 +37,10 @@ class PollWidget {
         width: Get.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
                     onTap: () {
@@ -46,10 +48,10 @@ class PollWidget {
                       Get.back();
                     },
                     child: Icon(Icons.arrow_back_ios_new,size: Dimens.mediumIcon,)),
-                AppText(LocalString.poll).px(10),
+                AppText(LocalString.notification).px(10),
               ],
             ),
-             Icon(Icons.download,size: Dimens.mediumIcon,).px(8),
+             Icon(Icons.download,size:Dimens.mediumIcon).px(8),
           ],
         ),
       ),
@@ -82,14 +84,11 @@ class PollWidget {
   Widget bottomBarItems() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-
       children: [
-
         Column(
-
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Icon(
+            Icon(
               Icons.circle,
               size: 14.h,
             ),
@@ -99,7 +98,7 @@ class PollWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Icon(
+            Icon(
               Icons.share,
               size: 14.h,
             ),
@@ -109,14 +108,13 @@ class PollWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Icon(
+            Icon(
               Icons.bookmark,
               size: 14.h,
             ),
             "Bookmark".text.size(12.h).make()
           ],
         ),
-
       ],
     ).px(6).py(5);
   }

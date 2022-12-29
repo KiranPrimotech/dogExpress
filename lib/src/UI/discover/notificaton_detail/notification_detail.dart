@@ -6,27 +6,23 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../utils/app_colors.dart';
+import 'notification_detail_widget.dart';
 
-class NotificationDetailScreen extends StatelessWidget {
+class NotificationDetailScreen extends StatelessWidget  with NotificationDetailWidget{
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              size: 20,
-              color: Theme.of(context).primaryColor,
 
-            )),
-        title: LocalString.notification.tr.text.size(18).color(AppColors.gray).make(),
+      body: SafeArea(
+        child: Stack(
+            children:[
+              HomeScreen(),
+              Positioned(top: 0, child: animatedAppBar()),
+              Positioned(bottom: 0, child: animatedBottomBar())
+            ]),
       ),
-      body: HomeScreen(),
     );
   }
 }

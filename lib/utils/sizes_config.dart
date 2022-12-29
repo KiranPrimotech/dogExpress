@@ -26,18 +26,43 @@ class SizeConfig {
         _mediaQueryData.padding.top + _mediaQueryData.padding.bottom;
     safeBlockHorizontal = (screenWidth - _safeAreaHorizontal) / 100;
     safeBlockVertical = (screenHeight - _safeAreaVertical) / 100;
+    responsiveDimension();
   }
 
 
   void responsiveDimension(){
     if(Get.width <= 480) {
-
       // margins
       Dimens.margin = 16.0;
       Dimens.marginLarge = 18.0;
       Dimens.marginExtraLarge = 22.0;
       Dimens.marginSmall = 12.0;
       Dimens.largeSpace = 35.0;
+
+      Dimens.fontExtraSmall = 10.0;
+      Dimens.fontSmall = 14.0;
+      Dimens.fontMedium = 16.0;
+      Dimens.fontNormal = 18.0;
+      Dimens.fontLarge = 21.0;
+      Dimens.fontExtraLarge = 25.0;
+
+      print("iff small ${Dimens.fontSmall}");
+    }
+    else if(Get.width > 480){
+      Dimens.margin = 18.0;
+      Dimens.marginLarge = 20.0;
+      Dimens.marginExtraLarge = 22.0;
+      Dimens.marginSmall = 12.0;
+      Dimens.largeSpace = 35.0;
+
+      Dimens.fontExtraSmall = 10.0;
+      Dimens.fontSmall = 16.0;
+      Dimens.fontMedium = 20.0;
+      Dimens.fontNormal = 18.0;
+      Dimens.fontLarge = 24.0;
+      Dimens.fontExtraLarge = 27.0;
+
+      print("iff small ${Dimens.fontSmall}");
     }
 
     //   // font sizes
@@ -78,12 +103,12 @@ class Dimens {
   static  double largeSpace = 35.0;
 
 // font sizes
-  static const  double fontExtraSmall = 10.0;
-  static const  double fontSmall = 12.0;
-  static const  double fontMedium = 14.0;
-  static const  double fontNormal = 16.0;
-  static const  double fontLarge = 21.0;
-  static const  double fontExtraLarge = 25.0;
+  static   double fontExtraSmall = 10.0;
+  static   double fontSmall = 12.0;
+  static   double fontMedium = 14.0;
+  static   double fontNormal = 16.0;
+  static   double fontLarge = 21.0;
+  static   double fontExtraLarge = 25.0;
 
 // padding
   static const  double padding2px = 2.0;
@@ -100,4 +125,13 @@ class Dimens {
 
   // Extra
   static  const double roundBtRadius = 20.0;
+
+
+  /// Icon Sizes
+  static  double largeIcon = 30.0;
+  static  double mediumIcon = 26.0;
+  static  double smallIcon = 24.0;
+  static  double extraSmallIcon = 20.0;
+  static  double extraLargeIcon = 50.0;
+
 }

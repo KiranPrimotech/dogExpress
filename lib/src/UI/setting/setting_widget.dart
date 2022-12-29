@@ -4,6 +4,7 @@ import 'package:dog_news/utils/app_colors.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:dog_news/utils/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -11,6 +12,7 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../../utils/app_text.dart';
 import '../../../utils/app_themes/app_theme_controller.dart';
 import '../../../utils/image_path_assets.dart';
+import '../../../utils/sizes_config.dart';
 import '../card/shared_pref.dart';
 
 class SettingWidget {
@@ -90,8 +92,8 @@ class SettingWidget {
       child: Image.asset(
         image,
         fit: BoxFit.cover,
-        height: 35,
-        width: 35,
+        height: 35.h,
+        width: 35.h,
       ),
     );
   }
@@ -107,10 +109,10 @@ class SettingWidget {
           children: [
             Icon(
               iconData,
-              size: 24,
+              size:  Dimens.smallIcon,
               //  color: AppColors.gray,
             ),
-            AppText.small(
+            AppText.medium(
               title.tr,
             ).px(10)
           ],
@@ -123,10 +125,10 @@ class SettingWidget {
     return Container(
       child: Row(
         children: [
-          const SizedBox(
-            width: 24,
+           SizedBox(
+            width:  Dimens.smallIcon,
           ),
-          AppText.small(
+          AppText.medium(
             title.tr,
           ).px(10)
         ],
@@ -144,10 +146,10 @@ class SettingWidget {
             children: [
               Icon(
                 iconData,
-                size: 24,
+                size: Dimens.smallIcon,
                 // color: AppColors.gray,
               ),
-              AppText.small(
+              AppText.medium(
                 title.tr,
               ).px(10)
             ],
@@ -158,13 +160,13 @@ class SettingWidget {
             },
             child: Row(
               children: [
-                Obx(() => AppText.small(
+                Obx(() => AppText.medium(
                       dropDownTitle.value.tr,
                     )),
                 // dropDownTitle.tr.text.color(AppColors.primary).make(),
                 Icon(
                   Icons.arrow_drop_down_outlined,
-                  size: 20,
+                  size:  Dimens.extraSmallIcon,
                   color: AppColors.primary,
                 ).px(5)
               ],
@@ -188,7 +190,7 @@ class SettingWidget {
                 size: 24,
                 //color: AppColors.gray,
               ),
-              AppText.small(
+              AppText.medium(
                 title.tr,
               ).px(10)
               // title.tr.text.color(AppColors.gray).make().px(10),
@@ -285,7 +287,7 @@ class SettingWidget {
           thickness: 1,
           color: AppColors.grey,
         ),
-        AppText.small(title!.tr, color: txtClr).px(10)
+        AppText.medium(title!.tr, color: txtClr).px(10)
         //title!.tr.text.color(txtClr).wide.base.make().p(8)
       ],
     );

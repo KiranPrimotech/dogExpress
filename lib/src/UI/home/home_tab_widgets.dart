@@ -1,5 +1,7 @@
+import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
+import 'package:dog_news/utils/sizes_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -53,39 +55,42 @@ mixin MixinHomeTabWidgets {
 
   Widget bottomBarItems() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+
       children: [
+
         Column(
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.circle,
-              size: 14,
+              size: 14.h,
             ),
-            "Relevancy".text.size(12).make()
+            "Relevancy".text.size(12.h).make()
           ],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.share,
-              size: 14,
+              size: 14.h,
             ),
-            "Share".text.size(12).make()
+            "Share".text.size(12.h).make()
           ],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.bookmark,
-              size: 14,
+              size: 14.h,
             ),
-            "Bookmark".text.size(12).make()
+            "Bookmark".text.size(12.h).make()
           ],
-        )
+        ),
+
       ],
     ).px(6).py(5);
   }
@@ -210,15 +215,18 @@ mixin MixinHomeTabWidgets {
       onTap: onTap(),
       child: SizedBox(
         width: caption == LocalString.discover
-            ? (Get.width - 60) * .4
-            : (Get.width - 60) * .5,
-        height: controller.appBarHeight,
+            ? (Get.width - 60) * .4.h
+            : (Get.width - 60) * .5.h,
+        height: controller.appBarHeight.h,
         child: Center(
-          child: Text(
-            caption.tr,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          child: Obx(() =>
+             AppText.medium(
+              caption.tr,
+               color: themeController.headingColor.value,
+               fontWeight: FontWeight.w600),
           ),
-        ),
+          ),
+
       ),
     );
   }
@@ -236,6 +244,7 @@ mixin MixinHomeTabWidgets {
           child: icon != null
               ? Icon(
                   icon,
+                  size: Dimens.mediumIcon,
                   color: AppColors.primary,
                 )
               : const SizedBox(),

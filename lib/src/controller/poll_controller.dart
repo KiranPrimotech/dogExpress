@@ -14,6 +14,7 @@ class PollController extends GetxController with GetTickerProviderStateMixin{
 
   /// AppBar Height
   double appBarHeight = 50.h;
+  double bottomBarHeight = (Get.height *.1).h;
   late AnimationController appBarAnimationController;
   late AnimationController bottomBarAnimationController;
 

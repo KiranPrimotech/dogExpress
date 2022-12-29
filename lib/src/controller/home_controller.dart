@@ -22,10 +22,8 @@ class HomeControllerCard extends GetxController{
 
   void updateIndex(newIndex) async {
     index.value = newIndex;
-    print("vjkjvkjkjkj ${index.value}");
     SharePreference.setLastIndex(newIndex);
-    print("object  ${newsModal.result![index.value].url!}");
-   await updateWeb().then((value) => print("Done Done"));
+   await updateWeb().then((value) => print("Done Done $value"));
     update();
   }
 
@@ -37,6 +35,7 @@ class HomeControllerCard extends GetxController{
   }
     RxInt progressValue = 0.obs;
   Future updateWeb() async{
+
     webController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
@@ -45,7 +44,6 @@ class HomeControllerCard extends GetxController{
           onProgress: (int progress) {
             progressValue.value= progress;
 
-            print("Progress--- ${progressValue}");
             // Update loading bar.
           },
           onPageStarted: (String url) {},
@@ -118,19 +116,6 @@ return Future.value(0);
   // String getShareText() {
   //   return "${newsList[index.value].title}\n${newsList[index.value].url}";
   // }
-
-  // Widget newsCard(int index) {
-  //   return NewsCard(
-  //     imgUrl: newsList[index].urlToImage!,
-  //     primaryText: newsList[index].title!,
-  //     secondaryText: newsList[index].description!,
-  //     sourceName: newsList[index].source!.name!,
-  //     author: newsList[index].author!,
-  //     publishedAt: newsList[index].publishedAt!,
-  //     url: newsList[index].url!,
-  //   );
-  // }
-
 
   Widget newsCard(int index) {
     return NewsCard(

@@ -13,15 +13,20 @@ class ThemeController extends GetxController{
   ThemeMode get themeMode => _themeMode;
   bool themeModeValue= true;
   Rx<Color> appBarColor = AppColors.white.obs;
+  Rx<Color> headingColor = AppColors.black.obs;
 
   upgradeFun(bool value){
     if(value ){
 
       appBarColor.value =AppColors.gray;
+      headingColor.value =AppColors.white;
+
       print(  " iff part --- ${appBarColor.value }");
     }
     else{
       appBarColor.value =AppColors.white;
+      headingColor.value =AppColors.black;
+
       print(  " else  part --- ${appBarColor.value }");    }
   }
 

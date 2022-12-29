@@ -15,6 +15,7 @@ import '../../../utils/app_colors.dart';
 
 import '../../../utils/image_path_network.dart';
 import '../../../utils/routes/app_routes.dart';
+import '../../../utils/sizes_config.dart';
 import '../../controller/home_controller.dar.dart';
 
 class DiscoverWidget {
@@ -39,21 +40,21 @@ class DiscoverWidget {
             Icon(
               Icons.search_outlined,
               color: AppColors.primary,
-              size: 20,
+              size: 20.h,
             ),
-            LocalString.searchNews.tr.text.make().px(4)
+            AppText(LocalString.searchNews.tr).px(4)
+            // LocalString.searchNews.tr.text.make().px(4)
           ],
         ).p(8),
       ).p(10),
     );
   }
-    Widget puzzleQuoteWidget(){
+
+  Widget puzzleQuoteWidget() {
     return SizedBox(
-      height: 110,
+      height: 110.h,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-
-
         child: Row(
           children: [
             puzzleQuoteWidgetItem(ImagePathNetwork.puzzle, () {
@@ -66,9 +67,7 @@ class DiscoverWidget {
         ),
       ),
     );
-
-    }
-
+  }
 
   /// Puzzle Quote Widget
   Widget puzzleQuoteWidgetItem(String image, Function onTap) {
@@ -88,26 +87,25 @@ class DiscoverWidget {
               Center(child: CircularProgressIndicator()),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ).p(10),
-
-        //   Image.network(
-        //     ImagePathAssets.image,
-        //     fit: BoxFit.fitWidth,
-        //   ).p(10),
       ).p(10),
     );
   }
 
   /// Feed Option
   Widget feedOptionWidget() {
-    return SizedBox(
-      height: 120,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: controller.feedList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return feedItemsWidget(controller.feedList, index).px(20);
-          }),
-    ).pLTRB(0, 20, 0, 10);
+    return Padding(
+      padding: const EdgeInsets.only(top: 12, bottom: 12).h,
+      child: SizedBox(
+        //  color: Colors.yellow,
+        height: 100.h,
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: controller.feedList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return feedItemsWidget(controller.feedList, index).px(20);
+            }),
+      ),
+    );
   }
 
   /// Feed Option Items
@@ -123,13 +121,21 @@ class DiscoverWidget {
         // homeController.   bottomBarAnimationController.reverse(from: 50);
       },
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             controller.feedList[index]['image'],
-            size: 50,
+            size: Dimens.extraLargeIcon.h,
             color: AppColors.primary,
           ),
-          "${feedList[index]['name']}".text.make().py(10),
+          Obx(
+            () => AppText.medium(
+              "${feedList[index]['name']}",
+              fontWeight: FontWeight.w600,
+              color: themeController.headingColor.value,
+            ).py(10),
+          ),
+          //"${feedList[index]['name']}".text.make().py(10),
         ],
       ),
     );
@@ -137,29 +143,40 @@ class DiscoverWidget {
 
   /// Heading Widget
   Widget notificationHeading(String heading, String title, Function onTap) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppText.large(heading.tr,fontWeight: FontWeight.w700,),
-            Container(
-              height: 2,
-              width: 30,
-              color: AppColors.black,
-            )
-          ],
-        ),
-        InkWell(onTap: () => onTap(), child: title.tr.text.size(12).bold.make())
-      ],
-    ).pLTRB(10, 0, 16, 16);
+    return Padding(
+      padding: const EdgeInsets.only(top: 0, left: 10, bottom: 10, right: 16).h,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Obx(() => AppText(
+                    heading.tr,
+                    fontWeight: FontWeight.w800,
+                    color: themeController.headingColor.value,
+                  )),
+              Container(
+                height: 2.h,
+                width: 30.w,
+                color: AppColors.black,
+              )
+            ],
+          ),
+          InkWell(
+              onTap: () => onTap(),
+              child: AppText.small(title.tr,
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w600))
+        ],
+      ),
+    );
   }
 
   /// Notification List widget
   Widget notificationListWidgte() {
     return SizedBox(
-      height:75*4.h,
+      height: 75 * 4.h,
       child: ListView.builder(
           itemCount: controller.notificationList.length,
           physics: NeverScrollableScrollPhysics(),
@@ -178,19 +195,19 @@ class DiscoverWidget {
         Get.toNamed(AppRoutes.notificationDetail);
       },
       child: SizedBox(
-         height:75 .h,
+        height: 75.h,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 10).r,
+              padding: EdgeInsets.symmetric(horizontal: 10).r,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
                     width: Get.width * .7,
-                    child: AppText(
+                    child: AppText.medium(
                       "${notificationList[index]['name']}",
                       maxLines: 2,
                     ),
@@ -203,14 +220,14 @@ class DiscoverWidget {
                       fit: BoxFit.cover,
                       imageUrl: notificationList[index]['image'],
                       placeholder: (context, url) =>
-                          Center(child: CircularProgressIndicator()),
+                          const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   )
                 ],
               ),
             ),
-             Divider(
+            Divider(
               color: Colors.grey,
               thickness: 1.h,
             )
@@ -245,16 +262,22 @@ class DiscoverWidget {
       onTap: () {
         Get.toNamed(AppRoutes.insightScreen);
       },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: CachedNetworkImage(
-          height: Get.width *.4,
-          width:  Get.width *.4,
-          fit: BoxFit.cover,
-          imageUrl: insightList[index]['image'],
-          placeholder: (context, url) =>
-              Center(child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(8.0),
+            //  border: Border.all(color: AppColors.grey,width: 0.5),
+            boxShadow: [BoxShadow(color: Colors.grey.shade400, blurRadius: 5)]),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: CachedNetworkImage(
+            height: Get.width * .4,
+            width: Get.width * .4,
+            fit: BoxFit.cover,
+            imageUrl: insightList[index]['image'],
+            placeholder: (context, url) =>
+                Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
         ),
       ).p(10),
     );
@@ -263,7 +286,7 @@ class DiscoverWidget {
   /// Poll List View
   Widget pollListWidget() {
     return SizedBox(
-      height: Get.height * .58,
+      height: Get.width * .8 * 6 / 10 + 220.h,
       child: ListView.builder(
           itemCount: controller.pollList.length,
           scrollDirection: Axis.horizontal,
@@ -282,33 +305,45 @@ class DiscoverWidget {
       },
       child: SizedBox(
         width: Get.width * .8,
-        height: Get.width * .8 * 6/10 + 210,
+        height: Get.width * .8 * 6 / 10 + 220.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(0.0),
-              child: CachedNetworkImage(
-                height: Get.width * .8 * 6/10,
-                width: Get.width * .8,
-                fit: BoxFit.cover,
-                imageUrl: pollList[index]['image'],
-                placeholder: (context, url) =>
-                    Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(6.0),topRight: Radius.circular(6.0)),
+
+                  boxShadow: [
+                    BoxShadow(color: Colors.grey.shade400, blurRadius: 5)
+                  ]),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(6.0),topRight: Radius.circular(6.0)),
+                child: CachedNetworkImage(
+                  height: Get.width * .8 * 6 / 10,
+                  width: Get.width * .8,
+                  fit: BoxFit.cover,
+                  imageUrl: pollList[index]['image'],
+                  placeholder: (context, url) =>
+                      Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              )
             ).p(10),
             SizedBox(
-              height: 210,
+              height: 220.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppText(
+                  AppText.medium(
                     "${pollList[index]['description']}",
                     maxLines: 4,
-                  ).px(8).py(5),
-                  const AppText("Do you personally own a pet?",fontWeight: FontWeight.w800,).px(8).py(8),
-
+                  ).px(8).py(5).expand(),
+                  Obx(() => AppText(
+                        "Do you personally own a pet?",
+                        fontWeight: FontWeight.w800,
+                        color: themeController.headingColor.value,
+                      ).px(8).py(8)),
                   Row(
                     children: [
                       Container(
@@ -437,7 +472,7 @@ class DiscoverWidget {
   ///Topics PAge View
   Widget pageTopicNotifications() {
     return SizedBox(
-        height: 300,
+        height: 300.h,
         child: PageView.builder(
           controller: controller.topicNotificationPageController,
           itemBuilder: (ctx, index) {
