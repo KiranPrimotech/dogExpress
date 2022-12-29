@@ -1,5 +1,6 @@
 import 'package:dog_news/src/UI/discover/poll/poll_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../UI/card/NewsDummy.dart';
@@ -12,21 +13,18 @@ class PollController extends GetxController with GetTickerProviderStateMixin{
   late NewsModal newsModal;
 
   /// AppBar Height
-  double appBarHeight = 50;
+  double appBarHeight = 50.h;
   late AnimationController appBarAnimationController;
   late AnimationController bottomBarAnimationController;
 
   Duration animationDuration = const Duration(milliseconds: 300);
-
 
   fetchData() {
     newsModal = NewsModal.fromJson(newsDummy);
   }
 
   void updateIndex(newIndex) {
-
     index.value = newIndex;
-
     SharePreference.setLastIndex(newIndex);
   }
 
@@ -50,10 +48,10 @@ class PollController extends GetxController with GetTickerProviderStateMixin{
     }
     updateIndex(index.value);
   }
-
   String getShareText() {
     return "${newsModal.result![index.value].title}\n${newsModal.result![index.value].url}";
   }
+
 
   @override
   void onInit() {

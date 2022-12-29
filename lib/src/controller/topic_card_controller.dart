@@ -1,5 +1,6 @@
 import 'package:dog_news/src/UI/discover/topic/card/topic_card_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../UI/card/NewsDummy.dart';
@@ -11,7 +12,7 @@ class TopicCardController extends GetxController with GetTickerProviderStateMixi
   RxInt index = 0.obs;
   late NewsModal newsModal;
   /// AppBar Height
-  double appBarHeight = 50;
+  double appBarHeight = 50.h;
   late AnimationController appBarAnimationController;
   late AnimationController bottomBarAnimationController;
 

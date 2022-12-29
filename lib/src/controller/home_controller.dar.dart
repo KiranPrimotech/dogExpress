@@ -2,6 +2,7 @@ import 'package:dog_news/src/model/response/news_response_model.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:dog_news/utils/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../utils/localization/localization_String.dart';
@@ -15,9 +16,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
 
   /// Position of tab from 0.0 to 1.0
   RxDouble position = 0.0.obs;
-
   RxString title="My Feeds".obs;
-
   RxDouble selectedItem = 3.0.obs;
   bool modeValue = false;
   RxInt indexValue=0.obs;
@@ -42,12 +41,13 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
   double viewportFraction = 0.3;
 
   /// AppBar Height
-  double appBarHeight = 50;
+  double appBarHeight = 50.h;
 
   late List<Articles> newsList ;
 
   @override
   void onInit() async {
+
     /// initialize App Bar Tab Controller
     appBarTab = PageController(
       initialPage: 0,
@@ -78,6 +78,8 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
 
       print("index value ---- ${indexValue}");
 
+
+
     });
 
     // homeTab.addListener(() {
@@ -100,9 +102,16 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
     themeController.getThemeModeFromPreferences();
 
     themeController.upgradeFun( modeValue);
-    getNewsList();
+
+
+   // getNewsList();
+
+
+
+
     super.onInit();
   }
+
 
   Future<void> getNewsList() async {
     newsList = await CallAPI().getNewsList();
@@ -182,7 +191,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
   }
 
   getModeValue() async{
-    modeValue = await SharePreference.getBoolValuesSF("mode");
+    modeValue = await SharePreference.getBoolValuesSF("mode") ?? false;
   }
 
 }

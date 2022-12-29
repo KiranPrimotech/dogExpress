@@ -64,8 +64,8 @@ class PollCard extends StatelessWidget{
                    AnimationStatus.completed &&
                    controller.bottomBarAnimationController.status ==
                        AnimationStatus.completed) {
-                 controller.bottomBarAnimationController.reverse(from: 50);
-                 controller.appBarAnimationController.reverse(from: 50);
+                 controller.bottomBarAnimationController.reverse(from: controller.appBarHeight);
+                 controller.appBarAnimationController.reverse(from: controller.appBarHeight);
                } else if (controller.appBarAnimationController.status ==
                    AnimationStatus.dismissed &&
                    controller.bottomBarAnimationController.status ==

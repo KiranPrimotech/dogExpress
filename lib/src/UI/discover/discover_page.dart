@@ -67,7 +67,7 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
               pollListWidget(),
 
             ],
-          ),
+          ).px(12),
         ),
       ),
     );
