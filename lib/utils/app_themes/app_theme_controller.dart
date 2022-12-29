@@ -14,18 +14,21 @@ class ThemeController extends GetxController{
   bool themeModeValue= true;
   Rx<Color> appBarColor = AppColors.white.obs;
   Rx<Color> headingColor = AppColors.black.obs;
+  Rx<Color> dividerColor = AppColors.black.obs;
 
   upgradeFun(bool value){
     if(value ){
 
       appBarColor.value =AppColors.gray;
       headingColor.value =AppColors.white;
+      dividerColor.value =AppColors.white;
 
       print(  " iff part --- ${appBarColor.value }");
     }
     else{
       appBarColor.value =AppColors.white;
       headingColor.value =AppColors.black;
+      dividerColor.value =AppColors.black;
 
       print(  " else  part --- ${appBarColor.value }");    }
   }

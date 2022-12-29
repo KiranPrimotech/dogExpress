@@ -33,6 +33,12 @@ class DiscoverWidget {
         height: 40.h,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.white,
+                blurRadius: 3
+              )
+            ],
             color: Colors.grey.shade300.withOpacity(0.5)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -156,10 +162,12 @@ class DiscoverWidget {
                     fontWeight: FontWeight.w800,
                     color: themeController.headingColor.value,
                   )),
-              Container(
-                height: 2.h,
-                width: 30.w,
-                color: AppColors.black,
+              Obx(()=>
+                 Container(
+                  height: 2.h,
+                  width: 30.w,
+                  color: themeController.dividerColor.value,
+                ),
               )
             ],
           ),
