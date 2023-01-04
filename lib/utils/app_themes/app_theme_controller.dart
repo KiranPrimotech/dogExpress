@@ -37,7 +37,7 @@ class ThemeController extends GetxController{
       headingColor.value =AppColors.black;
       dividerColor.value =AppColors.black;
       switchColor.value =AppColors.white;
-      searchColor.value =Colors.grey.shade300.withOpacity(.5);
+      searchColor.value =Colors.grey.shade400.withOpacity(.5);
       searchHintColor.value =AppColors.white;
 
 

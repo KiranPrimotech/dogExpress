@@ -20,64 +20,69 @@ class SettingWidget {
   ThemeController _themeController = Get.find();
 
   Widget safePreferenceWidget() {
-    return Container(
-      height: Get.height * .24,
-      color: AppColors.primary,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppText.extraLarge(
-            LocalString.savePreference.tr,
-            fontSize: TextSizes.extraLarge,
-            color: AppColors.white,
-          ).p(10),
-          SizedBox(
-            width: Get.width * .37,
-            child: AppText.small(
-              LocalString.signInDesc.tr,
-              maxLines: 2,
-              color: AppColors.white,
-            ),
-
-            // LocalString.signInDesc.tr.text.base.white.maxLines(2).make(),
-          ).px(10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Obx(() =>
+      Visibility(
+        visible: controller.loginValue.value,
+        child: Container(
+          height: Get.height * .24,
+          color: AppColors.primary,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              InkWell(
-                onTap: () {
-                  Get.toNamed(AppRoutes.signIn);
-                },
-                child: Container(
-                  //width: Get.width *.2,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.white,
-                  ),
-                  child: Center(
-                      child: AppText.small(
-                    LocalString.signIn.tr,
-                    maxLines: 2,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary,
-                  )).py(10).px(12),
-                ),
-              ),
+              AppText.extraLarge(
+                LocalString.savePreference.tr,
+                fontSize: TextSizes.extraLarge,
+                color: AppColors.white,
+              ).p(10),
               SizedBox(
-                // width: Get.width *.6,
-                child: Row(
-                  children: [
-                    signInOptionIcon(ImagePathAssets.googleImg),
-                    signInOptionIcon(ImagePathAssets.facebookImg),
-                    signInOptionIcon(ImagePathAssets.twitterImg),
-                    signInOptionIcon(ImagePathAssets.callImg),
-                  ],
+                width: Get.width * .37,
+                child: AppText.small(
+                  LocalString.signInDesc.tr,
+                  maxLines: 2,
+                  color: AppColors.white,
                 ),
-              )
+
+                // LocalString.signInDesc.tr.text.base.white.maxLines(2).make(),
+              ).px(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.signIn);
+                    },
+                    child: Container(
+                      //width: Get.width *.2,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: AppColors.white,
+                      ),
+                      child: Center(
+                          child: AppText.small(
+                        LocalString.signIn.tr,
+                        maxLines: 2,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primary,
+                      )).py(10).px(12),
+                    ),
+                  ),
+                  SizedBox(
+                    // width: Get.width *.6,
+                    child: Row(
+                      children: [
+                        signInOptionIcon(ImagePathAssets.googleImg),
+                        signInOptionIcon(ImagePathAssets.facebookImg),
+                        signInOptionIcon(ImagePathAssets.twitterImg),
+                        signInOptionIcon(ImagePathAssets.callImg),
+                      ],
+                    ),
+                  )
+                ],
+              ).pLTRB(10, 15, 10, 5)
             ],
-          ).pLTRB(10, 15, 10, 5)
-        ],
+          ),
+        ),
       ),
     );
   }
@@ -267,7 +272,8 @@ class SettingWidget {
           LocalString.doyouWantLog.tr.text.size(18).color( AppColors.gray).wide.make().py(20),
           GestureDetector(
               onTap: () {
-                Get.back();
+                controller.logOutUser();
+
               },
               child:
                   logoutOptions(title: "Log Out", txtClr: AppColors.primary)),

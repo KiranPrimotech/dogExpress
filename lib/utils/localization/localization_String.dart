@@ -77,6 +77,7 @@ static String verifyOtpDec= "By tapping \"Verify Phone Number \", an SMS may be 
  static String langKey= "langKey";
  static String autoPlayKey= "autoPlayKey";
  static String textSizeKey= "textSizeyKey";
+ static String signKey= "google";
 
 
 }

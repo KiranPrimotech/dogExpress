@@ -1,12 +1,36 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'firebase_options.dart';
+import 'notification/notification_service.dart';
 import 'utils/app_themes/app_theme.dart';
 import 'utils/localization/translation_string.dart';
 import 'utils/routes/app_pages.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'utils/sizes_config.dart';
-void main() {
+Future<void> _messageHandler(RemoteMessage message) async {
+  print('background message ${message.notification!.body}');
+  NotificationService.showNotification(message);
+}
+
+Future main()  async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+ FirebaseMessaging.onBackgroundMessage(_messageHandler);
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      badge: true,
+      alert: true,
+      sound: true
+  );
+
+
+
   runApp(const MyApp());
 }
 
@@ -33,6 +57,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: const Locale('en', 'US'),
           locale: const Locale('en', 'US'),
           translations: TranslationString(),
+          builder:  EasyLoading.init(),
 
         );
       },

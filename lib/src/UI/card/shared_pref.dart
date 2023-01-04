@@ -15,6 +15,10 @@ class SharePreference {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
   }
+  static removeField(String key) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove(key);
+  }
 
   static addStringToSF(String key ,String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

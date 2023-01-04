@@ -2,10 +2,13 @@ import 'package:dog_news/src/model/response/news_response_model.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:dog_news/utils/routes/app_routes.dart';
 import 'package:dog_news/utils/sizes_config.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../notification/notification_service.dart';
 import '../../utils/localization/localization_String.dart';
 import '../UI/card/shared_pref.dart';
 import '../network/api_call.dart';
@@ -47,6 +50,10 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
 
   @override
   void onInit() async {
+
+
+    NotificationService.initialize();
+    firebaseNotification();
     SizeConfig().init(Get.context!);
 
     /// initialize App Bar Tab Controller
@@ -174,6 +181,64 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
   }
 
 
+  /// firebase notification
+    getFirebaseNotification()  async {
+
+    print("firebase -----------------------------------------------------");
+
+      const AndroidNotificationChannel channel = AndroidNotificationChannel(
+        'high_importance_channel', // id
+        'High Importance Notifications', // title
+        //  'This channel is used for important notifications.', // description
+        importance: Importance.max,
+      );
+      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(channel);
+      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        print("Message Recieved ${message!.notification!.title}");
+
+        RemoteNotification? notification = message.notification;
+        AndroidNotification? android = message.notification?.android;
+        print("Message Recieved ${notification!.title}");
+
+        // If `onMessage` is triggered with a notification, construct our own
+        // local notification to show to users using the created channel.
+        if (notification != null && android != null) {
+          flutterLocalNotificationsPlugin.show(
+              notification.hashCode,
+              notification.title,
+              notification.body,
+              NotificationDetails(
+                android: AndroidNotificationDetails(
+                  channel.id,
+                  channel.name,
+                  icon: android?.smallIcon,
+
+                  // other properties...
+                ),
+              ));
+        }
+      });
+
+      FirebaseMessaging.onMessageOpenedApp.listen((message) {
+        print('Message clicked!');
+      });
+
+    }
+
+    /// local and firebase notification
+   firebaseNotification(){
+     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+       NotificationService.showNotification(message);
+     });
+   }
+
+  /// get Langauge
+
   getData() async {
     if( await SharePreference.getStringValuesSF(LocalString.langKey) != "" && await SharePreference.getStringValuesSF(LocalString.langKey) != null){
       Locale  locale=  await  SharePreference.getStringValuesSF(LocalString.langKey) == LocalString.eng  ? const Locale('en', 'US') : const Locale('hi', 'IND');
@@ -188,12 +253,19 @@ class HomeController extends GetxController with GetTickerProviderStateMixin{
 
   }
 
+  /// get Mode value for theme change
   getModeValue() async{
 
     modeValue = await SharePreference.getBoolValuesSF("mode")??false;
   }
 
+  initializeLocalNotification(){
+
+  }
+
 }
+
+
 
 
 enum VisibilityEnum{

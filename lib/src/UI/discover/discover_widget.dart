@@ -10,9 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../../../utils/app_colors.dart';
-
 import '../../../utils/image_path_network.dart';
 import '../../../utils/routes/app_routes.dart';
 import '../../../utils/sizes_config.dart';
@@ -34,7 +32,7 @@ class DiscoverWidget {
           height: 40.h,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              boxShadow:  [
+              boxShadow:  const [
                 BoxShadow(
                   color: Colors.white,
                   blurRadius: 3
@@ -43,13 +41,14 @@ class DiscoverWidget {
               color: themeController.searchColor.value),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
                 Icons.search_outlined,
                 color: AppColors.primary,
-                size: 20.h,
-              ),
-              AppText(LocalString.searchNews.tr, color: themeController.searchHintColor.value,).px(4)
+                size: 20,
+              ).centered(),
+              AppText.medium(LocalString.searchNews.tr, color: themeController.searchHintColor.value,).centered().px(4)
               // LocalString.searchNews.tr.text.make().px(4)
             ],
           ).p(8),

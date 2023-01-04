@@ -8,8 +8,9 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../utils/app_colors.dart';
+import '../../controller/signin_phone_controller.dart';
 
-class PhoneAuthScreen extends StatelessWidget{
+class PhoneAuthScreen extends GetView<PhoneController>{
   const PhoneAuthScreen({super.key});
 
   @override
@@ -25,16 +26,16 @@ class PhoneAuthScreen extends StatelessWidget{
         child: Column(
           children: [
             IntlPhoneField(
+
+              controller: controller.phoneController,
               dropdownIcon:const  Icon(Icons.arrow_drop_down_outlined,color: Colors.black,),
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                 FilteringTextInputFormatter.digitsOnly
 
               ],
-
-            
               decoration:  InputDecoration(
                 iconColor: AppColors.black,
                 labelText: 'Phone Number',
@@ -57,7 +58,11 @@ class PhoneAuthScreen extends StatelessWidget{
               ),
               initialCountryCode: 'IN',
               onChanged: (phone) {
-                print(phone.completeNumber);
+                controller.countyCode= phone.countryCode;
+                controller.phoneNumber= phone.number;
+
+                print(phone.countryCode);
+                print(controller.phoneNumber);
               },
             ).pLTRB(12, 25, 12, 10),
             SizedBox(
@@ -69,7 +74,9 @@ class PhoneAuthScreen extends StatelessWidget{
 
                 ),
                 onPressed: (){
-                  Get.toNamed(AppRoutes.verifyOtp);
+
+                controller.registerUser(controller.countyCode,controller.phoneNumber);
+                //  Get.toNamed(AppRoutes.verifyOtp);
 
                 }, child: "VERIFY PHONE NUMBER ".tr.text.color(AppColors.white).make().p(8),) ,
             ).py(10),

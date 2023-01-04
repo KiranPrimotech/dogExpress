@@ -16,44 +16,36 @@ import 'package:get/get.dart';
 class SettingScreen extends StatelessWidget with SettingWidget{
 
   SettingController controller = Get.find();
-
-  getData() async {
-    if( await SharePreference.getStringValuesSF(LocalString.langKey) == ""){
-      print("No value Stored");
-
-    }
-    else{
-      print(" uyryutieruituiotui ${await SharePreference.getStringValuesSF(LocalString.langKey) }");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     double? thickness= 1.5;
-    getData();
 
    return Scaffold(
 
      appBar: AppBar(
 
-       leading:   BackButton(
-
+       leading:   const BackButton(
        ),
        title: AppText.medium( LocalString.options.tr,),
 
        actions: [
-         GestureDetector(
-           onTap: (){
-             logout();
-           },
-           child: Container(
-             height:35,
-             width: 35,
-             decoration: BoxDecoration(
-               border: Border.all(width: 1.5),
-               borderRadius: BorderRadius.circular(40)
+         Obx(() =>
+          Visibility(
+            visible: controller.logOutValue.value,
+             child: GestureDetector(
+               onTap: (){
+                 logout();
+               },
+               child: Container(
+                 height:35,
+                 width: 35,
+                 decoration: BoxDecoration(
+                   border: Border.all(width: 1.5),
+                   borderRadius: BorderRadius.circular(40)
+                 ),
+                   child:  Icon(Icons.person_outline_outlined,size:  Dimens.largeIcon,)).p(10),
              ),
-               child:  Icon(Icons.person_outline_outlined,size:  Dimens.largeIcon,)).p(10),
+           ),
          ),
        ],
      ),

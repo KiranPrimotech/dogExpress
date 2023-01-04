@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "346442533727",
+    "firebase_url": "https://dogexpress-30ff0-default-rtdb.firebaseio.com",
+    "project_id": "dogexpress-30ff0",
+    "storage_bucket": "dogexpress-30ff0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346442533727:android:dc16ba1c6e8e95ecf804ea",
+        "android_client_info": {
+          "package_name": "com.example.dog_news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346442533727-ttsf2lc26as2g55uqimegket1mbde9c7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByrxO45uqvtpTaZ07_Dg5bcFftUIPet8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346442533727-ttsf2lc26as2g55uqimegket1mbde9c7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "346442533727-gete8b3cj00avbs9qpdgcahgc63a7i0u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dogNews"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
