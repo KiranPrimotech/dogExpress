@@ -1,7 +1,7 @@
 import 'package:dog_news/src/model/enumClass.dart';
+import 'package:dog_news/utils/media_query_widget.dart';
 import 'package:dog_news/utils/sizes_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppText extends StatelessWidget {
   final String label;
@@ -19,7 +19,7 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
-        this.minLines=1,
+    this.minLines = 1,
     this.fontWeight = FontWeight.w500,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -33,8 +33,8 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
-        this.minLines=1,
-    this.fontSize=TextSizes.small,
+    this.minLines = 1,
+    this.fontSize = TextSizes.small,
     this.fontWeight = FontWeight.w400,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -47,8 +47,8 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
-        this.minLines=1,
-    this.fontSize=TextSizes.medium,
+    this.minLines = 1,
+    this.fontSize = TextSizes.medium,
     this.fontWeight = FontWeight.w400,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -61,8 +61,8 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
-        this.minLines=1,
-    this.fontSize=TextSizes.large,
+    this.minLines = 1,
+    this.fontSize = TextSizes.large,
     this.fontWeight = FontWeight.w600,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -75,8 +75,8 @@ class AppText extends StatelessWidget {
     this.label, {
     Key? key,
     this.color,
-        this.minLines=1,
-    this.fontSize=TextSizes.extraLarge,
+    this.minLines = 1,
+    this.fontSize = TextSizes.extraLarge,
     this.fontWeight = FontWeight.w600,
     this.maxLines = 1,
     this.textAlign = TextAlign.left,
@@ -87,7 +87,6 @@ class AppText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final double textSize;
     if (fontSize == TextSizes.small) {
       textSize = Dimens.fontSmall;
@@ -101,35 +100,37 @@ class AppText extends StatelessWidget {
       textSize = Dimens.fontNormal;
     }
 
-    return Padding(
-      padding: padding ?? EdgeInsets.zero,
-      child: GestureDetector(
-        onTap: onTap,
-        child: color == null
-            ? Text(
-                label,
-                textAlign: textAlign,
-                style: TextStyle(
-                  color: color,
-                  fontWeight: fontWeight,
-                  fontSize: textSize,
-                  decoration: textDecoration,
+    return MediaQueryWidget(
+      child: Padding(
+        padding: padding ?? EdgeInsets.zero,
+        child: GestureDetector(
+          onTap: onTap,
+          child: color == null
+              ? Text(
+                  label,
+                  textAlign: textAlign,
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: fontWeight,
+                    fontSize: textSize,
+                    decoration: textDecoration,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: maxLines,
+                )
+              : Text(
+                  label,
+                  textAlign: textAlign,
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: fontWeight,
+                    fontSize: textSize,
+                    decoration: textDecoration,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: maxLines,
                 ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: maxLines,
-              )
-            : Text(
-                label,
-                textAlign: textAlign,
-                style: TextStyle(
-                  color: color,
-                  fontWeight: fontWeight,
-                  fontSize: textSize,
-                  decoration: textDecoration,
-                ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: maxLines,
-              ),
+        ),
       ),
     );
   }

@@ -1,6 +1,8 @@
 import UIKit
 import Flutter
+
 import flutter_local_notifications
+
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
@@ -12,9 +14,9 @@ import flutter_local_notifications
     UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
   }
 
-   FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
-      GeneratedPluginRegistrant.register(with: registry)
-    }
+  FlutterLocalNotificationsPlugin.setPluginRegistrantCallback { (registry) in
+       GeneratedPluginRegistrant.register(with: registry)
+     }
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
