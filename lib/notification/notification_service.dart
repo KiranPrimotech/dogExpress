@@ -45,9 +45,10 @@ class NotificationService {
 
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
+    AppleNotification? apple = message.notification?.apple;
     print("Message Recieved ${notification!.title}");
 
-    if (notification != null && android != null) {
+    if (notification != null ) {
       _flutterLocalNotificationsPlugin.show(
           notification.hashCode,
           notification.title,
