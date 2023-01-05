@@ -50,16 +50,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-	<key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb627775619103919</string>
-      </array>
-      </dict>
-    </array>
     <key>FacebookAppID</key>
     <string>627775619103919</string>
     <key>FacebookDisplayName</key>
@@ -81,11 +71,17 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <!-- TODO Replace this value: -->
+
                 <!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
                 <string>com.googleusercontent.apps.346442533727-gete8b3cj00avbs9qpdgcahgc63a7i0u</string>
             </array>
         </dict>
+         <dict>
+              <key>CFBundleURLSchemes</key>
+              <array>
+                <string>fb627775619103919</string>
+              </array>
+              </dict>
     </array>
 
 </dict>
