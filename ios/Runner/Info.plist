@@ -73,7 +73,7 @@
             <array>
 
                 <!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-                <string>com.googleusercontent.apps.346442533727-gete8b3cj00avbs9qpdgcahgc63a7i0u</string>
+                <string>com.googleusercontent.apps.346442533727-2jbo5asgbq2ologmidqaq5euoda5gfln</string>
             </array>
         </dict>
          <dict>
@@ -83,6 +83,5 @@
               </array>
               </dict>
     </array>
-
 </dict>
 </plist>
