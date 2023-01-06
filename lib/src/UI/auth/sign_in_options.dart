@@ -34,8 +34,8 @@ class SignInScreen extends GetView<SignController> with AuthWidget{
                 fit: BoxFit.cover,
                 imageUrl: ImagePathNetwork.dog1,
                 placeholder: (context, url) =>
-                    Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => Icon(Icons.error),
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ).centered().pLTRB(0, 20, 0, 10),
             SizedBox(
@@ -44,8 +44,8 @@ class SignInScreen extends GetView<SignController> with AuthWidget{
             /// Facebook
             optionWidget(bckClr: AppColors.facebookClr,title:LocalString.signWithFacebook,textClr: AppColors.white,imagePath: ImagePathAssets.facebookImg, onTap: controller.onClickFunction(action: OnClick.facebook)),
             optionWidget(bckClr: AppColors.white,title:LocalString.signWithGoogle,textClr: AppColors.black,imagePath: ImagePathAssets.googleImg,onTap: controller.onClickFunction(action: OnClick.google)),
-            optionWidget(bckClr: AppColors.twitterClr,title:LocalString.signWithTwitter,textClr: AppColors.white,imagePath: ImagePathAssets.twitterImg,onTap: controller.onClickFunction(action: OnClick.twitter)),
-            optionWidget(bckClr: AppColors.phoneClr,title:LocalString.signWithPhone,textClr: AppColors.white,imagePath:ImagePathAssets.callImg,onTap: (){
+            optionWidget(bckClr: AppColors.grey,title:LocalString.signWithApple,textClr: AppColors.white,imagePath: ImagePathAssets.appleImg,onTap: controller.onClickFunction(action: OnClick.apple)),
+            optionWidget(bckClr: AppColors.whatsClr,title:LocalString.signWithPhone,textClr: AppColors.white,imagePath:ImagePathAssets.callImg,onTap: (){
               Get.toNamed(AppRoutes.phoneAuth);
             }),
           ],

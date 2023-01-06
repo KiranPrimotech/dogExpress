@@ -36,7 +36,7 @@ class SignController extends GetxController {
       },
 
       /// Click Twitter
-      OnClick.twitter: () async {
+      OnClick.apple: () async {
         user = await AppleLoginService().signInWithApple();
         if (user != null) {
           await SharePreference.addStringToSF(
@@ -57,4 +57,4 @@ class SignController extends GetxController {
   }
 }
 
-enum OnClick { facebook, google, twitter, phone }
+enum OnClick { facebook, google, twitter, phone,apple }

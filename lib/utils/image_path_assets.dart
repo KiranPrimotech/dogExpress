@@ -7,6 +7,7 @@ class ImagePathAssets {
   static const String facebookImg = "assets/image/facebook.png";
   static const String googleImg = "assets/image/google.png";
   static const String twitterImg = "assets/image/twiiter.png";
+  static const String appleImg = "assets/image/apple.png";
   static const String callImg = "assets/image/call.png";
 
 }

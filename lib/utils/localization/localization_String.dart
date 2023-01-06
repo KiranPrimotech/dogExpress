@@ -62,6 +62,7 @@ static String searchNews= "Search for news  ";
 static String signWithFacebook= "Sign in with Facebook ";
 static String signWithGoogle= "Sign in with Google ";
 static String signWithTwitter= "Sign in with Twitter ";
+static String signWithApple= "Sign in with Apple ";
 static String signWithPhone= "Sign in with Phone ";
 static String pauseNotification= "Pause Notification ";
 static String signInDesc= "Sign in to save your Likes and Bookmarks";
