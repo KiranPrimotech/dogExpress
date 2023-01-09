@@ -47,9 +47,10 @@ class TranslationString extends Translations {
           LocalString.majorNews: "Major News  ",
           LocalString.noNews: "No News  ",
           LocalString.discover: "Discover  ",
-          LocalString.insight: "Insight"  ,
-          LocalString.poll: "Poll"  ,
-          LocalString.searchNews: "Search for news  "  ,
+          LocalString.insight: "Insight",
+          LocalString.poll: "Poll",
+          LocalString.searchNews: "Search for news  ",
+          LocalString.topic: "Topic ",
         },
         'hi_IND': {
           LocalString.appName: 'MUSIC Hindi',
@@ -84,7 +85,7 @@ class TranslationString extends Translations {
           LocalString.enterPhnNum: "अपना फोन नंबर डालें",
           LocalString.verifyPhnNum: "अपना फोन नम्बर सत्यापित करें",
           LocalString.doyouWantLog: "क्या आप लॉगआउट करना चाहते हैं?",
-          LocalString.defaultTxt: "चूक",
+          LocalString.defaultTxt: "डिफ़ॉल्ट",
           LocalString.largeTxt: "बड़ा ",
           LocalString.on: "On ",
           LocalString.onlyOn: "केवल वाईफ़ाई पर ",
@@ -95,8 +96,8 @@ class TranslationString extends Translations {
           LocalString.discover: "खोज करना  ",
           LocalString.insight: "अंतर्दृष्टि",
           LocalString.poll: "मतदान",
-          LocalString.searchNews: "समाचार खोजें "
-
+          LocalString.searchNews: "समाचार खोजें ",
+          LocalString.topic: "विषय "
         }
       };
 }

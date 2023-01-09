@@ -1,25 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
 
-import '../../utils/routes/app_routes.dart';
+import '../utils/routes/app_routes.dart';
 
-class PhoneController extends GetxController {
-  TextEditingController phoneController = TextEditingController();
+class PhoneAuthenticationService {
   FirebaseAuth auth = FirebaseAuth.instance;
-  String verificationId = "";
-  String countyCode = "";
-  String phoneNumber = "";
-  int? resendToken;
 
   /// Send OTP
-  Future registerUser(String countryCode, String mobile) async {
+  Future registerUser(
+      {required String countryCode,
+      required String mobile,
+      String? verificationId,
+      int? resendToken}) async {
     // EasyLoading.show();
     Loader.show(Get.context!);
     await auth.verifyPhoneNumber(
-      phoneNumber: "${countyCode} ${mobile}",
+      phoneNumber: "${countryCode} ${mobile}",
       verificationCompleted: (PhoneAuthCredential credential) {
         // EasyLoading.dismiss();
         Loader.hide();
@@ -42,8 +40,8 @@ class PhoneController extends GetxController {
       codeSent: (String verificationId, int? resendToken) {
         // EasyLoading.dismiss();
         Loader.hide();
-        this.verificationId = verificationId;
-        this.resendToken = resendToken;
+        verificationId = verificationId;
+        resendToken = resendToken;
         print("otp code ---- ${resendToken}");
         Get.toNamed(AppRoutes.verifyOtp);
       },
@@ -52,13 +50,8 @@ class PhoneController extends GetxController {
       codeAutoRetrievalTimeout: (String verificationId) {
         // EasyLoading.dismiss();
         Loader.hide();
-        this.verificationId = verificationId;
+        verificationId = verificationId;
       },
     );
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
   }
 }

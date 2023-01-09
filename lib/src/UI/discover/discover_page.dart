@@ -1,8 +1,11 @@
+import 'package:dog_news/src/UI/dummy_widget.dart';
 import 'package:dog_news/utils/routes/app_routes.dart';
+import 'package:dog_news/utils/shimmer/shimmer_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+
 import '../../../utils/localization/localization_String.dart';
 import 'discover_widget.dart';
 
@@ -13,10 +16,10 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 0,right: 0),
+            padding: const EdgeInsets.only(left: 0, right: 0),
             child: Column(
               children: [
-                 SizedBox(
+                SizedBox(
                   height: 50.h,
                 ),
 
@@ -24,39 +27,71 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
                 searchWidget().pLTRB(0, 10, 0, 0),
 
                 /// Puzzle and quote
-                 puzzleQuoteWidget(),
+                Obx(
+                  () => controller.loading.value
+                      ? ShimmerLoader(child: puzzleQuoteWidget())
+                      : puzzleQuoteWidget(),
+                ),
 
                 /// Feed Option
                 feedOptionWidget(),
 
                 /// Notification
-                notificationHeading(LocalString.notification, LocalString.viewAll, () {
+                notificationHeading(
+                    LocalString.notification, LocalString.viewAll, () {
                   Get.toNamed(AppRoutes.notificationDetail);
                 }),
 
-
                 /// Notification List Widget
-                notificationListWidgte(),
+                Obx(
+                  () => controller.loading.value
+                      ? DummyWidget().notificationListWidgetShimmer()
+                      : notificationListWidgte(),
+                ),
 
                 /// Insight
-                notificationHeading(LocalString.insight, LocalString.viewAll, () {
+                notificationHeading(LocalString.insight, LocalString.viewAll,
+                    () {
                   Get.toNamed(AppRoutes.insightScreen);
                 }).pLTRB(0, 16, 0, 0),
-                insightListWidget(),
+
+                /// insight list item
+                Obx(
+                  () => controller.loading.value
+                      ? DummyWidget().insightListWidgetShimmer()
+                      : insightListWidget(),
+                ),
 
                 /// Topic
                 notificationHeading(LocalString.topic, LocalString.viewAll, () {
                   Get.toNamed(AppRoutes.topicScreen);
                 }).pLTRB(0, 16, 0, 0),
-                itemsList(),
-                pageTopicNotifications(),
+
+                /// Topic List Items
+                Obx(
+                  () => controller.loading.value
+                      ? DummyWidget().topicItemsListShimmer()
+                      : itemsList(),
+                ),
+
+                /// Topic List Notification
+                Obx(
+                  () => controller.loading.value
+                      ? DummyWidget().notificationListWidgetShimmer()
+                      : pageTopicNotifications(),
+                ),
 
                 /// Polll
                 notificationHeading(LocalString.poll, LocalString.viewAll, () {
                   Get.toNamed(AppRoutes.pollScreen);
                 }).pLTRB(0, 16, 0, 0),
-                pollListWidget(),
 
+                /// Poll List Items
+                Obx(
+                  () => controller.loading.value
+                      ? DummyWidget().pollListWidgetShimmer()
+                      : pollListWidget(),
+                ),
               ],
             ),
           ),

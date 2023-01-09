@@ -3,24 +3,24 @@ import 'package:dog_news/src/controller/topic_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
 
-class TopicCardScreen extends GetView<TopicCardController> with TopicCardWidget{
+class TopicCardScreen extends GetView<TopicCardController>
+    with TopicCardWidget {
   @override
   Widget build(BuildContext context) {
     int prevIndex =
-    controller.index.value <= 0 ? 0 : controller.index.value - 1;
+        controller.index.value <= 0 ? 0 : controller.index.value - 1;
     int nextIndex =
-    controller.index.value == controller.newsModal.result!.length - 1
-        ? 0
-        : controller.index.value + 1;
+        controller.index.value == controller.newsModal.result!.length - 1
+            ? 0
+            : controller.index.value + 1;
 
     return Scaffold(
       body: SafeArea(
         child: Stack(children: [
           Center(
             child: Obx(
-                  () => Dismissible(
+              () => Dismissible(
                 background: controller.topicCard(prevIndex),
                 child: controller.topicCard(controller.index.value),
                 onUpdate: (details) {
@@ -40,7 +40,6 @@ class TopicCardScreen extends GetView<TopicCardController> with TopicCardWidget{
           Positioned(bottom: 0, child: animatedBottomBar()),
         ]),
       ),
-    );  }
-
-
+    );
+  }
 }

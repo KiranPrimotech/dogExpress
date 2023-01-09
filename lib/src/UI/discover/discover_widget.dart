@@ -3,13 +3,13 @@ import 'package:dog_news/src/controller/discover_controller.dart';
 import 'package:dog_news/src/model/enumClass.dart';
 import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
-import 'package:dog_news/utils/image_path_assets.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+
 import '../../../utils/app_colors.dart';
 import '../../../utils/image_path_network.dart';
 import '../../../utils/routes/app_routes.dart';
@@ -27,17 +27,12 @@ class DiscoverWidget {
       onTap: () {
         Get.toNamed(AppRoutes.search);
       },
-      child: Obx(()=>
-        Container(
+      child: Obx(
+        () => Container(
           height: 40.h,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              boxShadow:  const [
-                BoxShadow(
-                  color: Colors.white,
-                  blurRadius: 3
-                )
-              ],
+              boxShadow: const [BoxShadow(color: Colors.white, blurRadius: 3)],
               color: themeController.searchColor.value),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +43,10 @@ class DiscoverWidget {
                 color: AppColors.primary,
                 size: 20,
               ).centered(),
-              AppText.medium(LocalString.searchNews.tr, color: themeController.searchHintColor.value,).centered().px(4)
+              AppText.medium(
+                LocalString.searchNews.tr,
+                color: themeController.searchHintColor.value,
+              ).centered().px(4)
               // LocalString.searchNews.tr.text.make().px(4)
             ],
           ).p(8),
@@ -163,8 +161,8 @@ class DiscoverWidget {
                     fontWeight: FontWeight.w800,
                     color: themeController.headingColor.value,
                   )),
-              Obx(()=>
-                 Container(
+              Obx(
+                () => Container(
                   height: 2.h,
                   width: 30.w,
                   color: themeController.dividerColor.value,
@@ -175,8 +173,7 @@ class DiscoverWidget {
           InkWell(
               onTap: () => onTap(),
               child: AppText.small(title.tr,
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.w600))
+                  color: AppColors.primary, fontWeight: FontWeight.w600))
         ],
       ),
     );
@@ -223,8 +220,11 @@ class DiscoverWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.white, borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: [BoxShadow(color: Colors.grey.shade400, blurRadius: 4)]),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: [
+                          BoxShadow(color: Colors.grey.shade400, blurRadius: 4)
+                        ]),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6.0).r,
                       child: CachedNetworkImage(
@@ -324,26 +324,28 @@ class DiscoverWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(6.0),topRight: Radius.circular(6.0)),
-
-                  boxShadow: [
-                    BoxShadow(color: Colors.grey.shade400, blurRadius: 5)
-                  ]),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(6.0),topRight: Radius.circular(6.0)),
-                child: CachedNetworkImage(
-                  height: Get.width * .8 * 6 / 10,
-                  width: Get.width * .8,
-                  fit: BoxFit.cover,
-                  imageUrl: pollList[index]['image'],
-                  placeholder: (context, url) =>
-                      Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              )
-            ).p(10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(6.0),
+                        topRight: Radius.circular(6.0)),
+                    boxShadow: [
+                      BoxShadow(color: Colors.grey.shade400, blurRadius: 5)
+                    ]),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(6.0),
+                      topRight: Radius.circular(6.0)),
+                  child: CachedNetworkImage(
+                    height: Get.width * .8 * 6 / 10,
+                    width: Get.width * .8,
+                    fit: BoxFit.cover,
+                    imageUrl: pollList[index]['image'],
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                )).p(10),
             SizedBox(
               height: 220.h,
               child: Column(

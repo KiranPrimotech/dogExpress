@@ -1,10 +1,12 @@
 import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../../utils/localization/localization_String.dart';
+import '../../../../../utils/sizes_config.dart';
 import '../../../../controller/topic_card_controller.dart';
 
 class TopicCardWidget {
@@ -39,14 +41,17 @@ class TopicCardWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                     // print("preeeeeeeesssed");
+                      // print("preeeeeeeesssed");
                       Get.back();
                     },
-                    child: Icon(Icons.arrow_back_ios_new)),
+                    child: Icon(
+                      Icons.arrow_back_ios_new,
+                      size: Dimens.extraSmallIcon,
+                    )).px(8),
                 AppText(LocalString.topic).px(10),
               ],
             ),
-           // const Icon(Icons.download).px(8),
+            // const Icon(Icons.download).px(8),
           ],
         ),
       ),
@@ -78,39 +83,38 @@ class TopicCardWidget {
 
   Widget bottomBarItems() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.circle,
-              size: 14,
+              size: 14.h,
             ),
-            "Relevancy".text.size(12).make()
+            "Relevancy".text.size(12.h).make()
           ],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.share,
-              size: 14,
+              size: 14.h,
             ),
-            "Share".text.size(12).make()
+            "Share".text.size(12.h).make()
           ],
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.bookmark,
-              size: 14,
+              size: 14.h,
             ),
-            "Bookmark".text.size(12).make()
+            "Bookmark".text.size(12.h).make()
           ],
-        )
+        ),
       ],
     ).px(6).py(5);
   }
