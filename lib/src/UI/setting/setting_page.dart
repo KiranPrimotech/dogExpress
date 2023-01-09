@@ -2,14 +2,10 @@ import 'package:dog_news/src/controller/setting_controller.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-import '../../../utils/app_colors.dart';
 import '../../../utils/app_text.dart';
 import '../../../utils/routes/app_routes.dart';
 import '../../../utils/sizes_config.dart';
-import '../card/shared_pref.dart';
 import 'setting_widget.dart';
 import 'package:get/get.dart';
 

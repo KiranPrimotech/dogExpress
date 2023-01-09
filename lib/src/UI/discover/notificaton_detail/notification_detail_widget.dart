@@ -11,19 +11,19 @@ import '../../../../utils/sizes_config.dart';
 import '../../../controller/home_controller.dar.dart';
 
 class NotificationDetailWidget {
-  HomeController controller = Get.find();
+  HomeController homeController = Get.find();
   ThemeController themeController = Get.find();
 
   //  Animated app bar
   Widget animatedAppBar() {
     return AnimatedBuilder(
-        animation: controller.appBarAnimationController,
+        animation: homeController.appBarAnimationController,
         builder: (context, child) {
           return Transform.translate(
               offset: Offset(
                   0.0,
-                  (controller.appBarAnimationController.value - 1) *
-                      controller.appBarHeight),
+                  (homeController.appBarAnimationController.value - 1) *
+                      homeController.appBarHeight),
               child: appBar());
         });
   }
@@ -33,7 +33,7 @@ class NotificationDetailWidget {
     return Obx(
       () => Container(
         color: themeController.appBarColor.value,
-        height: controller.appBarHeight,
+        height: homeController.appBarHeight,
         width: Get.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,16 +61,16 @@ class NotificationDetailWidget {
   ///  Animated bottom bar
   Widget animatedBottomBar() {
     return AnimatedBuilder(
-        animation: controller.bottomBarAnimationController,
+        animation: homeController.bottomBarAnimationController,
         builder: (context, child) {
           return Transform.translate(
               offset: Offset(
                   0.0,
-                  -(controller.bottomBarAnimationController.value - 1) *
-                      controller.appBarHeight),
+                  -(homeController.bottomBarAnimationController.value - 1) *
+                      homeController.appBarHeight),
               child: Obx(
                 () => Container(
-                  height: controller.appBarHeight,
+                  height: homeController.appBarHeight,
                   color: themeController.appBarColor.value,
                   width: Get.width,
                   child: bottomBarItems(),

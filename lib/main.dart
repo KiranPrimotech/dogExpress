@@ -13,7 +13,7 @@ import 'utils/routes/app_pages.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
   print('background message ${message.notification!.body}');
-  NotificationService.showNotification(message);
+ // NotificationService.showNotification(message);
 }
 
 Future main() async {

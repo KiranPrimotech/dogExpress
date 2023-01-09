@@ -4,7 +4,6 @@ import 'package:dog_news/utils/routes/app_routes.dart';
 import 'package:dog_news/utils/sizes_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -206,53 +205,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     return act;
   }
 
-  /// firebase notification
-  getFirebaseNotification() async {
-    print("firebase -----------------------------------------------------");
 
-    const AndroidNotificationChannel channel = AndroidNotificationChannel(
-      'high_importance_channel', // id
-      'High Importance Notifications', // title
-      //  'This channel is used for important notifications.', // description
-      importance: Importance.max,
-    );
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
-
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(channel);
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("Message Recieved ${message!.notification!.title}");
-
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      print("Message Recieved ${notification!.title}");
-
-      // If `onMessage` is triggered with a notification, construct our own
-      // local notification to show to users using the created channel.
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                icon: android?.smallIcon,
-
-                // other properties...
-              ),
-            ));
-      }
-    });
-
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print('Message clicked!');
-    });
-  }
 
   /// local and firebase notification
   firebaseNotification() {

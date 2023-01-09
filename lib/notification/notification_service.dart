@@ -1,5 +1,8 @@
+import 'package:dog_news/utils/app_colors.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin
@@ -43,50 +46,63 @@ class NotificationService {
 
   static Future showNotification(RemoteMessage message) async {
 
+
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
     AppleNotification? apple = message.notification?.apple;
     print("Message Recieved ${notification!.title}");
 
-    if (notification != null ) {
-      _flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          const NotificationDetails(
-            android: AndroidNotificationDetails(
-              "default_notification_channel_id",
-                "channel",
-              icon: "@mipmap/ic_launcher",
 
-              // other properties...
-            ),
-          ));
-    }
 
-    // AndroidNotificationDetails androidDetails = const AndroidNotificationDetails(
-    //   "default_notification_channel_id",
-    //   "channel",
-    //   enableLights: true,
-    //   enableVibration: true,
-    //   priority: Priority.high,
-    //   importance: Importance.max,
-    //   icon: "@mipmap/ic_launcher",
+    // if (notification != null ) {
+    //   _flutterLocalNotificationsPlugin.show(
+    //       notification.hashCode,
+    //       "${notification.title} inner ",
+    //       notification.body,
+    //       const NotificationDetails(
+    //         android: AndroidNotificationDetails(
+    //           "default_notification_channel_id",
+    //           "channel",
+    //           icon: "@mipmap/ic_launcher",
     //
-    //
-    //   styleInformation: MediaStyleInformation(
-    //     htmlFormatContent: true,
-    //     htmlFormatTitle: true,
-    //   ),
-    //   playSound: true,
-    // );
-    //
-    // await _flutterLocalNotificationsPlugin.show(
-    //     message.data.hashCode,
-    //     message.data['title'],
-    //     message.data['body'],
-    //     NotificationDetails(
-    //       android: androidDetails,
-    //     ));
+    //           // other properties...
+    //         ),
+    //       ));
+    // }
+
+    AndroidNotificationDetails androidDetails = const AndroidNotificationDetails(
+      "default_notification_channel_id",
+      "channel",
+      enableLights: true,
+      enableVibration: true,
+      priority: Priority.high,
+      importance: Importance.max,
+      icon: "@mipmap/ic_launcher",
+
+
+      styleInformation: MediaStyleInformation(
+        htmlFormatContent: true,
+        htmlFormatTitle: true,
+      ),
+      playSound: true,
+    );
+
+    await _flutterLocalNotificationsPlugin.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: androidDetails,
+        ));
+
+
+    Get.snackbar(
+      "${notification.title}",
+      "${ notification.body}",
+      colorText: AppColors.primary,
+      icon: Icon(Icons.flutter_dash),
+      backgroundColor: AppColors.white,
+
+    );
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dog_news/feature/apple_login.dart';
 import 'package:dog_news/feature/facebook_login.dart';
 import 'package:dog_news/feature/google_login.dart';
@@ -10,8 +12,23 @@ import '../../utils/localization/localization_String.dart';
 import '../../utils/routes/app_routes.dart';
 
 class SignController extends GetxController {
+
   SettingController settingController = Get.find();
   User? user;
+  RxBool platformBool = false.obs;
+
+  checkCurrentPlatform(){
+    if (Platform.isAndroid) {
+      platformBool.value= false;
+      print("platrforn -- if --- ${platformBool.value}");
+
+    } else if (Platform.isIOS) {
+      platformBool.value= true;
+      print("platrforn -- else --- ${platformBool.value}");
+    }
+  }
+
+  /// Click
   Function onClickFunction({required OnClick action}) {
     Map<OnClick, void Function()> actions = {
       /// Click  facebook
@@ -55,6 +72,13 @@ class SignController extends GetxController {
     Function act = actions[action]!;
     return act;
   }
+
+  @override
+  void onInit() {
+    checkCurrentPlatform();
+    super.onInit();
+  }
+
 }
 
 enum OnClick { facebook, google, twitter, phone,apple }

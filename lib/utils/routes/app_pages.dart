@@ -15,7 +15,10 @@ import 'package:dog_news/src/UI/setting/notification.dart';
 import 'package:dog_news/src/UI/setting/pasue_notifictaion.dart';
 import 'package:dog_news/src/UI/setting/relevancy/relevancy_screen.dart';
 import 'package:dog_news/src/UI/setting/setting_page.dart';
+import 'package:dog_news/src/bindings/notification_pager_binding.dart';
 import 'package:get/get.dart';
+import '../../src/UI/discover/notificaton_detail/notification_pager.dart';
+import '../../src/UI/discover/poll/poll_pager.dart';
 import '../../src/UI/discover/search/search_screen.dart';
 import '../../src/bindings/auth_binding.dart';
 import '../../src/bindings/discover_binding.dart';
@@ -134,6 +137,16 @@ class AppPages {
       name: AppRoutes.topicCardScreen,
       page: () =>   TopicCardScreen(),
       binding: TopicCardBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.notificationPagerScreen,
+      page: () =>   NotificationPager(),
+      binding: NotificationPagerBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.pollPagerScreen,
+      page: () =>   PollPager(),
+      binding: NotificationPagerBinding(),
     ),
   ];
 }

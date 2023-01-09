@@ -2,6 +2,7 @@ import 'package:dog_news/src/UI/discover/poll/poll_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../UI/card/NewsDummy.dart';
 import '../UI/card/NewsModal.dart';
@@ -11,6 +12,8 @@ class PollController extends GetxController with GetTickerProviderStateMixin{
 
   RxInt index = 0.obs;
   late NewsModal newsModal;
+  late  WebViewController  webController ;
+
 
   /// AppBar Height
   double appBarHeight = 50.h;
@@ -24,9 +27,11 @@ class PollController extends GetxController with GetTickerProviderStateMixin{
     newsModal = NewsModal.fromJson(newsDummy);
   }
 
-  void updateIndex(newIndex) {
+  void updateIndex(newIndex) async  {
     index.value = newIndex;
     SharePreference.setLastIndex(newIndex);
+    await updateWeb().then((value) => print("Done Done $value"));
+    update();
   }
 
   void setupLastIndex() async {
@@ -53,6 +58,33 @@ class PollController extends GetxController with GetTickerProviderStateMixin{
     return "${newsModal.result![index.value].title}\n${newsModal.result![index.value].url}";
   }
 
+  Future updateWeb() async{
+
+    webController = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+          //  progressValue.value= progress;
+
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(newsModal.result![index.value].url!));
+    return Future.value(0);
+  }
+
 
   @override
   void onInit() {
@@ -66,6 +98,7 @@ class PollController extends GetxController with GetTickerProviderStateMixin{
 
     fetchData();
     setupLastIndex();
+    updateWeb();
     super.onInit();
   }
 

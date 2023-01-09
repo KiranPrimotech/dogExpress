@@ -39,7 +39,7 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
                 /// Notification
                 notificationHeading(
                     LocalString.notification, LocalString.viewAll, () {
-                  Get.toNamed(AppRoutes.notificationDetail);
+                  Get.toNamed(AppRoutes.notificationPagerScreen);
                 }),
 
                 /// Notification List Widget
@@ -68,7 +68,7 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
                 }).pLTRB(0, 16, 0, 0),
 
                 /// Topic List Items
-                Obx(
+               Obx(
                   () => controller.loading.value
                       ? DummyWidget().topicItemsListShimmer()
                       : itemsList(),
@@ -83,7 +83,7 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
 
                 /// Polll
                 notificationHeading(LocalString.poll, LocalString.viewAll, () {
-                  Get.toNamed(AppRoutes.pollScreen);
+                  Get.toNamed(AppRoutes.pollPagerScreen);
                 }).pLTRB(0, 16, 0, 0),
 
                 /// Poll List Items

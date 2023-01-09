@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:dog_news/utils/routes/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,10 +13,11 @@ class SettingController extends GetxController {
   RxBool hdImageValue = false.obs;
   RxBool loginValue = true.obs;
   RxBool logOutValue = false.obs;
-  // RxString selectedLanguage = "English".obs;
   RxString selectedLanguage = "".obs;
   RxString selectedTextSize = LocalString.defaultTxt.obs;
   RxString selectedAutoPlay = LocalString.on.obs;
+  RxBool platformBool = false.obs;
+
 
   onNotificationTap() {
     Get.toNamed(AppRoutes.notification);
@@ -74,21 +77,30 @@ class SettingController extends GetxController {
     update();
   }
 
+
+  /// Current Paltform
+  checkCurrentPlatform(){
+    if (Platform.isAndroid) {
+      platformBool.value= false;
+      print("platrforn -- if --- ${platformBool.value}");
+
+    } else if (Platform.isIOS) {
+      platformBool.value= true;
+      print("platrforn -- else --- ${platformBool.value}");
+    }
+  }
+
   @override
   void onInit() {
-    print("google login init------- ");
+
 
     super.onInit();
+    checkCurrentPlatform();
     setValue();
     setModeValue();
     getGoogleLoginValue();
   }
 
-  @override
-  void onReady() {
-    print("google login ready------- ");
-    super.onReady();
-  }
 
   @override
   InternalFinalCallback<void> get onStart => super.onStart;

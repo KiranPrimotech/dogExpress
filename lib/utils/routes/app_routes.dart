@@ -21,5 +21,7 @@ class AppRoutes {
   static String relevancyScreen = "/relevancyScreen";
   static String topicScreen = "/topicScreen";
   static String topicCardScreen = "/topicCardScreen";
+  static String notificationPagerScreen = "/notificationPagerScreen";
+  static String pollPagerScreen = "/pollPagerScreen";
 
 }

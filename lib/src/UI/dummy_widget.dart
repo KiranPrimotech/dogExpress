@@ -191,7 +191,7 @@ class DummyWidget {
       child: SizedBox(
           height: 220,
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
               Container(
                 height: 20,
@@ -209,7 +209,7 @@ class DummyWidget {
                     controller: controller.pageController,
                     itemCount: 5,
                     itemBuilder: (context, index) {
-                      return Container(
+                      return SizedBox(
                         height: 100,
                         width: 100,
                         child: Column(
@@ -230,7 +230,7 @@ class DummyWidget {
                                       color: Colors.grey.shade200, width: 1),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                              ).expand(),
+                              ),
                             ),
                           ],
                         ),

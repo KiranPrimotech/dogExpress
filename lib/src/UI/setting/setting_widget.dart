@@ -75,7 +75,9 @@ class SettingWidget {
                         children: [
                           signInOptionIcon(ImagePathAssets.googleImg),
                           signInOptionIcon(ImagePathAssets.facebookImg),
-                          signInOptionIcon(ImagePathAssets.appleImg),
+                          Visibility(
+                            visible: controller.platformBool.value,
+                              child: signInOptionIcon(ImagePathAssets.appleImg)),
                           signInOptionIcon(ImagePathAssets.callImg),
                         ],
                       ),
