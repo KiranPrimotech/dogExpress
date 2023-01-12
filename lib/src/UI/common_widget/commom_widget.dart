@@ -1,30 +1,28 @@
-import 'package:dog_news/src/UI/home/home_tab_widgets.dart';
-import 'package:dog_news/src/controller/home_controller.dart';
-import 'package:dog_news/utils/app_text.dart';
-import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../../../utils/app_text.dart';
+import '../../../utils/app_themes/app_theme_controller.dart';
+import '../../../utils/sizes_config.dart';
+import '../../controller/notifiocation_detail_controller.dart';
+import '../home/home_tab_widgets.dart';
 
-import '../../../../utils/sizes_config.dart';
-import '../../../controller/notifiocation_detail_controller.dart';
-
-class NotificationDetailWidget {
+class CommonWidget{
 
   ThemeController themeController = Get.find();
-  NotificationDetailController controller = Get.find();
+  NotificationDetailController notificationDetailController = Get.find();
 
-  //  Animated app bar
+  ///  Animated app bar
   Widget animatedAppBar() {
     return AnimatedBuilder(
-        animation: controller.appBarAnimationController,
+        animation: notificationDetailController.appBarAnimationController,
         builder: (context, child) {
           return Transform.translate(
               offset: Offset(
                   0.0,
-                  (controller.appBarAnimationController.value - 1) *
-                      controller.appBarHeight),
+                  (notificationDetailController.appBarAnimationController.value - 1) *
+                      notificationDetailController.appBarHeight),
               child: appBar());
         });
   }
@@ -32,9 +30,9 @@ class NotificationDetailWidget {
   /// App Bar
   Widget appBar() {
     return Obx(
-      () => Container(
+          () => Container(
         color: themeController.appBarColor.value,
-        height: controller.appBarHeight,
+        height: notificationDetailController.appBarHeight,
         width: Get.width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,14 +43,13 @@ class NotificationDetailWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-
                       Get.back();
                     },
                     child: Icon(Icons.arrow_back_ios_new, size: Dimens.extraSmallIcon,).px(8)),
-                Obx(()=> AppText("${controller.title}".tr).px(10)),
+                Obx(()=> AppText("${notificationDetailController.title}".tr).px(10)),
               ],
             ),
-             Icon(Icons.download,size:Dimens.mediumIcon).px(8),
+            Icon(Icons.download,size:Dimens.mediumIcon).px(8),
           ],
         ),
       ),
@@ -62,16 +59,16 @@ class NotificationDetailWidget {
   ///  Animated bottom bar
   Widget animatedBottomBar() {
     return AnimatedBuilder(
-        animation: controller.bottomBarAnimationController,
+        animation: notificationDetailController.bottomBarAnimationController,
         builder: (context, child) {
           return Transform.translate(
               offset: Offset(
                   0.0,
-                  -(controller.bottomBarAnimationController.value - 1) *
-                      controller.appBarHeight),
+                  -(notificationDetailController.bottomBarAnimationController.value - 1) *
+                      notificationDetailController.appBarHeight),
               child: Obx(
-                () => Container(
-                  height: controller.appBarHeight,
+                    () => Container(
+                  height: notificationDetailController.appBarHeight,
                   color: themeController.appBarColor.value,
                   width: Get.width,
                   child: bottomBarItems(),

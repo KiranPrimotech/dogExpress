@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../../../utils/localization/localization_String.dart';
 import 'discover_widget.dart';
 
 class DiscoverScreen extends StatelessWidget with DiscoverWidget {
+   DiscoverScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -84,6 +85,7 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
                 /// Polll
                 notificationHeading(LocalString.poll, LocalString.viewAll, () {
                   Get.toNamed(AppRoutes.pollPagerScreen);
+                  notificationDetailController.title.value= LocalString.poll;
                 }).pLTRB(0, 16, 0, 0),
 
                 /// Poll List Items

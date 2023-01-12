@@ -7,13 +7,17 @@
     <queries>
         <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
+    </queries>
 
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-
         android:label="dog_news">
-
 
         <activity
             android:name=".MainActivity"
@@ -69,6 +73,8 @@
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
 
+        <!--  SIGN IN WITH APPLE -->
+
         <activity
             android:name="com.aboutyou.dart_packages.sign_in_with_apple.SignInWithAppleCallback"
             android:exported="true">
@@ -82,5 +88,19 @@
             </intent-filter>
         </activity>
 
+
+<!--        &lt;!&ndash; Share Data (Path Provider )&ndash;&gt;-->
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="${applicationId}.provider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/provider_paths"/>-->
+<!--        </provider>-->
+
     </application>
+
+
 </manifest>

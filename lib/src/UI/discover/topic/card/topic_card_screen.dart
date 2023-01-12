@@ -1,11 +1,12 @@
-import 'package:dog_news/src/UI/discover/topic/card/topic_card_widget.dart';
 import 'package:dog_news/src/controller/topic_card_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TopicCardScreen extends GetView<TopicCardController>
-    with TopicCardWidget {
+import '../../../common_widget/commom_widget.dart';
+
+class TopicCardScreen extends GetView<TopicCardController> with CommonWidget {
+   TopicCardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     int prevIndex =
@@ -22,9 +23,8 @@ class TopicCardScreen extends GetView<TopicCardController>
             child: Obx(
               () => Dismissible(
                 background: controller.topicCard(prevIndex),
-                child: controller.topicCard(controller.index.value),
                 onUpdate: (details) {
-                  print(details.progress);
+
                 },
                 secondaryBackground: controller.topicCard(nextIndex),
                 resizeDuration: const Duration(milliseconds: 10),
@@ -33,6 +33,7 @@ class TopicCardScreen extends GetView<TopicCardController>
                 onDismissed: (direction) {
                   controller.updateContent(direction);
                 },
+                child: controller.topicCard(controller.index.value),
               ),
             ),
           ),

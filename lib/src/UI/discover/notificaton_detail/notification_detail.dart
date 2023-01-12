@@ -2,10 +2,10 @@ import 'package:dog_news/src/controller/notifiocation_detail_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../common_widget/commom_widget.dart';
 import 'notification_detail_widget.dart';
 
-class NotificationDetailScreen extends GetView<NotificationDetailController>
-    with NotificationDetailWidget {
+class NotificationDetailScreen extends GetView<NotificationDetailController> with CommonWidget {
   @override
   Widget build(BuildContext context) {
     int prevIndex =

@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dog_news/src/controller/notifiocation_detail_controller.dart';
+import 'package:dog_news/src/controller/topic_card_controller.dart';
 import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +14,7 @@ import '../../../controller/topic_controller.dart';
 
 class TopicWidget {
   TopicController controller = Get.find();
+  NotificationDetailController topicCardController = Get.find();
   ThemeController themeController = Get.find();
 
   Widget topicListWidget() {
@@ -28,8 +31,10 @@ class TopicWidget {
     return GestureDetector(
       onTap: () {
         Get.toNamed(AppRoutes.topicCardScreen);
+       topicCardController.title.value= controller.topicList[index]['name'];
       },
       child: Column(
+
         children: [
           Container(
             decoration: BoxDecoration(

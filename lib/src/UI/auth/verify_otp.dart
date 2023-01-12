@@ -5,15 +5,18 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../feature/sign_phone_number.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/localization/localization_String.dart';
 import '../../controller/verify_otp_controller.dart';
 
 class VerifyOTPScreen extends GetView<VerifyOTPController> {
-  const VerifyOTPScreen({super.key});
+  // const VerifyOTPScreen({super.key});
+  final verificationId = Get.arguments ;
 
   @override
   Widget build(BuildContext context) {
+    print("widget id --- $verificationId");
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -72,7 +75,7 @@ class VerifyOTPScreen extends GetView<VerifyOTPController> {
                       onChanged: (pin) {},
                       onCompleted: (pin) {
                         controller.newOtp = pin;
-                        controller.submitCode(controller.newOtp);
+                        controller.submitCode(controller.newOtp,verificationId);
                       },
                     ),
                   ).px(10).py(20),
@@ -88,8 +91,10 @@ class VerifyOTPScreen extends GetView<VerifyOTPController> {
                       if (controller.timerOtp.value == 0) {
                         controller.otpTimer();
 
-                        controller.resendOTP(countryCode:controller.phoneController.countyCode,phone: controller.phoneController.phoneNumber);
-                        controller.phoneController.registerUser(controller.phoneController.countyCode,controller.phoneController.phoneNumber );
+                      //  controller.resendOTP(countryCode:controller.phoneController.countyCode,phone: controller.phoneController.phoneNumber);
+                        PhoneAuthenticationService().registerUser(countryCode: controller.phoneController.countyCode, mobile: controller.phoneController.phoneNumber);
+
+                        //controller.phoneController.registerUser(controller.phoneController.countyCode,controller.phoneController.phoneNumber );
                       }
                     }).pLTRB(20, 20, 20, 10),
                   )

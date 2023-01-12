@@ -6,6 +6,8 @@ class NotificationPagerController extends GetxController{
 
   late PageController webTab;
 
+
+
   @override
   void onInit() {
     /// initialize webTab Tab Controller

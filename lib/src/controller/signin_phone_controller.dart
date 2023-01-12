@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
 
+import '../../feature/sign_phone_number.dart';
 import '../../utils/routes/app_routes.dart';
 
 class PhoneController extends GetxController {
@@ -13,23 +16,30 @@ class PhoneController extends GetxController {
   String countyCode = "";
   String phoneNumber = "";
   int? resendToken;
+  PhoneAuthenticationService service= PhoneAuthenticationService();
 
+  /// send Otp
+   sendOtpSubmit() async   {
+       await  service.registerUser(countryCode: countyCode, mobile: phoneNumber).then((value){verificationId = value; print(" iddd -- $verificationId!");
+         log("verification id $verificationId",name: "firebase verification idd");}) ;
+       print(" iddd -- $verificationId");
+
+  }
   /// Send OTP
   Future registerUser(String countryCode, String mobile) async {
-    // EasyLoading.show();
+
     Loader.show(Get.context!);
     await auth.verifyPhoneNumber(
       phoneNumber: "${countyCode} ${mobile}",
       verificationCompleted: (PhoneAuthCredential credential) {
-        // EasyLoading.dismiss();
+
         Loader.hide();
         print("completed ----  ${credential.smsCode}");
         Get.snackbar("Verification Code", "${credential.smsCode}",
             backgroundColor: Colors.black, colorText: Colors.white60);
-        //   auth.signInWithCredential(credential);
+
       },
       verificationFailed: (FirebaseAuthException e) {
-        //EasyLoading.dismiss();
         Loader.hide();
         if (e.code == 'invalid-phone-number') {
           print('The provided phone number is not valid.');
@@ -40,7 +50,7 @@ class PhoneController extends GetxController {
         }
       },
       codeSent: (String verificationId, int? resendToken) {
-        // EasyLoading.dismiss();
+
         Loader.hide();
         this.verificationId = verificationId;
         this.resendToken = resendToken;

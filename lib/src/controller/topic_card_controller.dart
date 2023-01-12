@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../utils/localization/localization_String.dart';
 import '../UI/card/NewsDummy.dart';
 import '../UI/card/NewsModal.dart';
 import '../UI/card/shared_pref.dart';
@@ -11,12 +12,7 @@ import '../UI/discover/topic/card/topic_card.dart';
 class TopicCardController extends GetxController with GetTickerProviderStateMixin{
   RxInt index = 0.obs;
   late NewsModal newsModal;
-  /// AppBar Height
-  double appBarHeight = 50.h;
-  late AnimationController appBarAnimationController;
-  late AnimationController bottomBarAnimationController;
-
-  Duration animationDuration = const Duration(milliseconds: 300);
+  RxString title=LocalString.topic.obs;
 
   fetchData() {
     newsModal = NewsModal.fromJson(newsDummy);
@@ -68,11 +64,6 @@ class TopicCardController extends GetxController with GetTickerProviderStateMixi
 
   @override
   void onInit() {
-    /// initialize app bar animation controller
-    appBarAnimationController = AnimationController(duration : animationDuration,vsync: this);
-
-    /// initialize bottom bar animation controller
-    bottomBarAnimationController = AnimationController(duration : animationDuration,vsync: this);
     fetchData();
     setupLastIndex();
   }

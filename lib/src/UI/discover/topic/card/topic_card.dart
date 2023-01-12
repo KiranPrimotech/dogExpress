@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dog_news/src/controller/notifiocation_detail_controller.dart';
 import 'package:dog_news/src/controller/topic_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +28,7 @@ class TopicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TopicCardController controller = Get.find();
+    NotificationDetailController controller = Get.find();
     return Scaffold(
       // backgroundColor: Colors.black,
       body: Column(

@@ -16,7 +16,7 @@ import '../card/shared_pref.dart';
 
 class SettingWidget {
   SettingController controller = Get.find();
-  final ThemeController _themeController = Get.find();
+  final ThemeController themeController = Get.find();
 
   /// Sign In Widget
   Widget safePreferenceWidget() {
@@ -132,17 +132,20 @@ class SettingWidget {
   }
 
   /// Widget With Title Only
-  Widget notificationOptionTitleWidget(String title) {
-    return Row(
-      children: [
-        SizedBox(
-          width: Dimens.smallIcon,
-        ),
-        AppText.medium(
-          title.tr,
-        ).px(10)
-      ],
-    ).p(10);
+  Widget notificationOptionTitleWidget({String? title,required Function onTap}) {
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Row(
+        children: [
+          SizedBox(
+            width: Dimens.smallIcon,
+          ),
+          AppText.medium(
+            title!.tr,
+          ).px(10)
+        ],
+      ).p(10),
+    );
   }
 
   /// Widget With DropDown Options
@@ -215,8 +218,8 @@ class SettingWidget {
     return Transform.scale(
       scale: 1.5,
       child: Switch(
-        inactiveThumbColor: _themeController.switchColor.value,
-        activeColor: _themeController.switchColor.value,
+        inactiveThumbColor: themeController.switchColor.value,
+        activeColor: themeController.switchColor.value,
         inactiveTrackColor: AppColors.gray.withOpacity(0.5),
         activeTrackColor: AppColors.primary.withOpacity(0.5),
         value: switchBool.value,
@@ -224,8 +227,8 @@ class SettingWidget {
           switchBool.value = value;
           if (action == SwitchAction.theme) {
             Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
-            _themeController.upgradeFun(value);
-            _themeController
+            themeController.upgradeFun(value);
+            themeController
                 .setThemeMode(value ? ThemeMode.dark : ThemeMode.light);
 
             SharePreference.addBoolToSF("mode", value);

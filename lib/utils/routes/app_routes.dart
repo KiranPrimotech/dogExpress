@@ -23,5 +23,6 @@ class AppRoutes {
   static String topicCardScreen = "/topicCardScreen";
   static String notificationPagerScreen = "/notificationPagerScreen";
   static String pollPagerScreen = "/pollPagerScreen";
+  static String commonWidget = "/commonWidget";
 
 }

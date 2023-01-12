@@ -70,8 +70,9 @@ class PhoneAuthScreen extends GetView<PhoneController> {
                   backgroundColor: AppColors.black,
                 ),
                 onPressed: () {
-                  controller.registerUser(
-                      controller.countyCode, controller.phoneNumber);
+                  controller.sendOtpSubmit();
+                  // controller.registerUser(
+                  //     controller.countyCode, controller.phoneNumber);
                   //  Get.toNamed(AppRoutes.verifyOtp);
                 },
                 child: "VERIFY PHONE NUMBER "

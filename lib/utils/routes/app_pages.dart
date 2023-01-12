@@ -90,7 +90,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.verifyOtp,
-      page: () =>  const VerifyOTPScreen(),
+      page: () =>   VerifyOTPScreen(),
       binding: VerifyOTPBinding(),
     ),
     GetPage(
@@ -148,5 +148,6 @@ class AppPages {
       page: () =>   PollPager(),
       binding: NotificationPagerBinding(),
     ),
+
   ];
 }

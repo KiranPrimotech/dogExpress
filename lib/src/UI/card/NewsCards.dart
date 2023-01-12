@@ -36,21 +36,20 @@ class NewsCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Get.to(PhotoViewScreen(), arguments: "${imgUrl}");
             },
             child: Container(
-              height: (MediaQuery.of(context).size.height /2).h,
+              height: (MediaQuery.of(context).size.height / 3).h,
               width: double.infinity,
               color: Colors.grey.withOpacity(0.2),
               child: CachedNetworkImage(
                 imageUrl: imgUrl,
                 fit: BoxFit.fill,
                 placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
+                    const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-
             ),
           ),
           GestureDetector(
@@ -65,8 +64,10 @@ class NewsCard extends StatelessWidget {
                       AnimationStatus.completed &&
                   controller.bottomBarAnimationController.status ==
                       AnimationStatus.completed) {
-                controller.bottomBarAnimationController.reverse(from: controller.appBarHeight);
-                controller.appBarAnimationController.reverse(from: controller.appBarHeight);
+                controller.bottomBarAnimationController
+                    .reverse(from: controller.appBarHeight);
+                controller.appBarAnimationController
+                    .reverse(from: controller.appBarHeight);
               } else if (controller.appBarAnimationController.status ==
                       AnimationStatus.dismissed &&
                   controller.bottomBarAnimationController.status ==
@@ -80,26 +81,26 @@ class NewsCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-                  child: AppText.medium(
-                    primaryText,
-                    maxLines: 10,
-                    fontWeight: FontWeight.w700,
-
+                  child: Obx(
+                    () => AppText.large(
+                      primaryText,
+                      maxLines: 10,
+                      color: controller.themeController.headingColor.value,
+                    ),
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: AppText.small(
-                      secondaryText,
-                      maxLines: 50,
-                      fontWeight: FontWeight.w500,
-
-                    )),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: AppText(
+                    secondaryText,
+                    maxLines: 50,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 4.0),
-                  child: AppText.medium(
+                  child: AppText.small(
                     "swipe left for more at $sourceName by $author / ${Utils.timeAgoSinceDate(publishedAt)}",
-
                   ),
                 )
               ],
@@ -120,18 +121,25 @@ class NewsCard extends StatelessWidget {
               // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),bottomRight: Radius.circular(8),)
             ),
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 Utils.launchURL(url);
               },
               child: Padding(
-                padding:  EdgeInsets.only(left: 8.0,bottom: 6,top: 6).r,
+                padding: EdgeInsets.only(left: 10.0, bottom: 6, top: 6).r,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
-                    "Blast Ocuured on jangambadi area".text.white.size(12.sp).make(),
-                    "Tap to read more $sourceName".text.white.size(10.sp).make(),
+                    "Blast Occured on jangambadi area"
+                        .text
+                        .white
+                        .size(12.sp)
+                        .make(),
+                    "Tap to read more $sourceName"
+                        .text
+                        .white
+                        .size(10.sp)
+                        .make(),
                   ],
                 ),
               ),

@@ -42,8 +42,7 @@ class AppleLoginService {
           //'de.lunaone.flutter.signinwithappleexample.service',
 
           redirectUri:
-              // For web your redirect URI needs to be the host of the "current page",
-              // while for Android you will be using the API server that redirects back into your app via a deep link
+
               kIsWeb
                   ? Uri.parse(
                       'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple')

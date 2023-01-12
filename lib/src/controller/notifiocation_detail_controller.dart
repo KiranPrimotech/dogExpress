@@ -1,3 +1,4 @@
+import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,16 +14,15 @@ class NotificationDetailController extends GetxController with GetTickerProvider
 
   RxInt index = 0.obs;
   late NewsModal newsModal;
+  RxString title=LocalString.notification.obs;
 
   /// AppBar Height
   double appBarHeight = 50.h;
-  double bottomBarHeight = (Get.height *.1).h;
   late AnimationController appBarAnimationController;
   late AnimationController bottomBarAnimationController;
-  late  WebViewController  webController ;
-
-
   Duration animationDuration = const Duration(milliseconds: 300);
+
+  late  WebViewController  webController ;
 
   fetchData() {
     newsModal = NewsModal.fromJson(newsDummy);
@@ -66,7 +66,6 @@ class NotificationDetailController extends GetxController with GetTickerProvider
 
     /// initialize app bar animation controller
     appBarAnimationController = AnimationController(duration : animationDuration,vsync: this);
-    //  appBarAnimationController.forward();
 
     /// initialize bottom bar animation controller
     bottomBarAnimationController = AnimationController(duration : animationDuration,vsync: this);

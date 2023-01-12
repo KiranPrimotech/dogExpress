@@ -3,31 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
 
+import '../src/UI/card/shared_pref.dart';
+import '../src/controller/setting_controller.dart';
+import '../utils/localization/localization_String.dart';
 import '../utils/routes/app_routes.dart';
 
 class PhoneAuthenticationService {
+
+  SettingController settingController = Get.find();
   FirebaseAuth auth = FirebaseAuth.instance;
+  String? verificationId ="";
 
   /// Send OTP
-  Future registerUser(
+  Future<String> registerUser(
       {required String countryCode,
       required String mobile,
       String? verificationId,
       int? resendToken}) async {
-    // EasyLoading.show();
+
     Loader.show(Get.context!);
     await auth.verifyPhoneNumber(
       phoneNumber: "${countryCode} ${mobile}",
       verificationCompleted: (PhoneAuthCredential credential) {
-        // EasyLoading.dismiss();
         Loader.hide();
         print("completed ----  ${credential.smsCode}");
         Get.snackbar("Verification Code", "${credential.smsCode}",
             backgroundColor: Colors.black, colorText: Colors.white60);
-        //   auth.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException e) {
-        //EasyLoading.dismiss();
         Loader.hide();
         if (e.code == 'invalid-phone-number') {
           print('The provided phone number is not valid.');
@@ -38,20 +41,42 @@ class PhoneAuthenticationService {
         }
       },
       codeSent: (String verificationId, int? resendToken) {
-        // EasyLoading.dismiss();
         Loader.hide();
-        verificationId = verificationId;
+        this.verificationId= verificationId;
         resendToken = resendToken;
         print("otp code ---- ${resendToken}");
-        Get.toNamed(AppRoutes.verifyOtp);
+        Get.toNamed(AppRoutes.verifyOtp, arguments: "$verificationId");
       },
       timeout: const Duration(seconds: 25),
       forceResendingToken: resendToken,
       codeAutoRetrievalTimeout: (String verificationId) {
-        // EasyLoading.dismiss();
         Loader.hide();
         verificationId = verificationId;
       },
     );
+    return this.verificationId??"null";
   }
+
+  // /// Submit SMS  Code
+  // Future submitCode(String otp) async {
+  //
+  //   try {
+  //
+  //     PhoneAuthCredential credential = PhoneAuthProvider.credential(
+  //         verificationId:verificationId, smsCode: otp
+  //     );
+  //     print("Credential ----- ${credential.smsCode}");
+  //     await auth.signInWithCredential(credential);
+  //
+  //
+  //     SharePreference.addStringToSF(LocalString.signKey, "login");
+  //     settingController.getGoogleLoginValue();
+  //     Get.until((route) => Get.currentRoute == AppRoutes.setting);
+  //
+  //   }
+  //   catch(e){
+  //     Get.snackbar("Otp", "Otp Doesn't Match",snackPosition: SnackPosition.BOTTOM);
+  //
+  //   }
+  // }
 }

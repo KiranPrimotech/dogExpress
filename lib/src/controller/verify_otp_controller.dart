@@ -32,21 +32,19 @@ class VerifyOTPController extends GetxController{
   }
 
   /// Submit SMS  Code
-  Future submitCode(String otp) async {
+  Future submitCode(String otp,String verificationId) async {
     isLoading = true ;
     try {
 
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: phoneController.verificationId, smsCode: otp
+          verificationId: verificationId, smsCode: otp
       );
       print("Credential ----- ${credential.smsCode}");
       isLoading = false;
       await phoneController.auth.signInWithCredential(credential);
       SharePreference.addStringToSF(LocalString.signKey, "login");
       settingController.getGoogleLoginValue();
-      // Get.offNamedUntil(AppRoutes.setting) ;
-      //Get.offNamedUntil(AppRoutes.setting, (route) => false);
-    //  Get.offAllNamed(AppRoutes.setting);
+
 
       Get.until((route) => Get.currentRoute == AppRoutes.setting);
 
@@ -57,6 +55,8 @@ class VerifyOTPController extends GetxController{
 
     }
   }
+
+
 
   Future<bool> resendOTP({required String countryCode,required String phone}) async {
     print(" testing ---- ${countryCode} ${phone}");

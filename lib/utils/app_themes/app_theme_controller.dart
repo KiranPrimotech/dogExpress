@@ -18,27 +18,36 @@ class ThemeController extends GetxController{
   Rx<Color> switchColor = AppColors.black.obs;
   Rx<Color> searchColor = AppColors.grey.obs;
   Rx<Color> searchHintColor = AppColors.grey.obs;
+  Rx<Color> borderColor = AppColors.gray.obs;
+  Rx<Color> topicBorderColor = AppColors.primary.obs;
 
   upgradeFun(bool value){
     if(value ){
 
+      /// dark mode
       appBarColor.value =AppColors.black;
       headingColor.value =AppColors.white;
       dividerColor.value =AppColors.white;
       switchColor.value =AppColors.primary;
       searchColor.value =AppColors.white;
       searchHintColor.value =AppColors.black;
+      borderColor.value =AppColors.white;
+      topicBorderColor.value =AppColors.white;
 
 
       print(  " iff part --- ${appBarColor.value }");
     }
     else{
+      /// light mode
       appBarColor.value =AppColors.white;
       headingColor.value =AppColors.black;
       dividerColor.value =AppColors.black;
       switchColor.value =AppColors.white;
       searchColor.value =Colors.grey.shade400.withOpacity(.5);
       searchHintColor.value =AppColors.white;
+      borderColor.value =AppColors.gray;
+      topicBorderColor.value =AppColors.primary;
+
 
 
       print(  " else  part --- ${appBarColor.value }");    }

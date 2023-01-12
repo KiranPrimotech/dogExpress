@@ -1,11 +1,13 @@
 import 'package:dog_news/src/controller/poll_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'poll_widget.dart';
+import '../../common_widget/commom_widget.dart';
 
-class PollScreen extends GetView<PollController> with PollWidget {
+
+class PollScreen extends GetView<PollController> with CommonWidget {
+   PollScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     int prevIndex =
@@ -22,16 +24,16 @@ class PollScreen extends GetView<PollController> with PollWidget {
             child: Obx(
               () => Dismissible(
                 background: controller.pollCard(prevIndex),
-                child: controller.pollCard(controller.index.value),
-                onUpdate: (details) {
-                  print(details.progress);
-                },
+
                 secondaryBackground: controller.pollCard(nextIndex),
                 resizeDuration: const Duration(milliseconds: 10),
                 key: Key(controller.index.toString()),
                 direction: DismissDirection.vertical,
                 onDismissed: (direction) {
                   controller.updateContent(direction);
+                },
+                child: controller.pollCard(controller.index.value),
+                onUpdate: (details) {
                 },
               ),
             ),

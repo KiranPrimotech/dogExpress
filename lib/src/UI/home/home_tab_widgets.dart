@@ -1,6 +1,7 @@
 import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
+import 'package:dog_news/utils/routes/app_routes.dart';
 import 'package:dog_news/utils/sizes_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +11,7 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../../utils/app_colors.dart';
 import '../../controller/home_controller.dar.dart';
 
-mixin MixinHomeTabWidgets {
+class  MixinHomeTabWidgets {
   HomeController controller = Get.find();
   ThemeController themeController = Get.find();
 
@@ -56,19 +57,21 @@ mixin MixinHomeTabWidgets {
   Widget bottomBarItems() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-
       children: [
-
-        Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.circle,
-              size: 14.h,
-            ),
-            "Relevancy".text.size(12.h).make()
-          ],
+        GestureDetector(
+          onTap: (){
+            relevancyFunction();
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.circle,
+                size: 14.h,
+              ),
+              "Relevancy".text.size(12.h).make()
+            ],
+          ),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,7 +93,6 @@ mixin MixinHomeTabWidgets {
             "Bookmark".text.size(12.h).make()
           ],
         ),
-
       ],
     ).px(6).py(5);
   }
@@ -124,7 +126,7 @@ mixin MixinHomeTabWidgets {
                         ),
                         Obx(
                           () => appBarTile(
-                            caption: '${controller.title.value}',
+                            caption: controller.title.value,
                             onTap: () => controller.homeFunctions(
                                 action: HomeFunctions.feedBar),
                           ),
@@ -206,7 +208,7 @@ mixin MixinHomeTabWidgets {
           onTap: () {},
         ),
       ],
-    );
+    ).expand();
   }
 
   /// App bar tiles
@@ -219,14 +221,12 @@ mixin MixinHomeTabWidgets {
             : (Get.width - 60) * .5.h,
         height: controller.appBarHeight.h,
         child: Center(
-          child: Obx(() =>
-             AppText.medium(
-              caption.tr,
-               color: themeController.headingColor.value,
-               fontWeight: FontWeight.w600),
+          child: Obx(
+            () => AppText.medium(caption.tr,
+                color: themeController.headingColor.value,
+                fontWeight: FontWeight.w600),
           ),
-          ),
-
+        ),
       ),
     );
   }
@@ -248,6 +248,98 @@ mixin MixinHomeTabWidgets {
                   color: AppColors.primary,
                 )
               : const SizedBox(),
+        ),
+      ),
+    );
+  }
+
+  /// Relevancy Bottom Sheet
+  void relevancyFunction() {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        ),
+        isDismissible: true,
+        isScrollControlled: true,
+        enableDrag: true,
+        context: Get.context!,
+        builder: (_) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(Get.context!).viewInsets.bottom,left: 20,right: 20),
+            child: relevancyDialog(),
+          );
+        });
+  }
+
+  ///Relevancy bottom dialog
+  Widget relevancyDialog() {
+    return SizedBox(
+      height: Get.height * .43,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+           AppText.large("Buisness",color: AppColors.primary,).centered().pLTRB(0, 30, 0, 10),
+          Obx(()=> AppText('You will get all miscellaneous Stories',color: themeController.headingColor.value,).centered().pLTRB(0, 10, 0, 10)),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+
+             newsWidget(title: LocalString.allNews, circleColor: AppColors.green),
+             newsWidget(title: LocalString.majorNews, circleColor: AppColors.yellow),
+             newsWidget(title: LocalString.noNews, circleColor: AppColors.red),
+
+            ],
+          ).py(20).px(10).expand(),
+
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary
+            ),
+              onPressed: (){
+              Get.toNamed(AppRoutes.relevancyScreen);
+          }, child: const  AppText("View All Topics",color: AppColors.white,).centered().p(8)).py(10)
+          
+
+        ],
+      ),
+    ).px(10);
+  }
+  Widget newsWidget({required String title ,required Color circleColor}){
+    return  GestureDetector(
+      onTap: (){
+       controller.selectedRelevance.value = title;
+      },
+      child: Obx(()=>
+         Column(
+          children: [
+
+              Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    border: Border.all(color: controller.selectedRelevance.value !=title?Colors.transparent:AppColors.primary , width: 3),
+                    borderRadius: BorderRadius.circular(50)),
+                child: Icon(
+                  Icons.circle,
+                  size: 40,
+                  color: circleColor,
+                ).centered(),
+              ).px(8),
+
+
+            AppText.medium(title,fontWeight: FontWeight.w700,color: themeController.headingColor.value ,).py(10),
+            Container(
+              height: 6,
+              width: 20,
+              decoration: BoxDecoration(
+                color: controller.selectedRelevance.value !=title?Colors.transparent:AppColors.primary ,
+                borderRadius: BorderRadius.circular(8)
+              ),
+            ).centered(),
+          ],
         ),
       ),
     );

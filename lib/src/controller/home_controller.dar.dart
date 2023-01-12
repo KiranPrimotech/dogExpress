@@ -20,6 +20,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   RxString title = "My Feeds".obs;
   RxDouble selectedItem = 3.0.obs;
   bool modeValue = false;
+  RxString selectedRelevance = LocalString.allNews.obs;
   RxInt indexValue = 0.obs;
 
   /// Page controller

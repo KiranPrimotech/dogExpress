@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_news/src/controller/discover_controller.dart';
+import 'package:dog_news/src/controller/notifiocation_detail_controller.dart';
 import 'package:dog_news/src/model/enumClass.dart';
 import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,6 +19,7 @@ import '../../controller/home_controller.dar.dart';
 class DiscoverWidget {
   DiscoverController controller = Get.find();
   HomeController homeController = Get.find();
+  NotificationDetailController notificationDetailController = Get.find();
   ThemeController themeController = Get.find();
 
   /// search Widget
@@ -89,8 +90,8 @@ class DiscoverWidget {
           imageUrl: image,
           fit: BoxFit.cover,
           placeholder: (context, url) =>
-              Center(child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+              const Center(child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ).p(10),
       ).p(10),
     );
@@ -117,11 +118,12 @@ class DiscoverWidget {
   Widget feedItemsWidget(List<Map<String, dynamic>> feedList, int index) {
     return GestureDetector(
       onTap: () {
-        print("home page -------------------");
+
         homeController.homeTab.animateToPage(1,
             duration: homeController.durationLong, curve: Curves.easeInOut);
         homeController.appBarTab.animateToPage(1,
             duration: homeController.durationLong, curve: Curves.easeInOut);
+
         homeController.title.value = feedList[index]['name'];
         // homeController.   bottomBarAnimationController.reverse(from: 50);
       },
@@ -185,7 +187,7 @@ class DiscoverWidget {
       height: 75 * 4.h,
       child: ListView.builder(
           itemCount: controller.notificationList.length,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return notificationItemsWidget(controller.notificationList, index);
@@ -206,7 +208,7 @@ class DiscoverWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10).r,
+              padding: const EdgeInsets.symmetric(horizontal: 10).r,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -234,7 +236,7 @@ class DiscoverWidget {
                         imageUrl: notificationList[index]['image'],
                         placeholder: (context, url) =>
                             const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
                       ),
                     ),
                   )
@@ -289,8 +291,8 @@ class DiscoverWidget {
             fit: BoxFit.cover,
             imageUrl: insightList[index]['image'],
             placeholder: (context, url) =>
-                Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
       ).p(10),
@@ -326,14 +328,14 @@ class DiscoverWidget {
             Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(6.0),
                         topRight: Radius.circular(6.0)),
                     boxShadow: [
                       BoxShadow(color: Colors.grey.shade400, blurRadius: 5)
                     ]),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(6.0),
                       topRight: Radius.circular(6.0)),
                   child: CachedNetworkImage(
@@ -342,8 +344,8 @@ class DiscoverWidget {
                     fit: BoxFit.cover,
                     imageUrl: pollList[index]['image'],
                     placeholder: (context, url) =>
-                        Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
                 )).p(10),
             SizedBox(
@@ -398,7 +400,7 @@ class DiscoverWidget {
     return SizedBox(
       height: 220,
       child: ListView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
           const SizedBox(
             height: 20,
@@ -409,9 +411,9 @@ class DiscoverWidget {
               child: PageView.builder(
                 onPageChanged: (pos) {
                   controller.currentPage.value = pos;
-                  print("page ---- ${controller.currentPage.value}");
+
                 },
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 controller: controller.pageController,
                 itemCount: controller.topicList.length,
                 itemBuilder: (context, index) {
@@ -431,7 +433,7 @@ class DiscoverWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Obx(() => AppText.large(
                   "${controller.topicList[controller.currentPage.value]['name']!}",
                   fontSize: TextSizes.large,
@@ -450,7 +452,7 @@ class DiscoverWidget {
       child: GetBuilder<DiscoverController>(
         init: controller,
         builder: (controller) => Container(
-          margin: EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 10),
           height: controller.PAGER_HEIGHT * controller.getScale(index).value,
           width: controller.PAGER_HEIGHT * controller.getScale(index).value,
           child: Column(
@@ -495,7 +497,7 @@ class DiscoverWidget {
             return notificationListWidgte();
           },
           itemCount: 20,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
         ));
   }
 }

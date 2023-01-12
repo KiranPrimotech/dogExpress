@@ -50,6 +50,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
     <key>FacebookAppID</key>
     <string>627775619103919</string>
     <key>FacebookDisplayName</key>
