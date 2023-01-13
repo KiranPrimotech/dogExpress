@@ -20,7 +20,7 @@ class PhoneController extends GetxController {
 
   /// send Otp
    sendOtpSubmit() async   {
-       await  service.registerUser(countryCode: countyCode, mobile: phoneNumber).then((value){verificationId = value; print(" iddd -- $verificationId!");
+       await  service.registerUser(countryCode: countyCode, mobile: phoneNumber,routes: AppRoutes.verifyOtp).then((value){verificationId = value; print(" iddd -- $verificationId!");
          log("verification id $verificationId",name: "firebase verification idd");}) ;
        print(" iddd -- $verificationId");
 

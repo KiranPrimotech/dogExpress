@@ -5,6 +5,8 @@ import 'package:velocity_x/velocity_x.dart';
 
 
 class HomeScreen extends GetView<HomeControllerCard> {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
 
@@ -17,27 +19,26 @@ class HomeScreen extends GetView<HomeControllerCard> {
 
       return Scaffold(
         //backgroundColor: Colors.black,
-        body:controller.newsModal.result!.length == 0? Center(child: "No List Found".text.make()):slidingwidet(prevIndex, nextIndex),
+        body:controller.newsModal.result!.isEmpty? Center(child: "No List Found".text.make()):slidingWidget(prevIndex, nextIndex),
 
       );
     }
 
-  Widget slidingwidet(int prevIndex, int nextIndex){
+  Widget slidingWidget(int prevIndex, int nextIndex){
     return Center(
       child: Obx(()=>
          Dismissible(
           background:controller. newsCard(prevIndex),
-          child:controller. newsCard(controller.index.value),
           onUpdate: (details) {
-            print(details.progress);
           },
           secondaryBackground: controller.newsCard(nextIndex),
-          resizeDuration: Duration(milliseconds: 10),
+          resizeDuration: const Duration(milliseconds: 10),
           key: Key(controller.index.toString()),
           direction: DismissDirection.vertical,
           onDismissed: (direction) {
             controller. updateContent(direction);
           },
+          child:controller. newsCard(controller.index.value),
         ),
       ),
     );

@@ -1,9 +1,7 @@
 import 'package:dog_news/src/controller/notifiocation_detail_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common_widget/commom_widget.dart';
-import 'notification_detail_widget.dart';
 
 class NotificationDetailScreen extends GetView<NotificationDetailController> with CommonWidget {
   @override
@@ -21,9 +19,7 @@ class NotificationDetailScreen extends GetView<NotificationDetailController> wit
             child: Obx(
               () => Dismissible(
                 background: controller.notificationCard(prevIndex),
-                child: controller.notificationCard(controller.index.value),
                 onUpdate: (details) {
-                  print(details.progress);
                 },
                 secondaryBackground: controller.notificationCard(nextIndex),
                 resizeDuration: const Duration(milliseconds: 10),
@@ -32,6 +28,7 @@ class NotificationDetailScreen extends GetView<NotificationDetailController> wit
                 onDismissed: (direction) {
                   controller.updateContent(direction);
                 },
+                child: controller.notificationCard(controller.index.value),
               ),
             ),
           ),

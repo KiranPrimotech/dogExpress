@@ -203,9 +203,8 @@ class DummyWidget {
                   child: PageView.builder(
                     onPageChanged: (pos) {
                       controller.currentPage.value = pos;
-                      print("page ---- ${controller.currentPage.value}");
                     },
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     controller: controller.pageController,
                     itemCount: 5,
                     itemBuilder: (context, index) {

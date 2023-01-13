@@ -17,14 +17,14 @@ class HomeTabView extends GetView<HomeController> with MixinHomeTabWidgets {
       body: SafeArea(
         child: PageView(
           allowImplicitScrolling: true,
-          physics: PageScrollPhysics(),
+          physics: const PageScrollPhysics(),
           scrollDirection: Axis.horizontal,
           controller: controller.webTab,
           children: [
             Stack(
             children: [
               PageView(
-                physics: CustomScrollPhysics(controller.webTab,parent: PageScrollPhysics()),
+                physics: CustomScrollPhysics(controller.webTab,parent: const PageScrollPhysics()),
                 scrollDirection: Axis.horizontal,
                 controller: controller.homeTab,
                 children: <Widget>[

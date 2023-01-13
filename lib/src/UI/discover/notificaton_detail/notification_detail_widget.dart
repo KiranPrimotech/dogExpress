@@ -1,5 +1,4 @@
 import 'package:dog_news/src/UI/home/home_tab_widgets.dart';
-import 'package:dog_news/src/controller/home_controller.dart';
 import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class NotificationDetailWidget {
   ThemeController themeController = Get.find();
   NotificationDetailController controller = Get.find();
 
-  //  Animated app bar
+  /// Animated app bar
   Widget animatedAppBar() {
     return AnimatedBuilder(
         animation: controller.appBarAnimationController,

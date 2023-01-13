@@ -22,7 +22,7 @@ class AuthWidget {
                   color: Colors.grey.shade400,
                   blurRadius: 3,
                   spreadRadius: 2,
-                  offset: Offset(0.0, 0.75))
+                  offset: const Offset(0.0, 0.75))
             ]),
         child: Row(
           children: [

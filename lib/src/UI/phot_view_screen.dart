@@ -4,6 +4,8 @@ import 'package:photo_view/photo_view.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class PhotoViewScreen extends StatelessWidget {
+  const PhotoViewScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

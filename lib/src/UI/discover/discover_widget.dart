@@ -475,10 +475,7 @@ class DiscoverWidget {
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
 
-                // Image.network(
-                //   image,
-                //   fit: BoxFit.cover,
-                // ),
+
               ).expand(),
             ],
           ),

@@ -1,19 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
-import 'notification/notification_service.dart';
 import 'utils/app_themes/app_theme.dart';
 import 'utils/localization/translation_string.dart';
 import 'utils/routes/app_pages.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
   print('background message ${message.notification!.body}');
- // NotificationService.showNotification(message);
+
 }
 
 Future main() async {
@@ -52,7 +50,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: const Locale('en', 'US'),
           locale: const Locale('en', 'US'),
           translations: TranslationString(),
-          builder: EasyLoading.init(),
+
         );
       },
     );

@@ -19,7 +19,8 @@ class PhoneAuthenticationService {
       {required String countryCode,
       required String mobile,
       String? verificationId,
-      int? resendToken}) async {
+      int? resendToken,
+      String? routes}) async {
 
     Loader.show(Get.context!);
     await auth.verifyPhoneNumber(
@@ -45,7 +46,7 @@ class PhoneAuthenticationService {
         this.verificationId= verificationId;
         resendToken = resendToken;
         print("otp code ---- ${resendToken}");
-        Get.toNamed(AppRoutes.verifyOtp, arguments: "$verificationId");
+        Get.toNamed(routes!, arguments: "$verificationId");
       },
       timeout: const Duration(seconds: 25),
       forceResendingToken: resendToken,
@@ -57,26 +58,38 @@ class PhoneAuthenticationService {
     return this.verificationId??"null";
   }
 
-  // /// Submit SMS  Code
-  // Future submitCode(String otp) async {
-  //
-  //   try {
-  //
-  //     PhoneAuthCredential credential = PhoneAuthProvider.credential(
-  //         verificationId:verificationId, smsCode: otp
-  //     );
-  //     print("Credential ----- ${credential.smsCode}");
-  //     await auth.signInWithCredential(credential);
-  //
-  //
-  //     SharePreference.addStringToSF(LocalString.signKey, "login");
-  //     settingController.getGoogleLoginValue();
-  //     Get.until((route) => Get.currentRoute == AppRoutes.setting);
-  //
-  //   }
-  //   catch(e){
-  //     Get.snackbar("Otp", "Otp Doesn't Match",snackPosition: SnackPosition.BOTTOM);
-  //
-  //   }
-  // }
+
+
+  /// Otp Verification
+
+  Future verifyOtp({required String verificationId,required String otp}) async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId:verificationId, smsCode: otp
+    );
+    print("Credential ----- ${credential.smsCode}");
+    await auth.signInWithCredential(credential);
+
+  }
+  /// Submit SMS  Code
+  Future submitCode({required String verificationId,required String otp}) async {
+
+    try {
+
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId:verificationId, smsCode: otp
+      );
+      print("Credential ----- ${credential.smsCode}");
+      await auth.signInWithCredential(credential);
+
+
+      SharePreference.addStringToSF(LocalString.signKey, "login");
+      settingController.getGoogleLoginValue();
+      Get.until((route) => Get.currentRoute == AppRoutes.setting);
+
+    }
+    catch(e){
+      Get.snackbar("Otp", "Otp Doesn't Match",snackPosition: SnackPosition.BOTTOM);
+
+    }
+  }
 }

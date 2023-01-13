@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../../../../utils/app_colors.dart';
 import '../../../controller/notifiocation_detail_controller.dart';
 import '../../card/Utils.dart';
 import '../../phot_view_screen.dart';
@@ -18,61 +19,61 @@ class NotificationCard extends StatelessWidget {
       author,
       publishedAt;
 
-  NotificationCard(
-      {required this.url,
-        required this.imgUrl,
-        required this.primaryText,
-        required this.secondaryText,
-        required this.sourceName,
-        required this.author,
-        required this.publishedAt});
+  const NotificationCard(
+      {super.key,
+      required this.url,
+      required this.imgUrl,
+      required this.primaryText,
+      required this.secondaryText,
+      required this.sourceName,
+      required this.author,
+      required this.publishedAt});
 
   @override
   Widget build(BuildContext context) {
     NotificationDetailController controller = Get.find();
     ThemeController themeController = Get.find();
+
     return Scaffold(
-      // backgroundColor: Colors.black,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           GestureDetector(
-            onTap: (){
-              Get.to(PhotoViewScreen(), arguments: "${imgUrl}");
+            onTap: () {
+              Get.to(const PhotoViewScreen(), arguments: imgUrl);
             },
             child: Container(
-              height: (MediaQuery.of(context).size.height /3).h,
+              height: (MediaQuery.of(context).size.height / 3).h,
               width: double.infinity,
               color: Colors.grey.withOpacity(0.2),
               child: CachedNetworkImage(
                 imageUrl: imgUrl,
                 fit: BoxFit.fill,
                 placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
+                    const Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-
             ),
           ),
           GestureDetector(
-
             behavior: HitTestBehavior.translucent,
             onTap: () {
-              print("pressed button ");
               if (controller.appBarAnimationController.status ==
-                  AnimationStatus.completed &&
+                      AnimationStatus.completed &&
                   controller.bottomBarAnimationController.status ==
                       AnimationStatus.dismissed) {
                 controller.bottomBarAnimationController.forward();
               } else if (controller.appBarAnimationController.status ==
-                  AnimationStatus.completed &&
+                      AnimationStatus.completed &&
                   controller.bottomBarAnimationController.status ==
                       AnimationStatus.completed) {
-                controller.bottomBarAnimationController.reverse(from: controller.appBarHeight);
-                controller.appBarAnimationController.reverse(from: controller.appBarHeight);
+                controller.bottomBarAnimationController
+                    .reverse(from: controller.appBarHeight);
+                controller.appBarAnimationController
+                    .reverse(from: controller.appBarHeight);
               } else if (controller.appBarAnimationController.status ==
-                  AnimationStatus.dismissed &&
+                      AnimationStatus.dismissed &&
                   controller.bottomBarAnimationController.status ==
                       AnimationStatus.dismissed) {
                 controller.appBarAnimationController.forward();
@@ -80,11 +81,12 @@ class NotificationCard extends StatelessWidget {
               }
             },
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
                   child: Obx(
-                        () => AppText.large(
+                    () => AppText.large(
                       primaryText,
                       maxLines: 10,
                       color: themeController.headingColor.value,
@@ -118,21 +120,25 @@ class NotificationCard extends StatelessWidget {
                   Colors.grey.shade900,
                 ],
               ),
-              // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),bottomRight: Radius.circular(8),)
             ),
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 Utils.launchURL(url);
               },
               child: Padding(
-                padding:  EdgeInsets.only(left: 8.0,bottom: 6,top: 6).r,
+                padding: const EdgeInsets.only(left: 8.0, bottom: 5, top: 5).r,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
-                    "Blast Ocuured on jangambadi area".text.white.size(12.sp).make(),
-                    "Tap to read more $sourceName".text.white.size(10.sp).make(),
+                    const AppText.small(
+                      "Blast Occurred on jangambadi area",
+                      color: AppColors.white,
+                    ),
+                    AppText.small(
+                      "Tap to read more$sourceName",
+                      color: AppColors.white,
+                    ),
                   ],
                 ),
               ),

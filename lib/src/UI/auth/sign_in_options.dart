@@ -6,7 +6,6 @@ import 'package:dog_news/utils/image_path_assets.dart';
 import 'package:dog_news/utils/image_path_network.dart';
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:dog_news/utils/routes/app_routes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';

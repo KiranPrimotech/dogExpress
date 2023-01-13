@@ -3,6 +3,7 @@ import 'package:dog_news/utils/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../utils/app_colors.dart';
 import '../../controller/home_controller.dar.dart';
 import '../phot_view_screen.dart';
 import 'Utils.dart';
@@ -37,7 +38,7 @@ class NewsCard extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              Get.to(PhotoViewScreen(), arguments: "${imgUrl}");
+              Get.to(PhotoViewScreen(), arguments: imgUrl);
             },
             child: Container(
               height: (MediaQuery.of(context).size.height / 3).h,
@@ -118,28 +119,19 @@ class NewsCard extends StatelessWidget {
                   Colors.grey.shade900,
                 ],
               ),
-              // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),bottomRight: Radius.circular(8),)
             ),
             child: GestureDetector(
               onTap: () {
                 Utils.launchURL(url);
               },
               child: Padding(
-                padding: EdgeInsets.only(left: 10.0, bottom: 6, top: 6).r,
+                padding: const EdgeInsets.only(left: 10.0, bottom: 5, top: 5).r,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    "Blast Occured on jangambadi area"
-                        .text
-                        .white
-                        .size(12.sp)
-                        .make(),
-                    "Tap to read more $sourceName"
-                        .text
-                        .white
-                        .size(10.sp)
-                        .make(),
+                    const AppText.small("Blast Occured on jangambadi area",color: AppColors.white,),
+                    AppText.small("Tap to read more$sourceName",color: AppColors.white,),
                   ],
                 ),
               ),

@@ -276,43 +276,58 @@ class  MixinHomeTabWidgets {
   ///Relevancy bottom dialog
   Widget relevancyDialog() {
     return SizedBox(
-      height: Get.height * .43,
+      height: Get.height * .45.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           AppText.large("Buisness",color: AppColors.primary,).centered().pLTRB(0, 30, 0, 10),
-          Obx(()=> AppText('You will get all miscellaneous Stories',color: themeController.headingColor.value,).centered().pLTRB(0, 10, 0, 10)),
+           Padding(
+             padding:  const EdgeInsets.only(top:30,bottom: 10).r,
+             child: AppText.large("Business",color: AppColors.primary,).centered(),
+           ),
+          Obx(()=> AppText.medium('You will get all miscellaneous Stories',color: themeController.headingColor.value,).centered().pLTRB(0, 10, 0, 10)),
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+          Padding(
+            padding:  const EdgeInsets.only(top: 20.0,bottom: 20,left: 10,right: 10).r,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-             newsWidget(title: LocalString.allNews, circleColor: AppColors.green),
-             newsWidget(title: LocalString.majorNews, circleColor: AppColors.yellow),
-             newsWidget(title: LocalString.noNews, circleColor: AppColors.red),
+               newsWidget(title: LocalString.allNews, circleColor: AppColors.green),
+               newsWidget(title: LocalString.majorNews, circleColor: AppColors.yellow),
+               newsWidget(title: LocalString.noNews, circleColor: AppColors.red),
 
-            ],
-          ).py(20).px(10).expand(),
-
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary
+              ],
             ),
-              onPressed: (){
-              Get.toNamed(AppRoutes.relevancyScreen);
-          }, child: const  AppText("View All Topics",color: AppColors.white,).centered().p(8)).py(10)
+          ).expand(),
+
+          Padding(
+            padding: const EdgeInsets.all(10).r,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary
+              ),
+                onPressed: (){
+                Get.toNamed(AppRoutes.relevancyScreen);
+            }, child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: const  AppText("View All Topics",color: AppColors.white,).centered(),
+            )),
+          )
           
 
         ],
       ),
     ).px(10);
   }
+
   Widget newsWidget({required String title ,required Color circleColor}){
     return  GestureDetector(
       onTap: (){
        controller.selectedRelevance.value = title;
       },
       child: Obx(()=>
+
          Column(
           children: [
 
@@ -328,12 +343,10 @@ class  MixinHomeTabWidgets {
                   color: circleColor,
                 ).centered(),
               ).px(8),
-
-
             AppText.medium(title,fontWeight: FontWeight.w700,color: themeController.headingColor.value ,).py(10),
             Container(
-              height: 6,
-              width: 20,
+              height: 6.h,
+              width: 20.w,
               decoration: BoxDecoration(
                 color: controller.selectedRelevance.value !=title?Colors.transparent:AppColors.primary ,
                 borderRadius: BorderRadius.circular(8)

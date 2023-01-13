@@ -1,13 +1,14 @@
 import 'dart:io';
 
-import 'package:dog_news/feature/apple_login.dart';
-import 'package:dog_news/feature/facebook_login.dart';
-import 'package:dog_news/feature/google_login.dart';
+import 'package:authentication/feature/apple_login.dart';
+import 'package:authentication/feature/facebook_login.dart';
+import 'package:authentication/feature/google_login.dart';
 import 'package:dog_news/src/UI/card/shared_pref.dart';
 import 'package:dog_news/src/controller/setting_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import '../../firebase_options.dart';
 import '../../utils/localization/localization_String.dart';
 import '../../utils/routes/app_routes.dart';
 
@@ -43,7 +44,8 @@ class SignController extends GetxController {
 
       /// Click Google
       OnClick.google: () async {
-        user = await LoginManager().signInWithGoogle();
+
+        user = await LoginManager().signInWithGoogle(androidClientId:  DefaultFirebaseOptions.currentPlatform.androidClientId??"", iosClientId:  DefaultFirebaseOptions.currentPlatform.iosClientId??"");
         if (user != null) {
           await SharePreference.addStringToSF(
               LocalString.signKey, "${user!.email!}");

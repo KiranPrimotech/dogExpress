@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_news/src/controller/notifiocation_detail_controller.dart';
-import 'package:dog_news/src/controller/topic_card_controller.dart';
+import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../controller/home_controller.dar.dart';
+import '../../../../../utils/app_colors.dart';
+import '../../../../../utils/app_text.dart';
 import '../../../card/Utils.dart';
 import '../../../phot_view_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -17,8 +19,8 @@ class TopicCard extends StatelessWidget {
       author,
       publishedAt;
 
-  TopicCard(
-      {required this.url,
+   const TopicCard(
+      {super.key, required this.url,
         required this.imgUrl,
         required this.primaryText,
         required this.secondaryText,
@@ -29,15 +31,15 @@ class TopicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     NotificationDetailController controller = Get.find();
+    ThemeController themeController = Get.find();
     return Scaffold(
-      // backgroundColor: Colors.black,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           GestureDetector(
             onTap: (){
-              Get.to(PhotoViewScreen(), arguments: "${imgUrl}");
+              Get.to(const PhotoViewScreen(), arguments: imgUrl);
             },
             child: Container(
               height: MediaQuery.of(context).size.height / 3,
@@ -75,22 +77,26 @@ class TopicCard extends StatelessWidget {
               }
             },
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-                  child: Text(
-                    primaryText,
-                    style:
-                    const TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                  child: Obx(
+                        () => AppText.large(
+                      primaryText,
+                      maxLines: 10,
+                      color: themeController.headingColor.value,
+                    ),
                   ),
                 ),
                 Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
+                    child: AppText(
                       secondaryText,
-                      style: const TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.w300),
-                    )),
+                      maxLines: 50,
+                      fontWeight: FontWeight.w500,
+                    ),),
                 Container(
                   padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
                   child: Text(
@@ -106,7 +112,7 @@ class TopicCard extends StatelessWidget {
           ).expand(),
           Container(
             width: Get.width * 1,
-            height: 50,
+            height: 50.h,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topRight,
@@ -116,20 +122,22 @@ class TopicCard extends StatelessWidget {
                   Colors.grey.shade900,
                 ],
               ),
-              // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8),bottomRight: Radius.circular(8),)
             ),
             child: GestureDetector(
               onTap: (){
                 Utils.launchURL(url);
               },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  "Blast Ocuured on jangambadi area".text.white.size(12).make(),
-                  "Tap to read more $sourceName".text.white.size(10).make(),
-                ],
-              ).p(8),
+              child: Padding(
+                padding:  const EdgeInsets.only(left: 8.0,bottom: 5,top: 5).r,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const AppText.small("Blast occurred on jangambadi area",color: AppColors.white,),
+                    AppText.small("Tap to read more$sourceName",color: AppColors.white,),
+                  ],
+                ).p(6),
+              ),
             ),
           )
         ],
