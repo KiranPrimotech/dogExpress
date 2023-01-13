@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:authentication/feature/apple_login.dart';
-import 'package:authentication/feature/facebook_login.dart';
-import 'package:authentication/feature/google_login.dart';
+import 'package:authentication/authentication.dart';
 import 'package:dog_news/src/UI/card/shared_pref.dart';
 import 'package:dog_news/src/controller/setting_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,7 +32,7 @@ class SignController extends GetxController {
     Map<OnClick, void Function()> actions = {
       /// Click  facebook
       OnClick.facebook: () async {
-        user = await FacebookManager().signInWithFacebook();
+        user = await AuthManager().facebookLogin();
         if (user != null) {
           SharePreference.addStringToSF(LocalString.signKey, "${user!.email!}");
           settingController.getGoogleLoginValue();
@@ -45,18 +43,18 @@ class SignController extends GetxController {
       /// Click Google
       OnClick.google: () async {
 
-        user = await LoginManager().signInWithGoogle(androidClientId:  DefaultFirebaseOptions.currentPlatform.androidClientId??"", iosClientId:  DefaultFirebaseOptions.currentPlatform.iosClientId??"");
+        user = await AuthManager().googleLogin(androidClientId: DefaultFirebaseOptions.currentPlatform.androidClientId!, iosClientId: DefaultFirebaseOptions.currentPlatform.iosClientId!);
         if (user != null) {
           await SharePreference.addStringToSF(
-              LocalString.signKey, "${user!.email!}");
+              LocalString.signKey, user!.email!);
           settingController.getGoogleLoginValue();
           Get.back();
         }
       },
 
-      /// Click Twitter
+      /// Click apple
       OnClick.apple: () async {
-        user = await AppleLoginService().signInWithApple();
+        user = await AuthManager().appleLogin();
         if (user != null) {
           await SharePreference.addStringToSF(
               LocalString.signKey, "${user!.email!}");

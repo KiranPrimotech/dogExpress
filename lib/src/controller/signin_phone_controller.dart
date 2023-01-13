@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:authentication/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,10 @@ class PhoneController extends GetxController {
 
   /// send Otp
    sendOtpSubmit() async   {
-       await  service.registerUser(countryCode: countyCode, mobile: phoneNumber,routes: AppRoutes.verifyOtp).then((value){verificationId = value; print(" iddd -- $verificationId!");
-         log("verification id $verificationId",name: "firebase verification idd");}) ;
-       print(" iddd -- $verificationId");
+       // await  service.registerUser(countryCode: countyCode, mobile: phoneNumber,routes: AppRoutes.verifyOtp).then((value){verificationId = value; print(" iddd -- $verificationId!");
+       //   log("verification id $verificationId",name: "firebase verification idd");}) ;
+       // print(" iddd -- $verificationId");
+       await AuthManager().phoneLogin(context: Get.context!, countryCode: countyCode, mobile: phoneNumber,routes: AppRoutes.verifyOtp);
 
   }
   /// Send OTP

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 
+import '../../firebase_options.dart';
 import '../UI/card/shared_pref.dart';
 
 class SettingController extends GetxController {
@@ -100,7 +101,22 @@ class SettingController extends GetxController {
       // Sign out with firebase
       await FirebaseAuth.instance.signOut();
       // Sign out with google
-      await GoogleSignIn().signOut();
+
+      try {
+        if (Platform.isAndroid) {
+          await GoogleSignIn(
+              clientId:
+              DefaultFirebaseOptions.currentPlatform.androidClientId)
+              .signOut();
+        } else if (Platform.isIOS) {
+          await GoogleSignIn(
+              clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
+              .signOut();
+        }
+      }
+      catch(e){
+        print("error -->   $e");
+      }
     } else {
       loginValue.value = true;
       logOutValue.value = false;

@@ -25,9 +25,11 @@ packages:
   authentication:
     dependency: "direct main"
     description:
-      path: authentication
-      relative: true
-    source: path
+      path: "."
+      ref: master
+      resolved-ref: "6aae072127c30e6b54f309ae4b139b8292bc9ba4"
+      url: "https://github.com/KiranPrimotech/authentication.git"
+    source: git
     version: "0.0.1"
   auto_size_text_pk:
     dependency: transitive

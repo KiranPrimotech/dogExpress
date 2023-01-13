@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:authentication/authentication.dart';
 import 'package:dog_news/src/controller/setting_controller.dart';
 import 'package:dog_news/src/controller/signin_phone_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,14 +38,8 @@ class VerifyOTPController extends GetxController{
     isLoading = true ;
     try {
 
-      PhoneAuthenticationService().verifyOtp(verificationId: verificationId, otp: otp);
-
-      // PhoneAuthCredential credential = PhoneAuthProvider.credential(
-      //     verificationId: verificationId, smsCode: otp
-      // );
-      // print("Credential ----- ${credential.smsCode}");
-      // isLoading = false;
-      // await phoneController.auth.signInWithCredential(credential);
+      // PhoneAuthenticationService().verifyOtp(verificationId: verificationId, otp: otp);
+      AuthManager().verifyOtp(context: Get.context!, verificationId: verificationId, otp: otp);
       SharePreference.addStringToSF(LocalString.signKey, "login");
       settingController.getGoogleLoginValue();
 
