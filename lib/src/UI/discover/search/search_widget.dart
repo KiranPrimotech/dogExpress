@@ -9,9 +9,8 @@ import '../../../controller/notifiocation_detail_controller.dart';
 import '../../../controller/search_controller.dart';
 
 class SearchWidget {
-
   SearchController searchController = Get.find();
-  NotificationDetailController  controller = Get.find();
+  NotificationDetailController controller = Get.find();
   ThemeController themeController = Get.find();
 
   Widget tabWidget() {
@@ -27,13 +26,10 @@ class SearchWidget {
                 text: 'Topic',
               ),
             ]),
-        SizedBox(
-          height: Get.height * .9,
-          child: TabBarView(children: [
-            shortWidget().expand(),
-            topicWidget(),
-          ]),
-        ).expand()
+        TabBarView(children: [
+          shortWidget(),
+          topicWidget(),
+        ]).expand()
       ],
     );
   }
@@ -50,9 +46,9 @@ class SearchWidget {
   /// Short List Item
   Widget shortListItem(List<Map<String, dynamic>> shortList, int index) {
     return GestureDetector(
-      onTap: (){
-        Get.toNamed(AppRoutes.topicCardScreen );
-        controller.title.value= "Shorts";
+      onTap: () {
+        Get.toNamed(AppRoutes.topicCardScreen);
+        controller.title.value = "Shorts";
       },
       child: Row(
         children: [
@@ -119,13 +115,12 @@ class SearchWidget {
         });
   }
 
-
   /// topic List Items
   Widget topicListItem(List<Map<String, dynamic>> topicList, int index) {
     return GestureDetector(
-      onTap: (){
-        Get.toNamed(AppRoutes.topicCardScreen );
-        controller.title.value= topicList[index]['name'];
+      onTap: () {
+        Get.toNamed(AppRoutes.topicCardScreen);
+        controller.title.value = topicList[index]['name'];
       },
       child: Obx(
         () => Chip(
@@ -144,5 +139,4 @@ class SearchWidget {
       ),
     );
   }
-
 }

@@ -3,8 +3,8 @@ import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SearchScreen extends StatelessWidget with SearchWidget{
-   SearchScreen({super.key});
+class SearchScreen extends StatelessWidget with SearchWidget {
+  SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,37 +12,30 @@ class SearchScreen extends StatelessWidget with SearchWidget{
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
-          resizeToAvoidBottomInset : false,
-
+          //  resizeToAvoidBottomInset: false,
           body: Column(
             children: [
               Row(
                 children: [
-
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.back();
                     },
-                    child: const BackButton(
-                    ),
+                    child: const BackButton(),
                   ),
                   SizedBox(
                     width: Get.width * .8,
-                    child:  TextField(
+                    child: TextField(
                       decoration: InputDecoration(
-                        hintText: LocalString.searchNews.tr,
-                        border: InputBorder.none
-                      ),
+                          hintText: LocalString.searchNews.tr,
+                          border: InputBorder.none),
                     ),
                   )
                 ],
               ),
-
               Expanded(child: tabWidget()),
-
             ],
           ),
-
         ),
       ),
     );

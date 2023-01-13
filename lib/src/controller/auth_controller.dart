@@ -11,18 +11,16 @@ import '../../utils/localization/localization_String.dart';
 import '../../utils/routes/app_routes.dart';
 
 class SignController extends GetxController {
-
   SettingController settingController = Get.find();
   User? user;
   RxBool platformBool = false.obs;
 
-  checkCurrentPlatform(){
+  checkCurrentPlatform() {
     if (Platform.isAndroid) {
-      platformBool.value= false;
+      platformBool.value = false;
       print("platrforn -- if --- ${platformBool.value}");
-
     } else if (Platform.isIOS) {
-      platformBool.value= true;
+      platformBool.value = true;
       print("platrforn -- else --- ${platformBool.value}");
     }
   }
@@ -42,8 +40,11 @@ class SignController extends GetxController {
 
       /// Click Google
       OnClick.google: () async {
-
-        user = await AuthManager().googleLogin(androidClientId: DefaultFirebaseOptions.currentPlatform.androidClientId!, iosClientId: DefaultFirebaseOptions.currentPlatform.iosClientId!);
+        user = await AuthManager().googleLogin(
+            androidClientId:
+                DefaultFirebaseOptions.currentPlatform.androidClientId ?? "",
+            iosClientId:
+                DefaultFirebaseOptions.currentPlatform.iosClientId ?? "");
         if (user != null) {
           await SharePreference.addStringToSF(
               LocalString.signKey, user!.email!);
@@ -78,7 +79,6 @@ class SignController extends GetxController {
     checkCurrentPlatform();
     super.onInit();
   }
-
 }
 
-enum OnClick { facebook, google, twitter, phone,apple }
+enum OnClick { facebook, google, twitter, phone, apple }
