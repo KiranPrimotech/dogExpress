@@ -24,17 +24,17 @@ class PhoneAuthenticationService {
 
     Loader.show(Get.context!);
     await auth.verifyPhoneNumber(
-      phoneNumber: "${countryCode} ${mobile}",
+      phoneNumber: "$countryCode $mobile",
       verificationCompleted: (PhoneAuthCredential credential) {
         Loader.hide();
-        print("completed ----  ${credential.smsCode}");
+        debugPrint("completed ----  ${credential.smsCode}");
         Get.snackbar("Verification Code", "${credential.smsCode}",
             backgroundColor: Colors.black, colorText: Colors.white60);
       },
       verificationFailed: (FirebaseAuthException e) {
         Loader.hide();
         if (e.code == 'invalid-phone-number') {
-          print('The provided phone number is not valid.');
+          debugPrint('The provided phone number is not valid.');
           Get.snackbar(
             "Verification",
             "The provided phone number is not valid.",
@@ -45,8 +45,8 @@ class PhoneAuthenticationService {
         Loader.hide();
         this.verificationId= verificationId;
         resendToken = resendToken;
-        print("otp code ---- ${resendToken}");
-        Get.toNamed(routes!, arguments: "$verificationId");
+        debugPrint("otp code ---- $resendToken");
+        Get.toNamed(routes!, arguments: verificationId);
       },
       timeout: const Duration(seconds: 25),
       forceResendingToken: resendToken,
@@ -66,7 +66,7 @@ class PhoneAuthenticationService {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
         verificationId:verificationId, smsCode: otp
     );
-    print("Credential ----- ${credential.smsCode}");
+    debugPrint("Credential ----- ${credential.smsCode}");
     await auth.signInWithCredential(credential);
 
   }
@@ -78,7 +78,7 @@ class PhoneAuthenticationService {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId:verificationId, smsCode: otp
       );
-      print("Credential ----- ${credential.smsCode}");
+      debugPrint("Credential ----- ${credential.smsCode}");
       await auth.signInWithCredential(credential);
 
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class RelevancyController extends GetxController{
@@ -7,11 +8,12 @@ class RelevancyController extends GetxController{
 
   void getData(){
     for (String key in map1.keys){
-      print(key);
+      debugPrint(key);
 
-      print(" map values ---  ${map1[key]}");
+      debugPrint(" map values ---  ${map1[key]}");
     }
   }
+
   @override
   void onInit() {
     getData();

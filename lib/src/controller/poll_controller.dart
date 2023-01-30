@@ -59,7 +59,7 @@ class PollController extends GetxController with GetTickerProviderStateMixin{
   }
 
   Future updateWeb() async{
-
+    WebViewController().clearLocalStorage();
     webController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))

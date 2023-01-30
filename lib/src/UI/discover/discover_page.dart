@@ -47,7 +47,7 @@ class DiscoverScreen extends StatelessWidget with DiscoverWidget {
                 Obx(
                   () => controller.loading.value
                       ? DummyWidget().notificationListWidgetShimmer()
-                      : notificationListWidgte(),
+                      : notificationListWidget(),
                 ),
 
                 /// Insight

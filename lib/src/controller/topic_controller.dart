@@ -1,4 +1,3 @@
-import 'package:dog_news/src/controller/discover_controller.dart';
 import 'package:dog_news/utils/image_path_network.dart';
 import 'package:get/get.dart';
 

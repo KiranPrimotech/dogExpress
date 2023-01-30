@@ -1,10 +1,10 @@
 import 'package:dog_news/src/controller/insight_controller.dart';
-import 'package:dog_news/src/controller/puzzle_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InsightScreen extends GetView<InsightController>{
+  const InsightScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
 
@@ -17,17 +17,17 @@ class InsightScreen extends GetView<InsightController>{
           child: Obx(() =>
               Dismissible(
                 background:controller. quoteCard(prevIndex),
-                child:controller. quoteCard(controller.index.value),
                 onUpdate: (details) {
-                  print(details.progress);
+                  debugPrint("$details.progress");
                 },
                 secondaryBackground:controller. quoteCard(nextIndex),
-                resizeDuration: Duration(milliseconds: 10),
+                resizeDuration: const Duration(milliseconds: 10),
                 key: Key(controller.index.value.toString()),
                 direction: DismissDirection.vertical,
                 onDismissed: (direction) {
                   controller. updateContent(direction);
                 },
+                child:controller. quoteCard(controller.index.value),
               ),
           ),
         ),

@@ -44,7 +44,6 @@ class NotificationDetailWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-
                       Get.back();
                     },
                     child: Icon(Icons.arrow_back_ios_new, size: Dimens.extraSmallIcon,).px(8)),
@@ -76,6 +75,7 @@ class NotificationDetailWidget {
                   child: bottomBarItems(),
                 ),
               ));
+
         });
   }
 

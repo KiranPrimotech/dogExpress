@@ -59,7 +59,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
     NotificationService.initialize();
 
     FirebaseMessaging.instance.getToken().then((token) {
-      print("token ---- ${token}");
+      debugPrint("token ---- $token");
     });
     firebaseNotification();
     SizeConfig().init(Get.context!);
@@ -97,7 +97,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         }
       }
 
-      print("index value ---- ${indexValue}");
+      debugPrint("index value ---- $indexValue");
     });
 
     // homeTab.addListener(() {
@@ -129,7 +129,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
 
   Future<void> getNewsList() async {
     newsList = await CallAPI().getNewsList();
-    print("resposne ---- ${newsList}");
+    debugPrint("response ---- $newsList");
   }
 
   @override
@@ -198,7 +198,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
       },
 
       HomeFunctions.refresh: () {
-        print(action);
+        debugPrint("$action");
       },
     };
 
@@ -211,13 +211,12 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   /// local and firebase notification
   firebaseNotification() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("message ----- ${message}");
+      debugPrint("message ----- $message");
       NotificationService.showNotification(message);
     });
   }
 
-  /// get Langauge
-
+  /// get Language
   getData() async {
     if (await SharePreference.getStringValuesSF(LocalString.langKey) != "" &&
         await SharePreference.getStringValuesSF(LocalString.langKey) != null) {
@@ -230,7 +229,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
         Get.updateLocale(locale);
       }
     } else {
-      print("home page -------------");
+      debugPrint("home page -------------");
     }
   }
 
@@ -240,6 +239,7 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   initializeLocalNotification() {}
+
 }
 
 enum VisibilityEnum {

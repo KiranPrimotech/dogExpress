@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class NotificationNewsUrlLauncher extends GetView<NotificationDetailController> {
+  const NotificationNewsUrlLauncher({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NotificationDetailController>(

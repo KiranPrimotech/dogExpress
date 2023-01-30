@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../common_widget/commom_widget.dart';
 
 class NotificationDetailScreen extends GetView<NotificationDetailController> with CommonWidget {
+   NotificationDetailScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     int prevIndex =

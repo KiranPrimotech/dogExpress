@@ -1,8 +1,5 @@
 import 'dart:math';
 
-import 'package:dog_news/src/UI/discover/puzzle/puzzle_card_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +7,7 @@ import 'insight_widget.dart';
 
 
 class InsightCard extends StatelessWidget with InsightWidget {
+
   final String url,
       imgUrl,
       primaryText,
@@ -19,7 +17,7 @@ class InsightCard extends StatelessWidget with InsightWidget {
       publishedAt;
 
   InsightCard(
-      {required this.url,
+      {super.key, required this.url,
         required this.imgUrl,
         required this.primaryText,
         required this.secondaryText,

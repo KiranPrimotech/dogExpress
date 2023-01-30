@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -11,12 +10,13 @@ import '../../../utils/localization/localization_String.dart';
 import '../../controller/verify_otp_controller.dart';
 
 class VerifyOTPScreen extends GetView<VerifyOTPController> {
-  // const VerifyOTPScreen({super.key});
   final verificationId = Get.arguments ;
+
+   VerifyOTPScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    print("widget id --- $verificationId");
+    //print("widget id --- $verificationId");
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -71,7 +71,7 @@ class VerifyOTPScreen extends GetView<VerifyOTPController> {
                       fieldStyle: FieldStyle.underline,
                       outlineBorderRadius: 8,
                       keyboardType: TextInputType.number,
-                      style: TextStyle(fontSize: 17, color: AppColors.black),
+                      style: const TextStyle(fontSize: 17, color: AppColors.black),
                       onChanged: (pin) {},
                       onCompleted: (pin) {
                         controller.newOtp = pin;

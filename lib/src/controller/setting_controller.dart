@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dog_news/utils/localization/localization_String.dart';
 import 'package:dog_news/utils/routes/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
@@ -35,27 +36,27 @@ class SettingController extends GetxController {
   setValue() async {
     if (await SharePreference.getStringValuesSF(LocalString.langKey) != "" &&
         await SharePreference.getStringValuesSF(LocalString.langKey) != null) {
-      print("if --- ${selectedLanguage.value}");
+      debugPrint("if --- ${selectedLanguage.value}");
       selectedLanguage.value =
           await SharePreference.getStringValuesSF(LocalString.langKey);
     } else {
       selectedLanguage.value = LocalString.eng;
-      print("else --- ${selectedLanguage.value}");
+      debugPrint("else --- ${selectedLanguage.value}");
     }
   }
 
   /// Get Mode Value
   setModeValue() async {
     modeValue.value = await SharePreference.getBoolValuesSF("mode") ?? false;
-    print("mode value --- ${modeValue}");
+    debugPrint("mode value --- $modeValue");
   }
 
   getData() async {
     if (await SharePreference.getStringValuesSF(LocalString.langKey) == "") {
-      print("No value Stored");
+      debugPrint("No value Stored");
     } else {
-      print(
-          " uyryutieruituiotui ${await SharePreference.getStringValuesSF(LocalString.langKey)}");
+      debugPrint(
+          " language  ${await SharePreference.getStringValuesSF(LocalString.langKey)}");
     }
   }
 
@@ -91,37 +92,19 @@ class SettingController extends GetxController {
 
   /// Login with Google
   getGoogleLoginValue() async {
-    print("loginnnn -------");
 
     if (await SharePreference.getStringValuesSF(LocalString.signKey) != "" &&
         await SharePreference.getStringValuesSF(LocalString.signKey) != null) {
       loginValue.value = false;
       logOutValue.value = true;
-      print("if ----- ${loginValue.value}");
-      // Sign out with firebase
-      await FirebaseAuth.instance.signOut();
-      // Sign out with google
+      debugPrint("if ----- ${loginValue.value}");
 
-      try {
-        if (Platform.isAndroid) {
-          await GoogleSignIn(
-              clientId:
-              DefaultFirebaseOptions.currentPlatform.androidClientId)
-              .signOut();
-        } else if (Platform.isIOS) {
-          await GoogleSignIn(
-              clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
-              .signOut();
-        }
-      }
-      catch(e){
-        print("error -->   $e");
-      }
+
     } else {
       loginValue.value = true;
       logOutValue.value = false;
 
-      print("else  ----- ${loginValue.value}");
+      debugPrint("else  ----- ${loginValue.value}");
     }
     update();
   }
@@ -130,11 +113,11 @@ class SettingController extends GetxController {
   checkCurrentPlatform(){
     if (Platform.isAndroid) {
       platformBool.value= false;
-      print("platrforn -- if --- ${platformBool.value}");
+      debugPrint("platform -- if --- ${platformBool.value}");
 
     } else if (Platform.isIOS) {
       platformBool.value= true;
-      print("platrforn -- else --- ${platformBool.value}");
+      debugPrint("platform -- else --- ${platformBool.value}");
     }
   }
 
@@ -158,7 +141,7 @@ class SettingController extends GetxController {
 
       },
 
-      /// feedabck
+      /// feedback
       OnClickOption.feedback: () async {
         feedbackLaunchMailto();
 
@@ -184,13 +167,32 @@ class SettingController extends GetxController {
   }
 
   /// Log Out
-  void logOutUser() async {
+   logOutUser() async {
     if (await SharePreference.getStringValuesSF(LocalString.signKey) != "" &&
         await SharePreference.getStringValuesSF(LocalString.signKey) != null) {
       loginValue.value = true;
       logOutValue.value = false;
       SharePreference.removeField(LocalString.signKey);
       Get.back();
+
+      await FirebaseAuth.instance.signOut();
+      // Sign out with google
+
+      try {
+        if (Platform.isAndroid) {
+          await GoogleSignIn(
+              clientId:
+              DefaultFirebaseOptions.currentPlatform.androidClientId)
+              .signOut();
+        } else if (Platform.isIOS) {
+          await GoogleSignIn(
+              clientId: DefaultFirebaseOptions.currentPlatform.iosClientId)
+              .signOut();
+        }
+      }
+      catch(e){
+        debugPrint("error -->   $e");
+      }
     } else {
       loginValue.value = false;
       logOutValue.value = true;

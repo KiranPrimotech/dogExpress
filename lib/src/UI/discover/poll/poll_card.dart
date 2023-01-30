@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_news/src/controller/notifiocation_detail_controller.dart';
-import 'package:dog_news/src/controller/poll_controller.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,8 +21,8 @@ class PollCard extends StatelessWidget {
       author,
       publishedAt;
 
-  PollCard(
-      {required this.url,
+  const PollCard(
+      {super.key, required this.url,
       required this.imgUrl,
       required this.primaryText,
       required this.secondaryText,
@@ -44,7 +43,7 @@ class PollCard extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              Get.to(PhotoViewScreen(), arguments: "${imgUrl}");
+              Get.to(const PhotoViewScreen(), arguments: imgUrl);
             },
             child: Container(
               height: (MediaQuery.of(context).size.height / 3).h,

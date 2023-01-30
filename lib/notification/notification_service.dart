@@ -45,8 +45,6 @@ class NotificationService {
   }
 
   static Future showNotification(RemoteMessage message) async {
-
-
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
     AppleNotification? apple = message.notification?.apple;

@@ -73,6 +73,7 @@
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
 
+
         <!--  SIGN IN WITH APPLE -->
 
         <activity

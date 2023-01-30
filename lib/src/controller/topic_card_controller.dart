@@ -1,6 +1,4 @@
-import 'package:dog_news/src/UI/discover/topic/card/topic_card_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../utils/localization/localization_String.dart';
@@ -64,6 +62,7 @@ class TopicCardController extends GetxController with GetTickerProviderStateMixi
 
   @override
   void onInit() {
+    super.onInit();
     fetchData();
     setupLastIndex();
   }

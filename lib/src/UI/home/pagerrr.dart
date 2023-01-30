@@ -41,7 +41,7 @@ class HomeTabView extends GetView<HomeController> with MixinHomeTabWidgets {
                       Container(
                           alignment: Alignment.center,
                           width: MediaQuery.of(context).size.width,
-                          child: HomeScreen()),
+                          child: const HomeScreen()),
                       Positioned(bottom: 0, child: animatedBottomBar()),
                     ],
                   ),
@@ -51,7 +51,7 @@ class HomeTabView extends GetView<HomeController> with MixinHomeTabWidgets {
             ],
           ),
 
-            NewsUrlLauncher()
+            const NewsUrlLauncher()
           ],
         ),
       ),

@@ -124,7 +124,7 @@ class SearchWidget {
       },
       child: Obx(
         () => Chip(
-          elevation: 1,
+          elevation: 5,
           backgroundColor: themeController.appBarColor.value,
           shape: StadiumBorder(
               side: BorderSide(

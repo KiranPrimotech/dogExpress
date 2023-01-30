@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: const Locale('en', 'US'),
           locale: const Locale('en', 'US'),
           translations: TranslationString(),
+
 
         );
       },

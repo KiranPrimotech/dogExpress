@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SignInScreen extends GetView<SignController> with AuthWidget{
+  const SignInScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,15 +43,15 @@ class SignInScreen extends GetView<SignController> with AuthWidget{
               height: Get.height *.14,
             ),
             /// Facebook
-            optionWidget(bckClr: AppColors.facebookClr,title:LocalString.signWithFacebook,textClr: AppColors.white,imagePath: ImagePathAssets.facebookImg, onTap: controller.onClickFunction(action: OnClick.facebook)),
+            optionWidget(bckClr: AppColors.facebookClr,title:LocalString.signWithFacebook,textClr: AppColors.white,imagePath: ImagePathAssets.facebookImg, onTap: controller.onClickFunction(action: OnClick.facebook,context: context)),
 
             /// Google
-            optionWidget(bckClr: AppColors.white,title:LocalString.signWithGoogle,textClr: AppColors.black,imagePath: ImagePathAssets.googleImg,onTap: controller.onClickFunction(action: OnClick.google)),
+            optionWidget(bckClr: AppColors.white,title:LocalString.signWithGoogle,textClr: AppColors.black,imagePath: ImagePathAssets.googleImg,onTap: controller.onClickFunction(action: OnClick.google, context: context)),
 
             /// Apple
             Obx(() =>  Visibility(
                 visible:controller.platformBool.value,
-                child: optionWidget(bckClr: AppColors.grey,title:LocalString.signWithApple,textClr: AppColors.white,imagePath: ImagePathAssets.appleImg,onTap: controller.onClickFunction(action: OnClick.apple)))),
+                child: optionWidget(bckClr: AppColors.grey,title:LocalString.signWithApple,textClr: AppColors.white,imagePath: ImagePathAssets.appleImg,onTap: controller.onClickFunction(action: OnClick.apple,context: context)))),
 
             /// Phone Number
             optionWidget(bckClr: AppColors.whatsClr,title:LocalString.signWithPhone,textClr: AppColors.white,imagePath:ImagePathAssets.callImg,onTap: (){

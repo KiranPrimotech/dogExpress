@@ -19,7 +19,7 @@ class NotificationPager extends GetView<NotificationPagerController>{
           controller: controller.webTab,
           children: [
             NotificationDetailScreen(),
-            NotificationNewsUrlLauncher()
+            const NotificationNewsUrlLauncher()
           ],
         ),
       ),

@@ -18,8 +18,8 @@ class NewsCard extends StatelessWidget {
       author,
       publishedAt;
 
-  NewsCard(
-      {required this.url,
+  const NewsCard(
+      {super.key, required this.url,
       required this.imgUrl,
       required this.primaryText,
       required this.secondaryText,
@@ -38,7 +38,7 @@ class NewsCard extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              Get.to(PhotoViewScreen(), arguments: imgUrl);
+              Get.to(const PhotoViewScreen(), arguments: imgUrl);
             },
             child: Container(
               height: (MediaQuery.of(context).size.height / 3).h,

@@ -1,9 +1,10 @@
 import 'package:dog_news/src/controller/puzzle_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PuzzleScreen extends GetView<PuzzleController>{
+  const PuzzleScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
 
@@ -16,17 +17,17 @@ class PuzzleScreen extends GetView<PuzzleController>{
           child: Obx(() =>
               Dismissible(
                 background:controller. quoteCard(prevIndex),
-                child:controller. quoteCard(controller.index.value),
                 onUpdate: (details) {
-                  print(details.progress);
+                  debugPrint("${details.progress}");
                 },
                 secondaryBackground:controller. quoteCard(nextIndex),
-                resizeDuration: Duration(milliseconds: 10),
+                resizeDuration: const Duration(milliseconds: 10),
                 key: Key(controller.index.value.toString()),
                 direction: DismissDirection.vertical,
                 onDismissed: (direction) {
                   controller. updateContent(direction);
                 },
+                child:controller. quoteCard(controller.index.value),
               ),
           ),
         ),

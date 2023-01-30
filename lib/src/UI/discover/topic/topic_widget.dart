@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_news/src/controller/notifiocation_detail_controller.dart';
-import 'package:dog_news/src/controller/topic_card_controller.dart';
 import 'package:dog_news/utils/app_text.dart';
 import 'package:dog_news/utils/app_themes/app_theme_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

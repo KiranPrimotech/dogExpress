@@ -182,7 +182,7 @@ class DiscoverWidget {
   }
 
   /// Notification List widget
-  Widget notificationListWidgte() {
+  Widget notificationListWidget() {
     return SizedBox(
       height: 75 * 4.h,
       child: ListView.builder(
@@ -266,14 +266,14 @@ class DiscoverWidget {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return insightItemsWidgte(controller.insightList, index);
+            return insightItemsWidget(controller.insightList, index);
           }),
       // ),
     );
   }
 
   /// Insight List Items
-  Widget insightItemsWidgte(List<Map<String, dynamic>> insightList, int index) {
+  Widget insightItemsWidget(List<Map<String, dynamic>> insightList, int index) {
     return GestureDetector(
       onTap: () {
         Get.toNamed(AppRoutes.insightScreen);
@@ -491,7 +491,7 @@ class DiscoverWidget {
         child: PageView.builder(
           controller: controller.topicNotificationPageController,
           itemBuilder: (ctx, index) {
-            return notificationListWidgte();
+            return notificationListWidget();
           },
           itemCount: 20,
           physics: const NeverScrollableScrollPhysics(),

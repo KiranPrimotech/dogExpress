@@ -12,8 +12,8 @@ class QuoteCard extends StatelessWidget {
       author,
       publishedAt;
 
-   QuoteCard(
-      {required this.url,
+   const QuoteCard(
+      {super.key, required this.url,
       required this.imgUrl,
       required this.primaryText,
       required this.secondaryText,

@@ -9,8 +9,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 
 class NewsUrlLauncher extends GetView<HomeControllerCard>{
-
-
+  const NewsUrlLauncher({super.key});
 
   @override
   Widget build(BuildContext context) {

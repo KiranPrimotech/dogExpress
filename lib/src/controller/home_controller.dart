@@ -35,7 +35,7 @@ class HomeControllerCard extends GetxController{
   }
     RxInt progressValue = 0.obs;
   Future updateWeb() async{
-
+    WebViewController().clearLocalStorage();
     webController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))

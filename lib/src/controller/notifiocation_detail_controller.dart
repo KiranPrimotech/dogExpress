@@ -89,7 +89,7 @@ class NotificationDetailController extends GetxController with GetTickerProvider
   }
 
   Future updateWeb() async{
-
+    WebViewController().clearLocalStorage();
     webController = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
@@ -97,7 +97,6 @@ class NotificationDetailController extends GetxController with GetTickerProvider
         NavigationDelegate(
           onProgress: (int progress) {
             //  progressValue.value= progress;
-
             // Update loading bar.
           },
           onPageStarted: (String url) {},

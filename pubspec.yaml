@@ -45,6 +45,7 @@ dependencies:
   get: ^4.6.5
   velocity_x: ^3.6.0
   email_validator: ^2.1.17
+
   http: ^0.13.5
   flutter_custom_tabs: ^1.0.4
   shared_preferences: ^2.0.15

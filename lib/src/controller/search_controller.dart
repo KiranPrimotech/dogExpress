@@ -79,6 +79,8 @@ class SearchController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
+
     // scrollController.addListener(() {
     //
     //   if (scrollController.position.maxScrollExtent ==
@@ -92,6 +94,5 @@ class SearchController extends GetxController {
     //
     // });
 
-    super.onInit();
   }
 }
